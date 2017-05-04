@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../Component/App'; // 首页组件
 
 import NotFoundPage from '../Component/NotFoundPage'; // NotFoundPage
+import Login from '../Component/Login'; // NotFoundPage
 
 
 // 路由配置
@@ -14,6 +15,7 @@ const RouteConfig = () => (
     <div className="app">
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
