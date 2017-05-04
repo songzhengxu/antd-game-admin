@@ -9,17 +9,12 @@
     ["import", [{ "libraryName": "antd", "style": true }]],
   ],
   "env": {
-        "development": {
-            "plugins": [
-                "react-hot-loader/babel"
-            ]
-        },
-        "test": {
-          "presets": [
-            "es2015",
-            "stage-2",
-            "react"
-          ]
-        }
+      "test": {
+        "presets": [
+          "es2015",
+          "stage-2",
+          "react"
+        ]
+      }
     }
 }
