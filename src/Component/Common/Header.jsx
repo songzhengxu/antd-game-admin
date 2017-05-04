@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Icon, Menu } from 'antd';
+import HeaderToggleAction from '../../Action/HeaderAction';
 
 const SubMenu = Menu.SubMenu;
 
 
-class Mian extends Component {
+class Main extends Component {
   render() {
+    const { HeaderReducer, changeCollapsed } = this.props;
     return (
       <div className="header">
-        <div className="button" >
-          <Icon type="menu-fold" />
+        <div className="button" onClick={changeCollapsed}>
+          <Icon type={HeaderReducer.collapsed ? 'menu-unfold' : 'menu-fold'} />
         </div>
         <div className="rightWarpper">
           <div className="button">
@@ -32,4 +35,4 @@ class Mian extends Component {
     );
   }
 }
-export default Mian;
+export default connect(state => ({ HeaderReducer: state.HeaderReducer }), HeaderToggleAction)(Main);

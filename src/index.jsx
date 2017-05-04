@@ -25,6 +25,7 @@ const render = (Component) => {
     </AppContainer>, document.getElementById('root'));
 };
 
+
 render(App);
 
 // 模块热替换的 API
