@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Header from './Common/Header';
 import Footer from './Common/Footer';
@@ -8,10 +9,11 @@ import Bread from './Common/Bread';
 
 class App extends Component {
   render() {
+    const { HeaderReducer, SiderReducer } = this.props;
     return (
       <div>
-        <div className="layout">
-          <aside className="sider light">
+        <div className={HeaderReducer.collapsed ? 'layout fold' : 'layout'}>
+          <aside className={!SiderReducer.light ? 'sider light' : 'sider'}>
             <Sider />
           </aside>
           <div className="main">
@@ -30,4 +32,5 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(state =>
+   ({ HeaderReducer: state.HeaderReducer, SiderReducer: state.SiderReducer }), null)(App);
