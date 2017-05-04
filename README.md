@@ -11,7 +11,7 @@ antd重构现有的游戏管理后台
 --------
 
 ```
-$ git clone https://github.com/songzhengxu/react-starter-kit.git
+$ git clone https://github.com/songzhengxu/antd-game-admin
 $ cd react-starter-kit
 $ npm install
 ```
