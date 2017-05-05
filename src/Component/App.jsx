@@ -15,7 +15,7 @@ class App extends Component {
       <div>
         <div className={HeaderReducer.collapsed ? 'layout fold' : 'layout'}>
           <aside className={!SiderReducer.light ? 'sider light' : 'sider'}>
-            <Sider />
+            <Sider theme={SiderReducer.light ? 'dark' : 'light'} />
           </aside>
           <div className="main">
             <Header />

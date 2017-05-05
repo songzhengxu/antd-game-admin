@@ -9,9 +9,9 @@ import config from '../../utils/config';
 
 class Nav extends Component {
   render() {
-    const { HeaderReducer } = this.props;
+    const { HeaderReducer, theme } = this.props;
     return (
-      <Menu mode="inline" inlineIndent={!HeaderReducer.collapsed ? '24' : '0'} defaultSelectedKeys={['1']}>
+      <Menu mode="inline" theme={theme} inlineIndent={!HeaderReducer.collapsed ? '24' : '0'} defaultSelectedKeys={['1']}>
         <Menu.Item key="1">
           <Link to="/advertisementMobile">
             <Icon type="user" />
@@ -39,14 +39,14 @@ const NavRedux = connect(state => ({ HeaderReducer: state.HeaderReducer }), null
 
 class Main extends Component {
   render() {
-    const { HeaderReducer, changeLight } = this.props;
+    const { HeaderReducer, changeLight, theme } = this.props;
     return (
       <div>
         <div className="logo">
           <img alt={'logo'} src={config.logo} />
           {!HeaderReducer.collapsed ? <span>{config.name}</span> : ''}
         </div>
-        <NavRedux />
+        <NavRedux theme={theme} />
         <div className="switchtheme">
           <span><Icon type="bulb" />Switch Theme</span>
           {!HeaderReducer.collapsed ? <Switch onChange={changeLight} /> : ''}
