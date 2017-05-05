@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
@@ -8,12 +8,20 @@ import Home from '../Component/App'; // 首页组件
 import NotFoundPage from '../Component/NotFoundPage'; // NotFoundPage
 
 
+class ComponentTest extends Component {
+  render() {
+    return (
+      <div className="comment">Nav1</div>
+    );
+  }
+}
+
 // 路由配置
 const RouteConfig = () => (
   <Router>
     <div className="app">
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route path="/" component={Home} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

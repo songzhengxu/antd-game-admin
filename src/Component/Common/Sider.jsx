@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Icon, Menu, Switch } from 'antd';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import SiderAction from '../../Action/SiderAction';
 
 import config from '../../utils/config';
@@ -12,17 +13,22 @@ class Nav extends Component {
     return (
       <Menu mode="inline" inlineIndent={!HeaderReducer.collapsed ? '24' : '0'} defaultSelectedKeys={['1']}>
         <Menu.Item key="1">
-          <Icon type="user" />
-          {!HeaderReducer.collapsed ? <span className="nav-text">nav 1</span> : ''}
-
+          <Link to="/advertisementMobile">
+            <Icon type="user" />
+            {!HeaderReducer.collapsed ? <span className="nav-text">nav 1</span> : ''}
+          </Link>
         </Menu.Item>
         <Menu.Item key="2">
-          <Icon type="video-camera" />
-          {!HeaderReducer.collapsed ? <span className="nav-text">nav 2</span> : ''}
+          <Link to="/">
+            <Icon type="video-camera" />
+            {!HeaderReducer.collapsed ? <span className="nav-text">HomePage</span> : ''}
+          </Link>
         </Menu.Item>
         <Menu.Item key="3">
-          <Icon type="upload" />
-          {!HeaderReducer.collapsed ? <span className="nav-text">nav 3</span> : ''}
+          <Link to="/login">
+            <Icon type="upload" />
+            {!HeaderReducer.collapsed ? <span className="nav-text">Login</span> : ''}
+          </Link>
         </Menu.Item>
       </Menu>
     );
