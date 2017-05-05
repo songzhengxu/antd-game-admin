@@ -28,8 +28,6 @@ class Main extends Component {
             this.showerror();
             this.setState({ loading: !this.state.loading });
           }, 1000).bind(this);
-        } else {
-
         }
       }
     });

@@ -7,7 +7,7 @@ import Home from '../Component/App'; // 首页组件
 
 import NotFoundPage from '../Component/NotFoundPage'; // NotFoundPage
 import Login from '../Component/Login'; // NotFoundPage
-
+import Table from '../Component/ContentTable';
 
 // 路由配置
 const RouteConfig = () => (
@@ -16,6 +16,7 @@ const RouteConfig = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/table" component={Table} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
