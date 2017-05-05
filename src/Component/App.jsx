@@ -5,6 +5,7 @@ import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
+import SiderMenuRoutes from '../Routes/SiderMenuRoutes';
 
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
             <div className="container">
               <Bread />
               <div className="content">
-                children2
+                <SiderMenuRoutes />
               </div>
             </div>
             <Footer />

@@ -14,9 +14,9 @@ const RouteConfig = () => (
   <Router>
     <div className="app">
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route path="/" component={Home} />
         <Route exact path="/login" component={Login} />
-        <Route component={NotFoundPage} />
+        <Route exact component={NotFoundPage} />
       </Switch>
     </div>
   </Router>
