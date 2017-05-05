@@ -1,12 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 
 import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
-import SiderMenuRoutes from '../Routes/SiderMenuRoutes';
 
+import AdvertisementMobile from './AdvertisementModule/AdvertisementMobile'; // advertisementMobile
+
+const Home = () => (
+  <div>
+    <h2>首页</h2>
+  </div>
+);
+
+
+class SiderMenuRoutes extends Component {
+  render() {
+    return (
+      <div className="contentInside">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/advertisementMobile" component={AdvertisementMobile} />
+          <Redirect to="/404" />
+        </Switch>
+      </div>
+    );
+  }
+}
 
 class App extends Component {
   render() {
