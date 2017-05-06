@@ -9,7 +9,7 @@ import Sider from './Common/Sider';
 import Bread from './Common/Bread';
 
 import AdvertisementMobile from './AdvertisementModule/AdvertisementMobile'; // advertisementMobile
-import GameList from './GameManagement/GameList';
+import GameList from './Games/Games';
 
 const Home = () => (
   <div>
@@ -25,7 +25,7 @@ class SiderMenuRoutes extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/advertisementMobile" component={AdvertisementMobile} />
-          <Route path="/gameList" component={GameList} />
+          <Route path="/games" component={GameList} />
           <Route path="/addGame" component={AdvertisementMobile} />
           <Route path="/gameType" component={AdvertisementMobile} />
           <Route path="/gameNews" component={AdvertisementMobile} />

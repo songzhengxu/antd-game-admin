@@ -37,7 +37,7 @@ class Nav extends Component {
           title={<span><Icon type="setting" /><span>游戏管理</span></span>}
         >
           <Menu.Item key="9">
-            <Link to="/gameList">
+            <Link to="/games">
               <Icon type="upload" />
               {!HeaderReducer.collapsed ? <span className="nav-text">游戏列表</span> : ''}
             </Link>
