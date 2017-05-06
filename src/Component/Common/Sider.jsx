@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Icon, Menu, Switch } from 'antd';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import SiderAction from '../../Action/SiderAction';
 
 import config from '../../utils/config';
@@ -8,21 +9,32 @@ import config from '../../utils/config';
 
 class Nav extends Component {
   render() {
-    const { HeaderReducer } = this.props;
+    const { HeaderReducer, theme } = this.props;
     return (
-      <Menu mode="inline" inlineIndent={!HeaderReducer.collapsed ? '24' : '0'} defaultSelectedKeys={['1']}>
+      <Menu mode="inline" theme={theme} inlineIndent={!HeaderReducer.collapsed ? '24' : '0'} defaultSelectedKeys={['1']}>
         <Menu.Item key="1">
-          <Icon type="user" />
-          {!HeaderReducer.collapsed ? <span className="nav-text">nav 1</span> : ''}
-
+          <Link to="/advertisementMobile">
+            <Icon type="user" />
+            {!HeaderReducer.collapsed ? <span className="nav-text">nav 1</span> : ''}
+          </Link>
         </Menu.Item>
         <Menu.Item key="2">
-          <Icon type="video-camera" />
-          {!HeaderReducer.collapsed ? <span className="nav-text">nav 2</span> : ''}
+          <Link to="/">
+            <Icon type="video-camera" />
+            {!HeaderReducer.collapsed ? <span className="nav-text">HomePage</span> : ''}
+          </Link>
         </Menu.Item>
         <Menu.Item key="3">
-          <Icon type="upload" />
-          {!HeaderReducer.collapsed ? <span className="nav-text">nav 3</span> : ''}
+          <Link to="/login">
+            <Icon type="upload" />
+            {!HeaderReducer.collapsed ? <span className="nav-text">Login</span> : ''}
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="4">
+          <Link to="/dada">
+            <Icon type="upload" />
+            {!HeaderReducer.collapsed ? <span className="nav-text">不存在的链接</span> : ''}
+          </Link>
         </Menu.Item>
       </Menu>
     );
@@ -33,14 +45,14 @@ const NavRedux = connect(state => ({ HeaderReducer: state.HeaderReducer }), null
 
 class Main extends Component {
   render() {
-    const { HeaderReducer, changeLight } = this.props;
+    const { HeaderReducer, changeLight, theme } = this.props;
     return (
       <div>
         <div className="logo">
           <img alt={'logo'} src={config.logo} />
           {!HeaderReducer.collapsed ? <span>{config.name}</span> : ''}
         </div>
-        <NavRedux />
+        <NavRedux theme={theme} />
         <div className="switchtheme">
           <span><Icon type="bulb" />Switch Theme</span>
           {!HeaderReducer.collapsed ? <Switch onChange={changeLight} /> : ''}

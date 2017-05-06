@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 import { Button, Row, Form, Input, message } from 'antd';
 import config from '../utils/config';
 // import { connect } from 'react-redux';
@@ -19,16 +18,25 @@ class Main extends Component {
     message.error('帐号或密码错误');
   }
   handleSubmit(event) {
+    const { history } = this.props;
     event.preventDefault();
-    this.setState({ loading: !this.state.loading });
+
     this.props.form.validateFields((error, values) => {
       if (!error) {
-        if (values.userName !== 'guest' && values.password !== 'guest') {
-          setTimeout(() => {
+        this.setState({ loading: !this.state.loading });
+        setTimeout(() => {
+          if (values.userName !== 'guest' && values.password !== 'guest') {
             this.showerror();
             this.setState({ loading: !this.state.loading });
+<<<<<<< HEAD
           }, 1000).bind(this);
         }
+=======
+          } else {
+            history.push('/');
+          }
+        }, 1000);
+>>>>>>> c526db0cb9cf48919fbc53293164b7ca9d74b92f
       }
     });
   }
@@ -62,7 +70,10 @@ class Main extends Component {
          )}
             </FormItem>
             <Row>
-              <Button type="primary" size="large" onClick={this.handleSubmit} loading={loginLoading}>
+              <Button
+                type="primary" size="large"
+                onClick={this.handleSubmit} loading={loginLoading}
+              >
              Sign in
            </Button>
               <p>
