@@ -32,7 +32,6 @@ class Nav extends Component {
             {!HeaderReducer.collapsed ? <span className="nav-text">Login</span> : ''}
           </Link>
         </Menu.Item>
-<<<<<<< HEAD
         <SubMenu
           key="sub4"
           title={<span><Icon type="setting" /><span>游戏管理</span></span>}
@@ -62,14 +61,12 @@ class Nav extends Component {
             </Link>
           </Menu.Item>
         </SubMenu>
-=======
         <Menu.Item key="4">
           <Link to="/dada">
             <Icon type="upload" />
             {!HeaderReducer.collapsed ? <span className="nav-text">不存在的链接</span> : ''}
           </Link>
         </Menu.Item>
->>>>>>> c526db0cb9cf48919fbc53293164b7ca9d74b92f
       </Menu>
     );
   }
