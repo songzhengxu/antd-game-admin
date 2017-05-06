@@ -28,15 +28,10 @@ class Main extends Component {
           if (values.userName !== 'guest' && values.password !== 'guest') {
             this.showerror();
             this.setState({ loading: !this.state.loading });
-<<<<<<< HEAD
-          }, 1000).bind(this);
-        }
-=======
           } else {
             history.push('/');
           }
         }, 1000);
->>>>>>> c526db0cb9cf48919fbc53293164b7ca9d74b92f
       }
     });
   }
@@ -89,5 +84,4 @@ class Main extends Component {
   }
 }
 
-const MainLogin = Form.create()(Main);
-export default MainLogin;
+export default Form.create()(Main);
