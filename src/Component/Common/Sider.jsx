@@ -61,6 +61,93 @@ class Nav extends Component {
             </Link>
           </Menu.Item>
         </SubMenu>
+        <SubMenu
+          key="connent"
+          title="内容管理"
+        >
+          <Menu.Item key="13">
+            <Link to="/ContentTable">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">专题管理</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="14">
+            <Link to="/activityControl">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">活动管理</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="15">
+            <Link to="/serviceControl">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">开服管理</span> : ''}
+            </Link>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu
+          key="money"
+          title="平台币管理"
+        >
+          <Menu.Item key="16">
+            <Link to="/grant">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">平台币发放</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="17">
+            <Link to="/recharge">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">发放记录&充值管理</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="18">
+            <Link to="/remaining">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">平台币余额列表</span> : ''}
+            </Link>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu
+          key="network "
+          title="网站管理"
+        >
+          <Menu.Item key="19">
+            <Link to="/networkInformation">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">网站信息</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="20">
+            <Link to="/serviceInformation">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">客服信息</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="21">
+            <Link to="/companyManagement">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">公司管理</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="22">
+            <Link to="/networkPicture">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">网站图片设定</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="23">
+            <Link to="/companyInformatio">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">公司信息配置</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="24">
+            <Link to="/blogroll">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">友情链接</span> : ''}
+            </Link>
+          </Menu.Item>
+        </SubMenu>
         <Menu.Item key="4">
           <Link to="/dada">
             <Icon type="upload" />

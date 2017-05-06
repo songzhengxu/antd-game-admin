@@ -84,5 +84,4 @@ class Main extends Component {
   }
 }
 
-const MainLogin = Form.create()(Main);
-export default MainLogin;
+export default Form.create()(Main);
