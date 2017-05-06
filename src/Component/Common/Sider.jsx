@@ -6,6 +6,8 @@ import SiderAction from '../../Action/SiderAction';
 
 import config from '../../utils/config';
 
+const SubMenu = Menu.SubMenu;
+
 
 class Nav extends Component {
   render() {
@@ -30,6 +32,35 @@ class Nav extends Component {
             {!HeaderReducer.collapsed ? <span className="nav-text">Login</span> : ''}
           </Link>
         </Menu.Item>
+        <SubMenu
+          key="sub4"
+          title={<span><Icon type="setting" /><span>游戏管理</span></span>}
+        >
+          <Menu.Item key="9">
+            <Link to="/gameList">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">游戏列表</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="10">
+            <Link to="/addGame">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">添加游戏</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="11">
+            <Link to="/gameNews">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">游戏资讯</span> : ''}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="12">
+            <Link to="/gameType">
+              <Icon type="upload" />
+              {!HeaderReducer.collapsed ? <span className="nav-text">游戏类型</span> : ''}
+            </Link>
+          </Menu.Item>
+        </SubMenu>
       </Menu>
     );
   }

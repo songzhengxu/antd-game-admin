@@ -16,7 +16,7 @@ const RouteConfig = () => (
       <Switch>
         <Route path="/" component={Home} />
         <Route exact path="/login" component={Login} />
-        <Route exact component={NotFoundPage} />
+        <Route component={NotFoundPage} />
       </Switch>
     </div>
   </Router>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Table } from 'antd';
 // import logo from '~/Assets/testPic.png';
 import data from './mockData';
@@ -44,4 +43,4 @@ class TabelComponent extends Component {
   }
 }
 
-export default connect(null, null)(TabelComponent);
+export default TabelComponent;
