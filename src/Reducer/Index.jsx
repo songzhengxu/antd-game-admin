@@ -4,7 +4,7 @@
  */
 import HeaderReducer from './HeaderReducer';
 import SiderReducer from './SiderReducer';
-import GameManagement from './GameManagement';
+import GameManagement from './GameManagementReducer';
 
 
 export default { HeaderReducer, SiderReducer, GameManagement };

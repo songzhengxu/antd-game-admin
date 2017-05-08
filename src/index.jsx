@@ -11,6 +11,8 @@ import store from './Config/Store'; // 引入Store
 
 import './Style/style.less'; // 引入样式表
 
+import './Config/init';
+
 // 订阅state改变
 store.subscribe(() => {
     // console.log(store.getState());

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 
 import Header from './Common/Header';
@@ -8,9 +8,8 @@ import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
 
-import AdvertisementMobile from './AdvertisementModule/AdvertisementMobile'; // advertisementMobile
-import GameList from './GameManagement/GameList';
-import { WrappedDemo } from './ContentManagementModule/ContentTable';
+import AdsMobile from './Ads/Mobile'; // advertisementMobile
+import GameList from './Games/Games';
 
 const Home = () => (
   <div>
@@ -25,13 +24,13 @@ class SiderMenuRoutes extends Component {
       <div className="contentInside">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/advertisementMobile" component={AdvertisementMobile} />
+          <Route path="/adsMobile" component={AdsMobile} />
           <Route path="/gameList" component={GameList} />
-          <Route path="/addGame" component={AdvertisementMobile} />
-          <Route path="/gameType" component={AdvertisementMobile} />
-          <Route path="/gameNews" component={AdvertisementMobile} />
-          <Route path="/contentTable" component={WrappedDemo} />
-          <Redirect to="/404" />
+
+          <Route path="/addGame" component={AdsMobile} />
+          <Route path="/gameType" component={AdsMobile} />
+          <Route path="/gameNews" component={AdsMobile} />
+          {/* <Redirect to="/404" /> */}
         </Switch>
       </div>
     );
