@@ -7,7 +7,6 @@ import Home from '../Component/App'; // 页面组件
 import NotFoundPage from '../Component/NotFoundPage'; // NotFoundPage
 import Login from '../Component/Login'; // Login
 
-
 // 路由配置
 const RouteConfig = () => (
   <Router>

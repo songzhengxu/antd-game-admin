@@ -8,8 +8,9 @@ import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
 
+
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
-import GameList from './GameManagement/GameList';
+import GameList from './Games/Games';
 
 const Home = () => (
   <div>
