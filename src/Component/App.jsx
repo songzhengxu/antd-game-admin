@@ -26,7 +26,7 @@ class SiderMenuRoutes extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/adsMobile" component={AdsMobile} />
-          <Route path="/gameList" component={GameList} />
+          <Route path="/games" component={GameList} />
           <Route path="/addGame" component={AdsMobile} />
           <Route path="/gameType" component={AdsMobile} />
           <Route path="/gameNews" component={AdsMobile} />

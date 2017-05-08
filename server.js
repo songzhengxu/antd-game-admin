@@ -22,7 +22,7 @@ const server = new WebpackDevServer(webpack(config), {
 
 // 你只需要执行这一段代码，当你访问需要跨域的api资源时，就可以成功访问到了。
 server.app.use('/api/*', proxy({
-  target: 'http://rap.fanweimei.com/mockjsdata/4',
+  target: 'http://rap.fanweimei.com/mockjsdata/3',
   changeOrigin: true,
 }));
 
