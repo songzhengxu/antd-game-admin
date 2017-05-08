@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import Table from './Tabel';
 
-class AdvertisementMobile extends Component {
+class Mobile extends Component {
   render() {
     return (<div>
       <Button className="editable-add-btn">Create</Button>
@@ -11,4 +11,4 @@ class AdvertisementMobile extends Component {
   }
 }
 
-export default AdvertisementMobile;
+export default Mobile;
