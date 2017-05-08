@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Table } from 'antd';
-// import logo from '~/Assets/testPic.png';
-// import data from './mockData';
+
 
 // TODO img的 src 用 import from 路径 可以 直接 使用不可用
 class TabelComponent extends Component {
@@ -36,18 +35,15 @@ class TabelComponent extends Component {
   }
   fetch() {
     this.setState({ loading: true });
-    axios.get('get/Ads/mobile', { baseURL: 'http://rap.fanweimei.com/mockjsdata/4/' })
-    .then((response) => {
-      console.log(response);
+    axios.get('api/get/Ads/mobile')
+    .then((data) => {
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
       this.setState({
         loading: false,
-        data: response.data.gameList,
+        data: data.gameList,
         pagination,
       });
-    }).catch((response) => {
-      console.log(response);
     });
   }
   render() {
