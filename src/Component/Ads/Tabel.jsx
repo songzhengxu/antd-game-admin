@@ -36,7 +36,7 @@ class TabelComponent extends Component {
   }
   fetch() {
     this.setState({ loading: true });
-    axios.get('get/Ads/mobile', { baseURL: 'http://rap.fanweimei.com/mockjsdata/4/' })
+    axios.get('api/get/Ads/mobile')
     .then((response) => {
       console.log(response);
       const pagination = { ...this.state.pagination };
@@ -70,8 +70,8 @@ class TabelComponent extends Component {
       key: 'URL',
     }, {
       title: '编辑时间',
-      dataIndex: 'editTime',
-      key: 'editTime',
+      dataIndex: 'editDate',
+      key: 'editDate',
     }, {
       title: '状态',
       dataIndex: 'status',
