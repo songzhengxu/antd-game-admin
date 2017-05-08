@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Spin } from 'antd';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import fetchDataIfNeed from '../../Action/GameListAction';
 
 const columns = [{
@@ -10,7 +11,6 @@ const columns = [{
   title: '游戏名称',
   dataIndex: 'gameList_youximngcheng',
   render: (text, record) => <a>{record.gameList_youximngcheng}</a>,
-
 }, {
   title: 'APPKEY',
   dataIndex: 'gameList_APPKEY',
@@ -18,9 +18,8 @@ const columns = [{
   title: '游戏类型',
   dataIndex: 'gameList_youxileixing',
   render: (text, record) => {
-    record.gameList_youxileixing.map(data => (
-      <a>{data}</a>
-    ));
+    const display = record.gameList_youxileixing.join(' | ');
+    return display;
   },
 }, {
   title: '添加时间',
@@ -34,6 +33,18 @@ const columns = [{
 }, {
   title: '管理操作',
   dataIndex: 'gameList_guanlicaozuo',
+  render: (text, record) => {
+    const display = record.gameList_guanlicaozuo.map(
+      data => <Link to="/adsMobile" key={data + Math.random()} >{data}</Link>);
+    const finalDisplay = [];
+    for (let displayIndex = 0; displayIndex < display.length; displayIndex += 1) {
+      finalDisplay.push(display[displayIndex]);
+      if (displayIndex !== display.length - 1) {
+        finalDisplay.push(' | ');
+      }
+    }
+    return finalDisplay;
+  },
 }];
 const dataFormatTrans = function dataFormatTrans(sourceData) {
   const dataSource = [];
@@ -97,7 +108,7 @@ testdata = {
 class GameList extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchDataIfNeed('http://rap.fanweimei.com/mockjsdata/3/games.json'));
+    dispatch(fetchDataIfNeed('api/games.json'));
   }
   render() {
     const { data } = this.props.gameList;

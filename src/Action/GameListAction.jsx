@@ -4,6 +4,7 @@ const getData = 'GET_DATA';
 const refreshData = 'REFRESH_DATA';
 const waitForFetching = 'WAIT_FOR_FETCHING';
 
+/*
 const resolveRecievedData = function resolveRecievedData(newRecievedData) {
   const recievedData = newRecievedData;
   for (let recievedDataIndex = 0;
@@ -13,6 +14,7 @@ const resolveRecievedData = function resolveRecievedData(newRecievedData) {
   }
   return recievedData;
 };
+*/
 
 const fetchData = function fetchData(url) {
   return dispatch => axios({
