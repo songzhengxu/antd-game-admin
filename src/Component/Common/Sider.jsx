@@ -66,7 +66,7 @@ class Nav extends Component {
           title="内容管理"
         >
           <Menu.Item key="13">
-            <Link to="/ContentTable">
+            <Link to="/contentTable">
               <Icon type="upload" />
               {!HeaderReducer.collapsed ? <span className="nav-text">专题管理</span> : ''}
             </Link>
