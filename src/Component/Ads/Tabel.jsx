@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Table } from 'antd';
-// import logo from '~/Assets/testPic.png';
-// import data from './mockData';
+import { Table, Modal } from 'antd';
+import DropOption from '../Common/DropOption';
 
+const confirm = Modal.confirm;
 // TODO img的 src 用 import from 路径 可以 直接 使用不可用
 class TabelComponent extends Component {
   constructor() {
@@ -16,17 +16,26 @@ class TabelComponent extends Component {
     this.handleTableChange = this.handleTableChange.bind(this);
     this.fetch = this.fetch.bind(this);
   }
-
-
-  // fetch(params = {}) {
-  //   return function fetchNew() {
-  //     this.setState({ loading: true });
-  //   }.bind(this);
-  // }
-
   componentDidMount() {
     this.fetch();
   }
+  handleMenuClick(record, e) {
+    if (e.key === '1') {
+      // onEditItem(record);
+      console.log(`编辑操作${record.key}`);
+    } else if (e.key === '2') {
+      confirm({
+        title: 'Are you sure delete this record?',
+        onOk() {
+          // onDeleteItem(record.id);
+
+          console.log(`删除当前元素id${record.key}`);
+        },
+      });
+    }
+  }
+
+
   handleTableChange(pagination) {
     const paper = { ...this.status.pagination };
     paper.current = pagination.current;
@@ -38,7 +47,6 @@ class TabelComponent extends Component {
     this.setState({ loading: true });
     axios.get('api/get/Ads/mobile')
     .then((response) => {
-      console.log(response);
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
       this.setState({
@@ -46,8 +54,6 @@ class TabelComponent extends Component {
         data: response.data.gameList,
         pagination,
       });
-    }).catch((response) => {
-      console.log(response);
     });
   }
   render() {
@@ -80,6 +86,7 @@ class TabelComponent extends Component {
       title: '操作',
       dataIndex: 'control',
       key: 'control',
+      render: (text, record) => <DropOption onMenuClick={e => this.handleMenuClick(record, e)} menuOptions={[{ key: '1', name: 'Update' }, { key: '2', name: 'Delete' }]} />,
     }];
     return (
       <Table
