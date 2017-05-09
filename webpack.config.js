@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // 一句话理解 path和 publicPath的作用！！！！
@@ -7,7 +9,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  cache: true,
+  devtool: 'eval',
   entry: {
     index: [
       'react-hot-loader/patch',
@@ -42,7 +45,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         use: [
-          'babel-loader', 'eslint-loader',
+          'babel-loader?cacheDirectory', 'eslint-loader',
         ],
         exclude: /^node_modules$/,
       },
@@ -106,6 +109,7 @@ module.exports = {
 
   },
   resolve: {
+    modules: [path.resolve(__dirname, 'node_modules')],
     extensions: ['.js', '.less', '.json', '.jsx'],
     alias: {
       '~': `${__dirname}/src`,
