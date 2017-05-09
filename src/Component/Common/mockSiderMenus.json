@@ -1,0 +1,539 @@
+{
+  "menus": [{
+      "id": 1,
+      "icon": "setting",
+      "name": "设置",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 2,
+      "icon": "caret-right",
+      "name": "后台菜单",
+      "bpid": 1,
+      "mpid": 1,
+      "index": 0,
+      "isHidden": false,
+      "router": "/setting/menus"
+    },
+    {
+      "id": 3,
+      "icon": "user",
+      "name": "个人信息",
+      "bpid": 1,
+      "mpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 4,
+      "icon": "double-right",
+      "name": "修改信息",
+      "bpid": 3,
+      "mpid": 3,
+      "index": 0,
+      "isHidden": false,
+      "router": "/setting/user/userinfo"
+    },
+    {
+      "id": 5,
+      "icon": "double-right",
+      "name": "修改密码",
+      "bpid": 3,
+      "mpid": 3,
+      "index": 0,
+      "isHidden": false,
+      "router": "/setting/user/password"
+    },
+    {
+      "id": 6,
+      "icon": "mail",
+      "name": "邮箱配置",
+      "bpid": 1,
+      "mpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 7,
+      "icon": "double-right",
+      "name": "SMTP配置",
+      "bpid": 6,
+      "mpid": 6,
+      "index": 0,
+      "isHidden": false,
+      "router": "/setting/mail/smtp"
+    },
+    {
+      "id": 8,
+      "icon": "rbac",
+      "name": "角色管理",
+      "bpid": 1,
+      "mpid": 1,
+      "index": 0,
+      "isHidden": false,
+      "router": "/setting/rbac"
+    },
+    {
+      "id": 9,
+      "icon": "admins",
+      "name": "管理员",
+      "bpid": 1,
+      "mpid": 1,
+      "index": 0,
+      "isHidden": false,
+      "router": "/setting/admins"
+    },
+    {
+      "id": 10,
+      "icon": "contacts",
+      "name": "内容管理",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 11,
+      "icon": "caret-right",
+      "name": "专题管理",
+      "bpid": 10,
+      "mpid": 10,
+      "index": 0,
+      "isHidden": false,
+      "router": "/content/subjects"
+    },
+    {
+      "id": 12,
+      "icon": "caret-right",
+      "name": "活动管理",
+      "bpid": 10,
+      "mpid": 10,
+      "index": 0,
+      "isHidden": false,
+      "router": "/content/activitys"
+    },
+    {
+      "id": 13,
+      "icon": "caret-right",
+      "name": "开服管理",
+      "bpid": 10,
+      "mpid": 10,
+      "index": 0,
+      "isHidden": false,
+      "router": "/content/servers"
+    },
+    {
+      "id": 14,
+      "icon": "pay-circle",
+      "name": "平台币管理",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 15,
+      "icon": "caret-right",
+      "name": "平台币发放",
+      "bpid": 14,
+      "mpid": 14,
+      "index": 0,
+      "isHidden": false,
+      "router": "/currency/eidtor"
+    },
+    {
+      "id": 16,
+      "icon": "caret-right",
+      "name": "发放记录&充值记录",
+      "bpid": 14,
+      "mpid": 14,
+      "index": 0,
+      "isHidden": false,
+      "router": "/currency/records"
+    },
+    {
+      "id": 17,
+      "icon": "caret-right",
+      "name": "平台币余额列表",
+      "bpid": 14,
+      "mpid": 14,
+      "index": 0,
+      "isHidden": false,
+      "router": "/currency/summarize"
+    },
+    {
+      "id": 18,
+      "icon": "rocket",
+      "name": "游戏管理",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 19,
+      "icon": "caret-right",
+      "name": "游戏列表",
+      "bpid": 18,
+      "mpid": 18,
+      "index": 0,
+      "isHidden": false,
+      "router": "/games/games"
+    },
+    {
+      "id": 20,
+      "icon": "caret-right",
+      "name": "添加游戏",
+      "bpid": 18,
+      "mpid": 18,
+      "index": 0,
+      "isHidden": false,
+      "router": "/games/editor"
+    },
+    {
+      "id": 21,
+      "icon": "caret-right",
+      "name": "游戏咨询",
+      "bpid": 18,
+      "mpid": 18,
+      "index": 0,
+      "isHidden": false,
+      "router": "/games/informations"
+    },
+    {
+      "id": 22,
+      "icon": "caret-right",
+      "name": "游戏类型",
+      "bpid": 18,
+      "mpid": 18,
+      "index": 0,
+      "isHidden": false,
+      "router": "/games/types"
+    },
+    {
+      "id": 23,
+      "icon": "gift",
+      "name": "礼包管理",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 24,
+      "icon": "caret-right",
+      "name": "礼包列表",
+      "bpid": 23,
+      "mpid": 23,
+      "index": 0,
+      "isHidden": false,
+      "router": "/gift/gifts"
+    },
+    {
+      "id": 25,
+      "icon": "home",
+      "name": "广告",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 26,
+      "icon": "caret-right",
+      "name": "首页轮播图(移动端)",
+      "bpid": 25,
+      "mpid": 25,
+      "index": 0,
+      "isHidden": false,
+      "router": "/ads/mobile"
+    },
+    {
+      "id": 27,
+      "icon": "caret-right",
+      "name": "首页轮播图(PC端)",
+      "bpid": 25,
+      "mpid": 25,
+      "index": 0,
+      "isHidden": false,
+      "router": "/ads/web"
+    },
+    {
+      "id": 28,
+      "icon": "caret-right",
+      "name": "游戏盒子轮播图管理",
+      "bpid": 25,
+      "mpid": 25,
+      "index": 0,
+      "isHidden": false,
+      "router": "/ads/gamebox"
+    },
+    {
+      "id": 29,
+      "icon": "team",
+      "name": "玩家管理",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 30,
+      "icon": "caret-right",
+      "name": "玩家列表",
+      "bpid": 29,
+      "mpid": 29,
+      "index": 0,
+      "isHidden": false,
+      "router": "/player/players"
+    },
+    {
+      "id": 31,
+      "icon": "global",
+      "name": "开放平台",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 32,
+      "icon": "caret-right",
+      "name": "热门网游",
+      "bpid": 31,
+      "mpid": 31,
+      "index": 0,
+      "isHidden": false,
+      "router": "/agent/hots"
+    },
+    {
+      "id": 33,
+      "icon": "caret-right",
+      "name": "渠道列表",
+      "bpid": 31,
+      "mpid": 31,
+      "index": 0,
+      "isHidden": false,
+      "router": "/agent/channels"
+    },
+    {
+      "id": 34,
+      "icon": "caret-right",
+      "name": "统计",
+      "bpid": 31,
+      "mpid": 31,
+      "index": 0,
+      "isHidden": false,
+      "router": "/agent/summarizes"
+    },
+    {
+      "id": 35,
+      "icon": "caret-right",
+      "name": "结算待审核列表",
+      "bpid": 31,
+      "mpid": 31,
+      "index": 0,
+      "isHidden": false,
+      "router": "/agent/pendinglists"
+    },
+    {
+      "id": 36,
+      "icon": "caret-right",
+      "name": "财务待审核列表",
+      "bpid": 31,
+      "mpid": 31,
+      "index": 0,
+      "isHidden": false,
+      "router": "/agent/auditlists"
+    },
+    {
+      "id": 37,
+      "icon": "caret-right",
+      "name": "结算列表",
+      "bpid": 31,
+      "mpid": 31,
+      "index": 0,
+      "isHidden": false,
+      "router": "/agent/accounts"
+    },
+    {
+      "id": 38,
+      "icon": "caret-right",
+      "name": "精品推荐",
+      "bpid": 31,
+      "mpid": 31,
+      "index": 0,
+      "isHidden": false,
+      "router": "/agent/qualities"
+    },
+    {
+      "id": 39,
+      "icon": "caret-right",
+      "name": "渠道资料审核",
+      "bpid": 31,
+      "mpid": 31,
+      "index": 0,
+      "isHidden": false,
+      "router": "/agent/channeldate"
+    },
+    {
+      "id": 40,
+      "icon": "bar-chart",
+      "name": "数据统计",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 41,
+      "icon": "caret-right",
+      "name": "留存统计",
+      "bpid": 40,
+      "mpid": 40,
+      "index": 0,
+      "isHidden": false,
+      "router": "/statistics/keep"
+    },
+    {
+      "id": 42,
+      "icon": "caret-right",
+      "name": "充值",
+      "bpid": 40,
+      "mpid": 40,
+      "index": 0,
+      "isHidden": false,
+      "router": "/statistics/recharge"
+    },
+    {
+      "id": 43,
+      "icon": "caret-right",
+      "name": "消费",
+      "bpid": 40,
+      "mpid": 40,
+      "index": 0,
+      "isHidden": false,
+      "router": "/statistics/consume"
+    },
+    {
+      "id": 44,
+      "icon": "caret-right",
+      "name": "日统计",
+      "bpid": 40,
+      "mpid": 40,
+      "index": 0,
+      "isHidden": false,
+      "router": "/statistics/daily"
+    },
+    {
+      "id": 45,
+      "icon": "caret-right",
+      "name": "游戏统计",
+      "bpid": 40,
+      "mpid": 40,
+      "index": 0,
+      "isHidden": false,
+      "router": "/statistics/game"
+    },
+    {
+      "id": 46,
+      "icon": "caret-right",
+      "name": "广告统计",
+      "bpid": 40,
+      "mpid": 40,
+      "index": 0,
+      "isHidden": false,
+      "router": "/statistics/ads"
+    },
+    {
+      "id": 47,
+      "icon": "message",
+      "name": "消息管理",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 48,
+      "icon": "caret-right",
+      "name": "消息列表",
+      "bpid": 47,
+      "mpid": 47,
+      "index": 0,
+      "isHidden": false,
+      "router": "/message/messages"
+    },
+    {
+      "id": 49,
+      "icon": "caret-right",
+      "name": "新增信息",
+      "bpid": 47,
+      "mpid": 47,
+      "index": 0,
+      "isHidden": false,
+      "router": "/message/editor"
+    },
+    {
+      "id": 50,
+      "icon": "home",
+      "name": "网站管理",
+      "bpid": 1,
+      "index": 0,
+      "isHidden": false
+    },
+    {
+      "id": 51,
+      "icon": "caret-right",
+      "name": "网站信息",
+      "bpid": 50,
+      "mpid": 50,
+      "index": 0,
+      "isHidden": false,
+      "router": "/web/website"
+    },
+    {
+      "id": 52,
+      "icon": "caret-right",
+      "name": "客服信息",
+      "bpid": 50,
+      "mpid": 50,
+      "index": 0,
+      "isHidden": false,
+      "router": "/web/service"
+    },
+    {
+      "id": 53,
+      "icon": "caret-right",
+      "name": "公司信息",
+      "bpid": 50,
+      "mpid": 50,
+      "index": 0,
+      "isHidden": false,
+      "router": "/web/contact"
+    },
+    {
+      "id": 54,
+      "icon": "caret-right",
+      "name": "网站图片设定",
+      "bpid": 50,
+      "mpid": 50,
+      "index": 0,
+      "isHidden": false,
+      "router": "/web/pictures"
+    },
+    {
+      "id": 55,
+      "icon": "caret-right",
+      "name": "公司信息配置",
+      "bpid": 50,
+      "mpid": 50,
+      "index": 0,
+      "isHidden": false,
+      "router": "/web/company"
+    },
+    {
+      "id": 56,
+      "icon": "caret-right",
+      "name": "友情连接",
+      "bpid": 50,
+      "mpid": 50,
+      "index": 0,
+      "isHidden": false,
+      "router": "/web/blogroll"
+    }
+  ]
+}
