@@ -7,10 +7,12 @@ import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
-
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
 import { DataTable, AddContent } from './ContentManagementModule/ContentTable';
+import Action from './ContentManagementModule/ActionControl';
+
+import mockSiderMenusJson from './Common/mockSiderMenus.json';
 
 const Home = () => (
   <div>
@@ -18,6 +20,10 @@ const Home = () => (
   </div>
 );
 
+
+const breadProps = {
+  menu: mockSiderMenusJson.menus,
+};
 
 class SiderMenuRoutes extends Component {
   render() {
@@ -31,6 +37,7 @@ class SiderMenuRoutes extends Component {
           <Route path="/gameType" component={AdsMobile} />
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
+          <Route path="/content/activitys" component={Action} />
 
           <Route path="/addContent" component={AddContent} />
           {/* <Redirect to="/404" /> */}
@@ -52,7 +59,7 @@ class App extends Component {
           <div className="main">
             <Header />
             <div className="container">
-              <Bread />
+              <Bread {...breadProps} location={location} />
               <div className="content">
                 <SiderMenuRoutes />
               </div>

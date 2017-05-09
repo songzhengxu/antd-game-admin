@@ -19,6 +19,13 @@ module.exports = {
     "pictureUrl": "",
     "isHot": "是",
     "time": "2017.5.5"
+  },
+  {
+    "index": 1,
+    "name": "五一大特卖1",
+    "pictureUrl": "暂无",
+    "startTime": "2017-04-14",
+    "endTime":"2017-04-25"
   }
 ]
 };
