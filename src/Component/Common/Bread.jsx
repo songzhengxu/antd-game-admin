@@ -7,7 +7,7 @@ class Mian extends Component {
       <div className="bread">
         <Breadcrumb>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>An</Breadcrumb.Item>
+          <Breadcrumb.Item>An2</Breadcrumb.Item>
         </Breadcrumb>
       </div>
     );
