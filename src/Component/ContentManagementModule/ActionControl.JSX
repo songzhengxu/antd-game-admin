@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Table, Modal } from 'antd';
+import { Table, Input, Radio, Form, Upload, Icon, Button, Modal, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import LzEditor from 'react-lz-editor';
 import DropOption from '../Common/DropOption';
 
-// const FormItem = Form.Item;
-// const RadioGroup = Radio.Group;
+const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
 const confirm = Modal.confirm;
+const RangePicker = DatePicker.RangePicker;
 
 class Action extends Component {
   constructor() {
@@ -25,7 +27,7 @@ class Action extends Component {
   handleMenu(record, event) {
     if (event.key === '1') {
       console.log('编辑专题$({record.key})');
-    } else if (event.key === '3') {
+    } else if (event.key === '2') {
       confirm({
         title: 'Are you delect this record?',
         onOk() {
@@ -84,7 +86,7 @@ class Action extends Component {
     ];
     return (
       <div>
-        <Link to="/addContent">
+        <Link to="/addAction">
           <button className="add-subject">添加活动</button>
         </Link>
         <Table
@@ -100,4 +102,76 @@ class Action extends Component {
   }
 }
 
-export default Action;
+class AddAction extends Component {
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
+  normFile(e) {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  }
+  render() {
+    const { getFieldDecorator } = this.props.form;
+    const formItemLayout = {
+      labelCol: { span: 6 },
+      wrapperCol: { span: 14 },
+    };
+    return (
+      <Form onSubmit={this.handleSubmit}>
+        <FormItem
+          {...formItemLayout}
+          label="专题题目"
+          hasFeedback
+        >
+          <Input type="text" />,
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label="图片【建议尺寸：640*280】"
+          extra="显示图片"
+        >
+          {getFieldDecorator('upload', {
+            valuePropName: 'fileList',
+            getValueFromEvent: this.normFile,
+          })(
+            <Upload name="logo" action="/upload.do" listType="picture">
+              <Button>
+                <Icon type="upload" /> Click to upload
+              </Button>
+            </Upload>,
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label="起止时间"
+        >
+          <RangePicker />,
+        </FormItem>
+        <FormItem>
+          <LzEditor
+            active="true"
+          />
+        </FormItem>
+
+
+        <FormItem
+          wrapperCol={{ span: 12, offset: 6 }}
+        >
+          <Button type="primary" htmlType="submit">添加</Button>
+          <Link to="/content/activitys">
+            <Button type="primary" htmlType="submit" size="large" className="backtrack">返回</Button>
+          </Link>
+        </FormItem>
+      </Form>
+    );
+  }
+}
+const Addaction = Form.create()(AddAction);
+export { Action, Addaction };

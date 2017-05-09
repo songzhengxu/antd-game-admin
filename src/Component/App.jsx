@@ -10,7 +10,7 @@ import Bread from './Common/Bread';
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
 import { DataTable, AddContent } from './ContentManagementModule/ContentTable';
-import Action from './ContentManagementModule/ActionControl';
+import { Action, Addaction } from './ContentManagementModule/ActionControl';
 
 import mockSiderMenusJson from './Common/mockSiderMenus.json';
 
@@ -40,6 +40,7 @@ class SiderMenuRoutes extends Component {
           <Route path="/content/activitys" component={Action} />
 
           <Route path="/addContent" component={AddContent} />
+          <Route path="/addAction" component={Addaction} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>
