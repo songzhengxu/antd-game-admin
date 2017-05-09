@@ -49,6 +49,7 @@
     "antd": "^2.10.0",
     "axios": "^0.16.1",
     "nprogress": "^0.2.0",
+    "path-to-regexp": "^1.7.0",
     "react": "^15.5.4",
     "react-addons-update": "^15.5.2",
     "react-dom": "^15.5.4",
