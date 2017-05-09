@@ -25,12 +25,12 @@ class SiderMenuRoutes extends Component {
       <div className="contentInside">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/adsMobile" component={AdsMobile} />
+          <Route path="/ads/mobile" component={AdsMobile} />
           <Route path="/games" component={GameList} />
           <Route path="/addGame" component={AdsMobile} />
           <Route path="/gameType" component={AdsMobile} />
           <Route path="/gameNews" component={AdsMobile} />
-          <Route path="/dataTable" component={DataTable} />
+          <Route path="/content/subjects" component={DataTable} />
 
           <Route path="/addContent" component={AddContent} />
           {/* <Redirect to="/404" /> */}

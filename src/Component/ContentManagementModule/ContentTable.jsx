@@ -41,7 +41,7 @@ class DataTable extends Component {
   }
   fetch() {
     this.setState({ loading: true });
-    axios.get(' api/content/subject')
+    axios.get('api/content/subject')
     .then((response) => {
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
@@ -250,7 +250,7 @@ class Addsubject extends Component {
           wrapperCol={{ span: 12, offset: 6 }}
         >
           <Button type="primary" htmlType="submit">添加</Button>
-          <Link to="/dataTable">
+          <Link to="/content/subjects">
             <div className="backtrack">返回</div>
           </Link>
         </FormItem>
