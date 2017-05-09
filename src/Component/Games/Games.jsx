@@ -1,9 +1,10 @@
 import React from 'react';
-import { Table, Spin } from 'antd';
+import { Table, Spin, Select } from 'antd';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fetchDataIfNeed from '../../Action/GameListAction';
 
+const Option = Select.Option;
 const columns = [{
   title: '序号',
   dataIndex: 'gameList_xuhao',
@@ -62,7 +63,8 @@ const dataFormatTrans = function dataFormatTrans(sourceData) {
 /*
 testdata = {
     "code":"200",
-    "data":[
+    "data":{
+      "list":[
       [100165,
       "幻城H5",
       "7a53f435ec3ce5eebf11f9263383e2ac",
@@ -98,12 +100,44 @@ testdata = {
       "2017-04-28 14:26:04",
       "程序接入",
       ["编辑","新增资讯"]
+      ],
+      [100161,
+      "传奇世界之仗剑天涯H5",
+      "b98c561173284c42ccc94a1b98e04f95",
+      ["动作","网游"],
+      "2017-04-28 11:41:14",
+      "2017-05-02 18:13:59",
+      "上线",
+      ["编辑","新增资讯"]
       ]
       ],
+      "shaixuanzhuangtai": ['全部状态', "程序接入", "上线", '下线'],
+      "shaixuanyouxileixing": ['全部类型', '动作', '角色', '闯关', '网游']
+      },
     "msg":"成功获取信息"
 }
 */
 
+const Selector = function Selector(props) {
+  const options = props.options;
+  const dynamicOpiton = options.map(option =>
+    <Option key={option} value={option}>{ option }</Option>);
+  return (
+    <span>
+      {props.children}:
+      <Select
+        showSearch
+        style={{ width: 200 }}
+        placeholder=" 请选择 "
+        optionFilterProp="children"
+        filterOption={(input, option) =>
+          option.props.value.indexOf(input) >= 0}
+      >
+        {dynamicOpiton}
+      </Select>
+    </span>
+  );
+};
 
 class GameList extends React.Component {
   componentDidMount() {
@@ -112,10 +146,19 @@ class GameList extends React.Component {
   }
   render() {
     const { data } = this.props.gameList;
+    // console.log(this.props.gameList);
     if (data) {
-      const dataSource = dataFormatTrans(data);
+      const { filterWord } = this.props.gameList;
+      let dataSource;
+      if (!filterWord.need) {
+        dataSource = dataFormatTrans(data.list);
+      }
+      const shaixuanzhuangtai = data.shaixuanzhuangtai;
+      const shaixuanyouxileixing = data.shaixuanyouxileixing;
       return (
         <div className="gameListTable">
+          <Selector options={shaixuanzhuangtai} >状态</Selector>
+          <Selector options={shaixuanyouxileixing} >游戏类型</Selector>
           <Table
             columns={columns}
             dataSource={dataSource}
