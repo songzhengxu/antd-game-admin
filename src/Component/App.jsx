@@ -7,10 +7,10 @@ import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
-
-
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
+
+import mockSiderMenusJson from './Common/mockSiderMenus.json';
 
 const Home = () => (
   <div>
@@ -18,6 +18,10 @@ const Home = () => (
   </div>
 );
 
+
+const breadProps = {
+  menu: mockSiderMenusJson.menus,
+};
 
 class SiderMenuRoutes extends Component {
   render() {
@@ -49,7 +53,7 @@ class App extends Component {
           <div className="main">
             <Header />
             <div className="container">
-              <Bread />
+              <Bread {...breadProps} location={location} />
               <div className="content">
                 <SiderMenuRoutes />
               </div>
