@@ -19,19 +19,19 @@ class Navgation extends Component {
           key="sub1" title={!HeaderReducer.collapsed ?
             <span><Icon type="bars" /><span>广告</span></span> : <span><Icon type="bars" /></span>}
         >
-          <MenuItem key="1">
+          <MenuItem key="101">
             <Link to="/adsMobile">
               <Icon type="user" />
               {<span className="nav-text">首页轮播图（移动端）</span>}
             </Link>
           </MenuItem>
-          <MenuItem key="2">
+          <MenuItem key="201">
             <Link to="/adsMobile">
               <Icon type="user" />
               {<span className="nav-text">首页轮播图（PC端）</span>}
             </Link>
           </MenuItem>
-          <MenuItem key="3">
+          <MenuItem key="301">
             <Link to="/adsMobile">
               <Icon type="user" />
               {<span className="nav-text">游戏盒子轮播管理）</span>}
@@ -85,7 +85,7 @@ class Navgation extends Component {
           title="内容管理"
         >
           <MenuItem key="13">
-            <Link to="/ContentTable">
+            <Link to="/dataTable">
               <Icon type="upload" />
               {!HeaderReducer.collapsed ? <span className="nav-text">专题管理</span> : ''}
             </Link>
@@ -167,7 +167,7 @@ class Navgation extends Component {
             </Link>
           </MenuItem>
         </SubMenu>
-        <MenuItem key="4">
+        <MenuItem key="404">
           <Link to="/dada">
             <Icon type="upload" />
             {!HeaderReducer.collapsed ? <span className="nav-text">不存在的链接</span> : ''}

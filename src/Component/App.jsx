@@ -10,6 +10,7 @@ import Bread from './Common/Bread';
 
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
+import { DataTable, AddContent } from './ContentManagementModule/ContentTable';
 
 const Home = () => (
   <div>
@@ -25,11 +26,13 @@ class SiderMenuRoutes extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/adsMobile" component={AdsMobile} />
-          <Route path="/gameList" component={GameList} />
-
+          <Route path="/games" component={GameList} />
           <Route path="/addGame" component={AdsMobile} />
           <Route path="/gameType" component={AdsMobile} />
           <Route path="/gameNews" component={AdsMobile} />
+          <Route path="/dataTable" component={DataTable} />
+
+          <Route path="/addContent" component={AddContent} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>

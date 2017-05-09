@@ -1,47 +1,15 @@
 import React, { Component } from 'react';
-import { Table, Input, Radio, Form, Upload, Icon, Button } from 'antd';
+import { Table, Input, Radio, Form, Upload, Icon, Button, Modal } from 'antd';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import LzEditor from 'react-lz-editor';
-import data from '../ContentManagementModule/tableData';
+import DropOption from '../Common/DropOption';
+// import data from '../ContentManagementModule/tableData';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
+const confirm = Modal.confirm;
 
-const columns = [{
-  title: '序号',
-  dataIndex: 'index',
-  key: 'index',
-}, {
-  title: '名称',
-  dataIndex: 'name',
-  key: 'name',
-}, {
-  title: '图片',
-  dataIndex: 'pictureUrl',
-  key: 'pictureUrl',
-}, {
-  title: '是否热门',
-  dataIndex: 'isHot',
-  key: 'isHot',
-}, {
-  title: '时间',
-  dataIndex: 'time',
-  key: 'time',
-}, {
-  title: '操作',
-  dataIndex: '',
-  key: 'action',
-  render: () => (
-    <span>
-      <a href={undefined}>编辑专题</a>
-      <span className="ant-divider" />
-      <a href={undefined}>编辑游戏列表</a>
-      <span className="ant-divider" />
-      <a href={undefined} className="ant-dropdown-link">
-      删除
-      </a>
-    </span>
-  ) },
-];
 
 class DataTable extends Component {
   constructor() {
@@ -51,46 +19,88 @@ class DataTable extends Component {
       pagination: {},
       loading: false,
     };
+    this.fetch = this.fetch.bind(this);
+    this.handleTableChange = this.handleTableChange.bind(this);
   }
-
   componentDidMount() {
-    this.fetch(data);
+    this.fetch();
   }
-  fetch(tableData) {
+  handleMenu(record, event) {
+    if (event.key === '1') {
+      console.log('编辑专题$({record.key})');
+    } else if (event.key === '2') {
+      console.log('编辑游戏列表$({record.key})');
+    } else if (event.key === '3') {
+      confirm({
+        title: 'Are you delect this record?',
+        onOk() {
+          console.log('删除$({record.key})');
+        },
+      });
+    }
+  }
+  fetch() {
     this.setState({ loading: true });
-    const pagination = { ...this.state.pagination };
-    pagination.total = tableData.totalCount;
-    this.setState({
-      loading: false,
-      data: data.results,
-      pagination,
+    axios.get(' api/content/subject')
+    .then((response) => {
+      const pagination = { ...this.state.pagination };
+      pagination.total = 200;
+      this.setState({
+        loading: false,
+        data: response.data.datas,
+        pagination,
+      });
     });
   }
 
-  handleTableChange(pagination, filters, sorter) {
+  handleTableChange(pagination) {
     const pager = { ...this.state.pagination };
     pager.current = pagination.current;
     this.setState({
       pagination: pager,
     });
-    this.fetch({
-      results: pagination.pageSize,
-      page: pagination.current,
-      sortField: sorter.field,
-      sortOrder: sorter.order,
-      ...filters,
-    });
   }
   render() {
+    const columns = [{
+      title: '序号',
+      dataIndex: 'index',
+      key: 'index',
+    }, {
+      title: '名称',
+      dataIndex: 'name',
+      key: 'name',
+    }, {
+      title: '图片',
+      dataIndex: 'pictureUrl',
+      key: 'pictureUrl',
+    }, {
+      title: '是否热门',
+      dataIndex: 'isHot',
+      key: 'isHot',
+    }, {
+      title: '时间',
+      dataIndex: 'time',
+      key: 'time',
+    }, {
+      title: '操作',
+      dataIndex: '',
+      key: 'action',
+      render: (text, record) => <DropOption onMenuClick={event => this.handleMenu(record, event)} menuOptions={[{ key: '1', name: '编辑专题' }, { key: '2', name: '编辑游戏列表' }, { key: '3', name: '删除' }]} /> },
+    ];
     return (
-      <Table
-        columns={columns}
-        rowKey={record => record.registered}
-        dataSource={data}
-        pagination={{ defaultPageSize: 2 }}
-        // loading={this.state.loading}
-        // onChange={this.handleTableChange}
-      />
+      <div>
+        <Link to="/addContent">
+          <button className="add-subject">添加专题</button>
+        </Link>
+        <Table
+          columns={columns}
+          rowKey={record => record.registered}
+          dataSource={this.state.data}
+          pagination={{ defaultPageSize: 2 }}
+          loading={this.state.loading}
+          onChange={this.handleTableChange}
+        />
+      </div>
     );
   }
 
@@ -240,11 +250,13 @@ class Addsubject extends Component {
           wrapperCol={{ span: 12, offset: 6 }}
         >
           <Button type="primary" htmlType="submit">添加</Button>
-          <a href={undefined} className="backtrack">返回</a>
+          <Link to="/dataTable">
+            <div className="backtrack">返回</div>
+          </Link>
         </FormItem>
       </Form>
     );
   }
 }
-const WrappedDemo = Form.create()(Addsubject);
-export { DataTable, WrappedDemo };
+const AddContent = Form.create()(Addsubject);
+export { DataTable, AddContent };

@@ -44,9 +44,11 @@ class TabelComponent extends Component {
     });
   }
   fetch() {
+    console.log(axios.get('api/get/ads/mobile'));
     this.setState({ loading: true });
-    axios.get('api/get/Ads/mobile')
+    axios.get('api/get/ads/mobile')
     .then((response) => {
+      console.log(response);
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
       this.setState({
@@ -76,8 +78,8 @@ class TabelComponent extends Component {
       key: 'URL',
     }, {
       title: '编辑时间',
-      dataIndex: 'editTime',
-      key: 'editTime',
+      dataIndex: 'editDate',
+      key: 'editDate',
     }, {
       title: '状态',
       dataIndex: 'status',
