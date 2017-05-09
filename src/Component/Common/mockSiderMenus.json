@@ -187,7 +187,7 @@
       "mpid": 18,
       "index": 0,
       "isHidden": false,
-      "router": "/games/editor"
+      "router": "/games/addgame"
     },
     {
       "id": 21,

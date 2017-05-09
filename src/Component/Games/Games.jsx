@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Spin, Select } from 'antd';
+import { Table, Spin, Select, Input } from 'antd';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import fetchDataIfNeed from '../../Action/GameListAction';
@@ -123,18 +123,20 @@ const Selector = function Selector(props) {
   const dynamicOpiton = options.map(option =>
     <Option key={option} value={option}>{ option }</Option>);
   return (
-    <span>
-      {props.children}:
-      <Select
-        showSearch
-        style={{ width: 200 }}
-        placeholder=" 请选择 "
-        optionFilterProp="children"
-        filterOption={(input, option) =>
+    <span className="gameList_selector" >
+      {props.children} :
+      <span className="gameList_selector_unit">
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          placeholder=" 请选择 "
+          optionFilterProp="children"
+          filterOption={(input, option) =>
           option.props.value.indexOf(input) >= 0}
-      >
-        {dynamicOpiton}
-      </Select>
+        >
+          {dynamicOpiton}
+        </Select>
+      </span>
     </span>
   );
 };
@@ -153,12 +155,31 @@ class GameList extends React.Component {
       if (!filterWord.need) {
         dataSource = dataFormatTrans(data.list);
       }
+      const shaixuanzhuangtaiFilter = data.shaixuanzhuangtai.map(zhuangtai =>
+        ({ text: zhuangtai, value: zhuangtai }));
+      const shaixuanyouxileixingFilter = data.shaixuanyouxileixing.map(leixing =>
+          ({ text: leixing, value: leixing }));
+      columns[3].filters = shaixuanyouxileixingFilter;
+      columns[3].onFilter = (value, record) => {
+        console.log('');
+        return (value === '全部类型') ? record.gameList_youxileixing : record.gameList_youxileixing.includes(value);
+      };
+      columns[3].filterMultiple = false;
+      columns[6].filters = shaixuanzhuangtaiFilter;
+      columns[6].onFilter = (value, record) => {
+        console.log('');
+        return (value === '全部状态') ? record.gameList_dangqianzhuangtai : record.gameList_dangqianzhuangtai.includes(value);
+      };
+      columns[6].filterMultiple = false;
       const shaixuanzhuangtai = data.shaixuanzhuangtai;
       const shaixuanyouxileixing = data.shaixuanyouxileixing;
       return (
         <div className="gameListTable">
-          <Selector options={shaixuanzhuangtai} >状态</Selector>
-          <Selector options={shaixuanyouxileixing} >游戏类型</Selector>
+          <div className="gameList_selectBar" >
+            <Selector options={shaixuanzhuangtai} >状态</Selector>
+            <Selector options={shaixuanyouxileixing} >游戏类型</Selector>
+            <span className="ganmeList_searchGameName">游戏名称：<Input /></span>
+          </div>
           <Table
             columns={columns}
             dataSource={dataSource}
