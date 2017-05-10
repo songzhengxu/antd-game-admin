@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { Table, Input, Radio, Form, Upload, Icon, Button, Modal } from 'antd';
+import { Table, Input, Radio, Form, Upload, Icon, Button, Modal, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LzEditor from 'react-lz-editor';
 import DropOption from '../Common/DropOption';
-// import data from '../ContentManagementModule/tableData';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const confirm = Modal.confirm;
+const RangePicker = DatePicker.RangePicker;
 
-
-class DataTable extends Component {
+class Action extends Component {
   constructor() {
     super();
     this.state = {
@@ -29,8 +28,6 @@ class DataTable extends Component {
     if (event.key === '1') {
       console.log('编辑专题$({record.key})');
     } else if (event.key === '2') {
-      console.log('编辑游戏列表$({record.key})');
-    } else if (event.key === '3') {
       confirm({
         title: 'Are you delect this record?',
         onOk() {
@@ -41,7 +38,7 @@ class DataTable extends Component {
   }
   fetch() {
     this.setState({ loading: true });
-    axios.get('api/content/subject')
+    axios.get('api/content/action')
     .then((response) => {
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
@@ -74,23 +71,23 @@ class DataTable extends Component {
       dataIndex: 'pictureUrl',
       key: 'pictureUrl',
     }, {
-      title: '是否热门',
-      dataIndex: 'isHot',
-      key: 'isHot',
+      title: '开始时间',
+      dataIndex: 'startTime',
+      key: 'startTime',
     }, {
-      title: '时间',
-      dataIndex: 'time',
-      key: 'time',
+      title: '结束时间',
+      dataIndex: 'endTime',
+      key: 'endTime',
     }, {
       title: '操作',
       dataIndex: '',
       key: 'action',
-      render: (text, record) => <DropOption onMenuClick={event => this.handleMenu(record, event)} menuOptions={[{ key: '1', name: '编辑专题' }, { key: '2', name: '编辑游戏列表' }, { key: '3', name: '删除' }]} /> },
+      render: (text, record) => <DropOption onMenuClick={event => this.handleMenu(record, event)} menuOptions={[{ key: '1', name: '编辑活动' }, { key: '2', name: '删除' }]} /> },
     ];
     return (
       <div>
-        <Link to="/addContent">
-          <button className="add-subject">添加专题</button>
+        <Link to="/addAction">
+          <button className="add-subject">添加活动</button>
         </Link>
         <Table
           columns={columns}
@@ -103,64 +100,9 @@ class DataTable extends Component {
       </div>
     );
   }
-
 }
 
-
-// class Addsubject extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       value: 1,
-//     };
-//   }
-//   render() {
-//     return (
-//       <Form>
-//         <FormItem
-//           label="专题名称"
-//         >
-//           <Input />
-//         </FormItem>
-//         <FormItem
-//           label="Dragger"
-//         >
-//           <div className="dropbox">
-//             <Upload.Dragger name="files" action="/upload.do">
-//               <p className="ant-upload-drag-icon">
-//                 <Icon type="inbox" />
-//               </p>
-//               <p className="ant-upload-text">Click or drag file to this area to upload</p>
-//               <p
-//                 className="ant-upload-hint"
-//               >Support for a single or bulk upload.
-//               Strictly prohibit from uploading company data or other band files
-//             </p>
-//             </Upload.Dragger>
-//           </div>
-//         </FormItem>
-//         <div>专题内容:</div>
-//         <LzEditor
-//           active="true"
-//         />
-//         <div>热门:</div>
-//         <RadioGroup className="radioStyle">
-//           <Radio value={1}>是</Radio>
-//           <Radio value={2}>否</Radio>
-//         </RadioGroup>
-//         <div className="submit">
-//           <FormItem>
-//             <Button type="Submit" size="large">添加</Button>
-//             <a href={undefined}>返回</a>
-//           </FormItem>
-//         </div>
-//       </Form>
-//     );
-//   }
-// }
-//
-//
-class Addsubject extends Component {
+class AddAction extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -206,29 +148,24 @@ class Addsubject extends Component {
             </Upload>,
           )}
         </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label="起止时间"
+        >
+          <RangePicker />,
+        </FormItem>
         <FormItem>
           <LzEditor
             active="true"
           />
         </FormItem>
 
-        <FormItem
-          {...formItemLayout}
-          label="热门"
-        >
-          {getFieldDecorator('radio-group')(
-            <RadioGroup>
-              <Radio value="a">是</Radio>
-              <Radio value="b">否</Radio>
-            </RadioGroup>,
-          )}
-        </FormItem>
 
         <FormItem
           wrapperCol={{ span: 12, offset: 6 }}
         >
           <Button type="primary" htmlType="submit">添加</Button>
-          <Link to="/content/subjects">
+          <Link to="/content/activitys">
             <Button type="primary" htmlType="submit" size="large" className="backtrack">返回</Button>
           </Link>
         </FormItem>
@@ -236,5 +173,5 @@ class Addsubject extends Component {
     );
   }
 }
-const AddContent = Form.create()(Addsubject);
-export { DataTable, AddContent };
+const Addaction = Form.create()(AddAction);
+export { Action, Addaction };

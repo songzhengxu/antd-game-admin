@@ -57,9 +57,11 @@ class TabelComponent extends Component {
     });
   }
   fetch() {
+    console.log(axios.get('api/get/ads/mobile'));
     this.setState({ loading: true });
     axios.get('api/get/ads/mobile')
     .then((response) => {
+      console.log(response);
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
       this.setState({
