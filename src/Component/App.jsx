@@ -7,10 +7,10 @@ import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
-
-
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
+
+import mockSiderMenusJson from './Common/mockSiderMenus.json';
 
 const Home = () => (
   <div>
@@ -19,15 +19,19 @@ const Home = () => (
 );
 
 
+const breadProps = {
+  menu: mockSiderMenusJson.menus,
+};
+
 class SiderMenuRoutes extends Component {
   render() {
     return (
       <div className="contentInside">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/ads/mobile" component={AdsMobile} />
+          <Route path="/ads/mobile" component={AdsMobile} />
           <Route exact path="/games/games" component={GameList} />
-          <Route path="/addGame" component={AdsMobile} />
+          <Route exact path="/games/addgame" component={AdsMobile} />
           <Route path="/gameType" component={AdsMobile} />
           <Route path="/gameNews" component={AdsMobile} />
           {/* <Redirect to="/404" /> */}
@@ -49,7 +53,7 @@ class App extends Component {
           <div className="main">
             <Header />
             <div className="container">
-              <Bread />
+              <Bread {...breadProps} location={location} />
               <div className="content">
                 <SiderMenuRoutes />
               </div>

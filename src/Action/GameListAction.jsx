@@ -3,7 +3,6 @@ import axios from 'axios';
 const getData = 'GET_DATA';
 const refreshData = 'REFRESH_DATA';
 const waitForFetching = 'WAIT_FOR_FETCHING';
-
 /*
 const resolveRecievedData = function resolveRecievedData(newRecievedData) {
   const recievedData = newRecievedData;

@@ -12,6 +12,7 @@ const AUTH_TOKEN = {
 axios.interceptors.request.use((config) => {
      /* 在发送请求之前做某事*/
   NProgress.start();
+  console.log(config);
   return config;
 }, (error) => {
    /* 请求错误时做些事*/

@@ -3,7 +3,6 @@
       "id": 1,
       "icon": "setting",
       "name": "设置",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -89,7 +88,6 @@
       "id": 10,
       "icon": "contacts",
       "name": "内容管理",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -127,7 +125,6 @@
       "id": 14,
       "icon": "pay-circle",
       "name": "平台币管理",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -165,7 +162,6 @@
       "id": 18,
       "icon": "rocket",
       "name": "游戏管理",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -187,7 +183,7 @@
       "mpid": 18,
       "index": 0,
       "isHidden": false,
-      "router": "/games/editor"
+      "router": "/games/addgame"
     },
     {
       "id": 21,
@@ -213,7 +209,6 @@
       "id": 23,
       "icon": "gift",
       "name": "礼包管理",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -231,7 +226,6 @@
       "id": 25,
       "icon": "home",
       "name": "广告",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -269,7 +263,6 @@
       "id": 29,
       "icon": "team",
       "name": "玩家管理",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -287,7 +280,6 @@
       "id": 31,
       "icon": "global",
       "name": "开放平台",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -375,7 +367,6 @@
       "id": 40,
       "icon": "bar-chart",
       "name": "数据统计",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -443,7 +434,6 @@
       "id": 47,
       "icon": "message",
       "name": "消息管理",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
@@ -471,7 +461,6 @@
       "id": 50,
       "icon": "home",
       "name": "网站管理",
-      "bpid": 1,
       "index": 0,
       "isHidden": false
     },
