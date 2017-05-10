@@ -9,14 +9,14 @@ const Bread = ({ menu }) => {
   // 匹配当前路由寻找出当前的菜单
   const pathArray = [];
   let current;
-  for (const index in menu) {
+  for (let index = 0; index < menu.length; index += 1) {
     if (menu[index].router && pathToRegexp(menu[index].router).exec(location.pathname)) {
       current = menu[index];
       break;
     }
   }
 
-  // 定义函数来
+  // 定义函数来通过bpid查找父级
   const getPathArray = (item) => {
     pathArray.unshift(item);
     if (item.bpid) {

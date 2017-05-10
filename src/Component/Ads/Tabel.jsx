@@ -22,14 +22,14 @@ class TabelComponent extends Component {
   handleMenuClick(record, e) {
     if (e.key === '1') {
       // onEditItem(record);
-      console.log(`编辑操作${record.key}`);
+
     } else if (e.key === '2') {
       confirm({
         title: 'Are you sure delete this record?',
         onOk() {
           // onDeleteItem(record.id);
 
-          console.log(`删除当前元素id${record.key}`);
+
         },
       });
     }

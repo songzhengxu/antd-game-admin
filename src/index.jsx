@@ -15,7 +15,7 @@ import './Config/init';
 
 // 订阅state改变
 store.subscribe(() => {
-    // console.log(store.getState());
+  // console.log(store.getState());
 });
 
 const render = (Component) => {

@@ -45,7 +45,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         use: [
-          'babel-loader?cacheDirectory', 'eslint-loader',
+          'babel-loader?cacheDirectory',
         ],
         exclude: /^node_modules$/,
       },
@@ -53,7 +53,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader',
+          'css-loader?minimize',
         ],
         exclude: /^node_modules$/,
       },
