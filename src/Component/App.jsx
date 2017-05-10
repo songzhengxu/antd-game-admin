@@ -9,6 +9,7 @@ import Sider from './Common/Sider';
 import Bread from './Common/Bread';
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
+import AddGame from './Games/AddGame';
 
 import mockSiderMenusJson from './Common/mockSiderMenus.json';
 
@@ -31,7 +32,7 @@ class SiderMenuRoutes extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/ads/mobile" component={AdsMobile} />
           <Route exact path="/games/games" component={GameList} />
-          <Route exact path="/games/addgame" component={AdsMobile} />
+          <Route exact path="/games/addgame" component={AddGame} />
           <Route path="/gameType" component={AdsMobile} />
           <Route path="/gameNews" component={AdsMobile} />
           {/* <Redirect to="/404" /> */}
