@@ -26,6 +26,28 @@ module.exports = {
     "pictureUrl": "暂无",
     "startTime": "2017-04-14",
     "endTime":"2017-04-25"
+  },
+],
+"games":[{
+    "title":"全部"
+  },
+  {
+      "title":"幻城H5"
+  },
+  {
+      "title":"御龙在天"
+  },
+  {
+      "title":"群乐消online"
+  },
+  {
+      "title":"传奇世界之杖剑天涯H5"
+  },
+  {
+      "title":"测试"
+  },
+  {
+      "title":"吉姆战旗"
   }
 ]
 };
