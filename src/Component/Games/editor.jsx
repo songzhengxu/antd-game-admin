@@ -1,10 +1,66 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Radio, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Radio, Checkbox, Upload, Modal } from 'antd';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
 
+
+class PicturesWall extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      previewVisible: false,
+      previewImage: '',
+      fileList: [],
+    };
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handlePreview = this.handlePreview.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleCancel() {
+    this.setState({ previewVisible: false });
+  }
+
+  handlePreview(file) {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
+  }
+
+  handleChange({ fileList }) {
+    this.setState({ fileList });
+    const filed = this.props.id;
+    this.props.setFieldsValue({ [filed]: { fileList } });
+  }
+
+  render() {
+    const { previewVisible, previewImage, fileList } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
+    return (
+      <div className="clearfix">
+        <Upload
+          action="//jsonplaceholder.typicode.com/posts/"
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={this.handlePreview}
+          onChange={this.handleChange}
+        >
+          {fileList.length >= this.props.limit ? null : uploadButton}
+        </Upload>
+        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal>
+      </div>
+    );
+  }
+}
 /*
 const GameTypeRadio = function GameTypeRadio() {
   return (
@@ -53,6 +109,11 @@ class Hello extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        // 发送异步请求
+        // 等待异步请求返回状态码
+        // 改变gamelst数据状态为refresh
+        // 跳转到games页面
+        this.props.history.push('/games/games');
       }
       console.log(err);
     });
@@ -61,7 +122,7 @@ class Hello extends React.Component {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   render() {
-    const { getFieldDecorator, getFieldsError } = this.props.form;
+    const { getFieldDecorator, setFieldsValue, getFieldValue } = this.props.form;
     // const youximingchengError = isFieldTouched('userName') && getFieldError('userName');
     return (
       <Form layout="horizontal" onSubmit={this.handleSubmit}>
@@ -72,7 +133,13 @@ class Hello extends React.Component {
           {getFieldDecorator('youximingcheng', {
             rules: [{ required: true, message: '请输入游戏名称' }],
           })(
-            <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="请输入游戏名称" />,
+            <Input
+              prefix={<Icon
+                type="lock"
+                style={{ fontSize: 13 }}
+              />}
+              placeholder="请输入游戏名称"
+            />,
           )}
         </FormItem>
         <FormItem label="游戏类型" >
@@ -102,39 +169,87 @@ class Hello extends React.Component {
         </FormItem>
         <FormItem label="游戏点击量" hasFeedback >
           {getFieldDecorator('youxidianjiliang', {
-            rules: [{ required: true, message: '请输入游戏点击量' }],
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                const testValue = value * 1;
+                const isInt = Number.isInteger(testValue);
+                if (isNaN(testValue) || !isInt) {
+                  errors.push(
+                  new Error('not a number'),
+                );
+                  const somerule = rule;
+                  somerule.message = '请输入一个整数';
+                }
+                if (!value) {
+                  errors.push(
+                  new Error('no input value'),
+                );
+                  const somerule = rule;
+                  somerule.message = '没有输入游戏点击量';
+                }
+                callback(errors);
+              } }],
           })(
             <Input
-              prefix={<Icon
-                type="lock"
-                style={{ fontSize: 13 }}
-              />}
               placeholder="请输入游戏点击量"
             />,
           )}
         </FormItem>
         <FormItem label="游戏自定义排序" hasFeedback >
           {getFieldDecorator('youxizidingyipaixu', {
-            rules: [{ required: true, message: '没有输入游戏序号' }],
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                const testValue = value * 1;
+                const isInt = Number.isInteger(testValue);
+                if (isNaN(testValue) || !isInt) {
+                  errors.push(
+                  new Error('not a number'),
+                );
+                  const somerule = rule;
+                  somerule.message = '请输入一个整数';
+                }
+                if (!value) {
+                  errors.push(
+                  new Error('no input value'),
+                );
+                  const somerule = rule;
+                  somerule.message = '没有输入游戏自定义排序';
+                }
+                callback(errors);
+              } }],
           })(
             <Input
-              prefix={<Icon
-                type="lock"
-                style={{ fontSize: 13 }}
-              />}
               placeholder="请输入游戏序号，越小越靠前"
             />,
           )}
         </FormItem>
         <FormItem label="推荐星级" hasFeedback >
           {getFieldDecorator('tuijianxingji', {
-            rules: [{ required: true, message: '没有推荐星级' }],
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                const testValue = value * 1;
+                const isInt = Number.isInteger(testValue);
+                if (testValue < 0 || testValue > 5 || isNaN(testValue) || !isInt) {
+                  errors.push(
+                  new Error('less or more'),
+                );
+                  const somerule = rule;
+                  somerule.message = '请输入0-5之间的整数';
+                }
+                if (!value) {
+                  errors.push(
+                  new Error('no input value'),
+                );
+                  const somerule = rule;
+                  somerule.message = '没有输入推荐星级';
+                }
+                callback(errors);
+              } }],
           })(
             <Input
-              prefix={<Icon
-                type="lock"
-                style={{ fontSize: 13 }}
-              />}
               placeholder="请输入推荐星级"
             />,
           )}
@@ -144,10 +259,6 @@ class Hello extends React.Component {
             rules: [{ required: true, message: '没有SEO标题' }],
           })(
             <Input
-              prefix={<Icon
-                type="lock"
-                style={{ fontSize: 13 }}
-              />}
               placeholder="请输入SEO标题"
             />,
           )}
@@ -157,10 +268,6 @@ class Hello extends React.Component {
             rules: [{ required: true, message: '没有SEO关键字' }],
           })(
             <Input
-              prefix={<Icon
-                type="lock"
-                style={{ fontSize: 13 }}
-              />}
               placeholder="请输入SEO关键字"
             />,
           )}
@@ -195,6 +302,69 @@ class Hello extends React.Component {
               type="textarea"
               rows={4}
               placeholder="请输入游戏支付回调地址"
+            />,
+          )}
+        </FormItem>
+        <FormItem label="游戏icon" >
+          {getFieldDecorator('youxiicon', {
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                if (value === undefined || value.fileList.length < 1) {
+                  errors.push(
+                  new Error('less or more'),
+                  );
+                  const somerule = rule;
+                  somerule.message = '请上传游戏icon';
+                }
+                callback(errors);
+              } }],
+          })(
+            <PicturesWall
+              setFieldsValue={setFieldsValue}
+              getFieldValue={getFieldValue} limit={1}
+            />,
+          )}
+        </FormItem>
+        <FormItem label="游戏背景" >
+          {getFieldDecorator('youxibeijing', {
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                if (value === undefined || value.fileList.length < 1) {
+                  errors.push(
+                  new Error('less or more'),
+                  );
+                  const somerule = rule;
+                  somerule.message = '请上传游戏背景';
+                }
+                callback(errors);
+              } }],
+          })(
+            <PicturesWall
+              setFieldsValue={setFieldsValue}
+              getFieldValue={getFieldValue} limit={1}
+            />,
+          )}
+        </FormItem>
+        <FormItem label="游戏截图(请上传5张游戏截图)" >
+          {getFieldDecorator('youxijietu', {
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                if (value === undefined || value.fileList.length < 5) {
+                  errors.push(
+                  new Error('less or more'),
+                  );
+                  const somerule = rule;
+                  somerule.message = '请上传5张游戏截图';
+                }
+                callback(errors);
+              } }],
+          })(
+            <PicturesWall
+              setFieldsValue={setFieldsValue}
+              getFieldValue={getFieldValue} limit={5}
             />,
           )}
         </FormItem>
@@ -244,10 +414,6 @@ class Hello extends React.Component {
               } }],
           })(
             <Input
-              prefix={<Icon
-                type="lock"
-                style={{ fontSize: 13 }}
-              />}
               placeholder="默认分成范围为0-1"
             />,
           )}
@@ -276,10 +442,6 @@ class Hello extends React.Component {
               } }],
           })(
             <Input
-              prefix={<Icon
-                type="lock"
-                style={{ fontSize: 13 }}
-              />}
               placeholder="默认分成范围为0-1"
             />,
           )}
@@ -288,7 +450,6 @@ class Hello extends React.Component {
           <Button
             type="primary"
             htmlType="submit"
-            disabled={this.hasErrors(getFieldsError())}
           >
             提交
           </Button>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Spin, Select, Input } from 'antd';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import fetchDataIfNeed from '../../Action/GameListAction';
+import fetchDataIfNeed from '../../Action/Games/games';
 
 const Option = Select.Option;
 const columns = [{

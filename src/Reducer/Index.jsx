@@ -4,7 +4,7 @@
  */
 import HeaderReducer from './HeaderReducer';
 import SiderReducer from './SiderReducer';
-import GameManagement from './GameManagementReducer';
+import GameManagement from './Games/games';
 import AdsMobileReducer from './Ads/MobileReducer';
 
 
