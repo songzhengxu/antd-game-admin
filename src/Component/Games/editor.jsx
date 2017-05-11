@@ -305,9 +305,62 @@ class Hello extends React.Component {
             />,
           )}
         </FormItem>
+        <FormItem label="游戏icon" >
+          {getFieldDecorator('youxiicon', {
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                if (value === undefined || value.fileList.length < 1) {
+                  errors.push(
+                  new Error('less or more'),
+                  );
+                  const somerule = rule;
+                  somerule.message = '请上传游戏icon';
+                }
+                callback(errors);
+              } }],
+          })(
+            <PicturesWall
+              setFieldsValue={setFieldsValue}
+              getFieldValue={getFieldValue} limit={1}
+            />,
+          )}
+        </FormItem>
+        <FormItem label="游戏背景" >
+          {getFieldDecorator('youxibeijing', {
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                if (value === undefined || value.fileList.length < 1) {
+                  errors.push(
+                  new Error('less or more'),
+                  );
+                  const somerule = rule;
+                  somerule.message = '请上传游戏背景';
+                }
+                callback(errors);
+              } }],
+          })(
+            <PicturesWall
+              setFieldsValue={setFieldsValue}
+              getFieldValue={getFieldValue} limit={1}
+            />,
+          )}
+        </FormItem>
         <FormItem label="游戏截图(请上传5张游戏截图)" >
           {getFieldDecorator('youxijietu', {
-            rules: [{ required: true, message: '请上传5张游戏截图' }],
+            rules: [{ required: true,
+              validator(rule, value, callback) {
+                const errors = [];
+                if (value === undefined || value.fileList.length < 5) {
+                  errors.push(
+                  new Error('less or more'),
+                  );
+                  const somerule = rule;
+                  somerule.message = '请上传5张游戏截图';
+                }
+                callback(errors);
+              } }],
           })(
             <PicturesWall
               setFieldsValue={setFieldsValue}
