@@ -10,9 +10,9 @@ import Bread from './Common/Bread';
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
 import AddGame from './Games/AddGame';
-import { DataTable, AddContent } from './ContentManagementModule/ContentTable';
-import { Action, Addaction } from './ContentManagementModule/ActionControl';
-import Servers from './ContentManagementModule/Servers';
+import { DataTable, AddContent } from './Content/Subject';
+import { Action, Addaction } from './Content/Activitys';
+import Servers from './Content/Servers';
 
 
 import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
