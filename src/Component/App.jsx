@@ -14,7 +14,7 @@ import { DataTable, AddContent } from './ContentManagementModule/ContentTable';
 import { Action, Addaction } from './ContentManagementModule/ActionControl';
 
 
-import mockSiderMenusJson from './Common/mockSiderMenus.json';
+import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
 
 const Home = () => (
   <div>
