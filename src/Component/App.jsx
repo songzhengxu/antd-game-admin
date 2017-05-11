@@ -9,12 +9,14 @@ import Sider from './Common/Sider';
 import Bread from './Common/Bread';
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
+
 import AddGame from './Games/editor';
-import { DataTable, AddContent } from './ContentManagementModule/ContentTable';
-import { Action, Addaction } from './ContentManagementModule/ActionControl';
+import { DataTable, AddContent } from './Content/Subject';
+import { Action, Addaction } from './Content/Activitys';
+import Servers from './Content/Servers';
 
 
-import mockSiderMenusJson from './Common/mockSiderMenus.json';
+import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
 
 const Home = () => (
   <div>
@@ -40,6 +42,7 @@ class SiderMenuRoutes extends Component {
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />
+          <Route path="/content/servers" component={Servers} />
 
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />

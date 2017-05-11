@@ -5,6 +5,7 @@
 import HeaderReducer from './HeaderReducer';
 import SiderReducer from './SiderReducer';
 import GameManagement from './Games/games';
+import AdsMobileReducer from './Ads/MobileReducer';
 
 
-export default { HeaderReducer, SiderReducer, GameManagement };
+export default { HeaderReducer, SiderReducer, GameManagement, AdsMobileReducer };
