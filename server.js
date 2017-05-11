@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const opn = require('opn');
 const config = require('./webpack.config');
 const proxy = require('http-proxy-middleware');
 
@@ -32,5 +31,3 @@ server.app.get('*', (req, res) => {
 });
 
 server.listen(3000);
-// 自动打开浏览器
-opn('http://localhost:3000');

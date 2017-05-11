@@ -178,7 +178,7 @@ class Addsubject extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
-      labelCol: { span: 6 },
+      labelCol: { span: 4 },
       wrapperCol: { span: 14 },
     };
     return (
