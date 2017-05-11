@@ -9,9 +9,11 @@ import Sider from './Common/Sider';
 import Bread from './Common/Bread';
 import AdsMobile from './Ads/Mobile'; // advertisementMobile
 import GameList from './Games/Games';
+import AddGame from './Games/AddGame';
 import { DataTable, AddContent } from './ContentManagementModule/ContentTable';
 import { Action, Addaction } from './ContentManagementModule/ActionControl';
 import Servers from './ContentManagementModule/Servers';
+
 
 import mockSiderMenusJson from './Common/mockSiderMenus.json';
 
@@ -34,7 +36,7 @@ class SiderMenuRoutes extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/ads/mobile" component={AdsMobile} />
           <Route exact path="/games/games" component={GameList} />
-          <Route exact path="/games/addgame" component={AdsMobile} />
+          <Route exact path="/games/addgame" component={AddGame} />
           <Route path="/gameType" component={AdsMobile} />
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
