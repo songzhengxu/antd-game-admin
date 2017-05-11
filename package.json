@@ -1,13 +1,14 @@
 {
   "name": "antd-game-admin",
   "version": "1.0.0",
-  "description": "",
+  "description": "antd-game-admin\r ===============",
   "main": "index.js",
   "scripts": {
     "dev": "rimraf dist &&set NODE_ENV=development&&node server.js",
     "test": "set NODE_ENV=test&&mocha",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha",
-    "build": "rimraf dist && webpack --progress --colors -p --config webpack.config.production.js"
+    "build": "rimraf dist && webpack --progress --colors -p --config webpack.config.production.js",
+    "start": "node server.js"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
@@ -69,5 +70,8 @@
   "bugs": {
     "url": "https://github.com/songzhengxu/antd-game-admin/issues"
   },
-  "homepage": "https://github.com/songzhengxu/antd-game-admin#readme"
+  "homepage": "https://github.com/songzhengxu/antd-game-admin#readme",
+  "directories": {
+    "test": "test"
+  }
 }

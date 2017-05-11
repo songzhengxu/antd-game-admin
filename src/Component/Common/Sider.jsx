@@ -3,7 +3,7 @@ import { Icon, Menu, Switch } from 'antd';
 import { connect } from 'react-redux';
 import lodash from 'lodash';
 import { Link } from 'react-router-dom';
-import mockSiderMenusJson from './mockSiderMenus.json';
+import mockSiderMenusJson from '../../Mock/mockSiderMenus.json';
 import config from '../../utils/config';
 import SiderToggleLightAction from '../../Action/SiderAction';
 

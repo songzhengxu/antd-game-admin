@@ -103,6 +103,7 @@ class TabelComponent extends Component {
   handleUpdatePicture({ fileList }) { this.setState({ fileList }); }
 
   render() {
+    console.log('refresh');
     const columns = [{
       title: '序号',
       dataIndex: 'index',

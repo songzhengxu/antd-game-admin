@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Table, Input, Radio, Form, Upload, Icon, Button, Modal, DatePicker } from 'antd';
+import { Table, Input, Form, Upload, Icon, Button, Modal, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LzEditor from 'react-lz-editor';
 import DropOption from '../Common/DropOption';
 
 const FormItem = Form.Item;
-const RadioGroup = Radio.Group;
 const confirm = Modal.confirm;
 const RangePicker = DatePicker.RangePicker;
 
@@ -103,20 +102,20 @@ class Action extends Component {
 }
 
 class AddAction extends Component {
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  }
-  normFile(e) {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  }
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   this.props.form.validateFields((err, values) => {
+  //     if (!err) {
+  //       console.log('Received values of form: ', values);
+  //     }
+  //   });
+  // }
+  // normFile(e) {
+  //   if (Array.isArray(e)) {
+  //     return e;
+  //   }
+  //   return e && e.fileList;
+  // }
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
