@@ -25,7 +25,7 @@ class Main extends Component {
       if (!error) {
         this.setState({ loading: !this.state.loading });
         setTimeout(() => {
-          if (values.userName !== 'guest' && values.password !== 'guest') {
+          if (values.userName !== 'guest' || values.password !== 'guest') {
             this.showerror();
             this.setState({ loading: !this.state.loading });
           } else {

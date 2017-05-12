@@ -1,32 +1,21 @@
 import React, { Component } from 'react';
 import { Icon, Menu, Switch } from 'antd';
-import { connect } from 'react-redux';
 import lodash from 'lodash';
 import { Link } from 'react-router-dom';
 import mockSiderMenusJson from '../../Mock/mockSiderMenus.json';
 import config from '../../utils/config';
-import SiderToggleLightAction from '../../Action/SiderAction';
 
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 
-
+/**
+ * [arrayToTree cheng]
+ * @type {[type]}
+ */
 class SiderMenu extends Component {
-  // componentDidMount() {
-  //   console.log(mockSiderMenusJson);
-  //   const { dispatch } = this.props;
-  //   dispatch(fetchDataIfNeed('api/get/sider/menus'));
-  // }
+
   render() {
-    const { HeaderReducer, theme } = this.props;
-    // array 类型转换为 tree 类型
-    // if (!SiderReducer.gameMenus.data) {
-    //   return (
-    //     <div className="gameListLoading">
-    //       <Spin />
-    //     </div>
-    //   );
-    // }
+    const { Views, theme } = this.props;
     const arrayToTree = function arrayToTree(array, id = 'id', pid = 'pid', children = 'children') {
       const datas = lodash.cloneDeep(array);
       const result = [];
@@ -54,7 +43,7 @@ class SiderMenu extends Component {
           return (
             <SubMenu
               key={item.id}
-              title={!HeaderReducer.collapsed ? <span>{item.icon && <Icon type={item.icon} />}
+              title={!Views.collapsed ? <span>{item.icon && <Icon type={item.icon} />}
                 {item.name}</span> : <span>{item.icon && <Icon type={item.icon} />}</span>}
             >
               {getMeunItems(item.children)}
@@ -78,8 +67,8 @@ class SiderMenu extends Component {
       <div className="SilderMenu">
         <Menu
           defaultSelectedKeys={['1']}
-          mode={!HeaderReducer.collapsed ? 'inline' : 'vertical'}
-          theme={theme} inlineIndent={!HeaderReducer.collapsed ? '24' : '0'}
+          mode={!Views.collapsed ? 'inline' : 'vertical'}
+          theme={theme} inlineIndent={!Views.collapsed ? '24' : '0'}
         >
           {menuItems}
         </Menu>
@@ -87,29 +76,24 @@ class SiderMenu extends Component {
     );
   }
 }
-const SilderMenuRedux = connect(state =>
-  ({ HeaderReducer: state.HeaderReducer, SiderReducer: state.SiderReducer }))(SiderMenu);
-
 
 class Main extends Component {
   render() {
-    const { HeaderReducer, changeLight, theme } = this.props;
+    const { Views, changeLight, theme } = this.props;
     return (
       <div>
         <div className="logo">
           <img alt={'logo'} src={config.logo} />
-          {!HeaderReducer.collapsed ? <span>{config.name}</span> : ''}
+          {!Views.collapsed ? <span>{config.name}</span> : ''}
         </div>
-        <SilderMenuRedux theme={theme} />
+        <SiderMenu {...this.props} theme={theme} />
         <div className="switchtheme">
           <span><Icon type="bulb" />Switch Theme</span>
-          {!HeaderReducer.collapsed ? <Switch onChange={changeLight} /> : ''}
+          {!Views.collapsed ? <Switch defaultChecked={Views.light} onChange={changeLight} /> : ''}
         </div>
       </div>
     );
   }
 }
 
-export default connect(state =>
-  ({ HeaderReducer: state.HeaderReducer, SiderReducer: state.SiderReducer }),
-  SiderToggleLightAction)(Main);
+export default Main;

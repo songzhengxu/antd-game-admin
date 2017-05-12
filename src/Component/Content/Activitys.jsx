@@ -25,12 +25,13 @@ class Action extends Component {
   }
   handleMenu(record, event) {
     if (event.key === '1') {
-      console.log('编辑专题$({record.key})');
+      console.log(`编辑专题${record.key}`);
     } else if (event.key === '2') {
       confirm({
         title: 'Are you delect this record?',
         onOk() {
-          console.log('删除$({record.key})');
+          console.log(`删除${record.key}`);
+          console.log(`删除${record.key}`);
         },
       });
     }
@@ -43,7 +44,7 @@ class Action extends Component {
       pagination.total = 200;
       this.setState({
         loading: false,
-        data: response.data.datas,
+        data: response,
         pagination,
       });
     });

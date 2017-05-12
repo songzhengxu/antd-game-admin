@@ -11,11 +11,13 @@ import store from './Config/Store'; // 引入Store
 
 import './Style/style.less'; // 引入样式表
 
-import './Config/init';
+import './Config/init'; // 初始化全局设置
+import { Tool } from './utils/Tool';
 
 // 订阅state改变
 store.subscribe(() => {
-    // console.log(store.getState());
+   // 把Views保存在本地，防止刷新丢失
+  Tool.localItem('Views', JSON.stringify(store.getState().Views));
 });
 
 const render = (Component) => {
