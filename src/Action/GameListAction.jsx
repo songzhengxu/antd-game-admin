@@ -5,33 +5,33 @@ const refreshData = 'REFRESH_DATA';
 const waitForFetching = 'WAIT_FOR_FETCHING';
 
 
-const fetchData = function fetchData(url) {
+function fetchData(url) {
   return dispatch => axios({
     method: 'get',
     url,
     responseType: 'json',
   })
-    .then(response => response.data)
-    .then(data => data.data)
+    .then(response => response.data.data)
     .then(data => dispatch({ type: getData, data }));
-};
+}
 
 // 这里的state是全局store的state, state = store.getData();
-const shouldFetchDate = function shouldFetchDate(state) {
-  if (state.GameManagement.gameList.status === waitForFetching ||
-    state.GameManagement.gameList.status === refreshData) {
+function shouldFetchDate(state) {
+  const states = state.GameManagement.gameList.status;
+  // 三元运算
+  if (states === waitForFetching || states === refreshData) {
     return true;
   }
   return false;
-};
+}
 
-const fetchDataIfNeed = function fetchDataIfNedd(url) {
+function fetchDataIfNedd(url) {
   return (dispatch, getState) => {
     if (shouldFetchDate(getState())) {
       return dispatch(fetchData(url));
     }
     return null;
   };
-};
+}
 
 export default fetchDataIfNeed;

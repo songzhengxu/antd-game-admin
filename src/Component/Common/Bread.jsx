@@ -9,6 +9,8 @@ const Bread = ({ menu }) => {
   // 匹配当前路由寻找出当前的菜单
   const pathArray = [];
   let current;
+
+  // 通过当前url来查找出当前的菜单项
   for (let index = 0; index < menu.length; index += 1) {
     if (menu[index].router && pathToRegexp(menu[index].router).exec(location.pathname)) {
       current = menu[index];
@@ -23,7 +25,7 @@ const Bread = ({ menu }) => {
       getPathArray(queryArray(menu, item.bpid, 'id'));
     }
   };
-
+  // 通过当前项匹配，找出当前菜单项的所有父级
   if (!current) {
     pathArray.push({
       id: 404,

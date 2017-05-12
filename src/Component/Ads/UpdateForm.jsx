@@ -81,5 +81,4 @@ class CreateModal extends Component {
 
 const CreateModalContainer = connect(state =>
   ({ Mobile: state.AdsMobileReducer.Mobile }))(CreateModal);
-const WarppedCreateModal = Form.create()(CreateModalContainer);
-export default WarppedCreateModal;
+export default Form.create()(CreateModalContainer);

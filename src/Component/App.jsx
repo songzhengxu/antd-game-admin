@@ -2,21 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
+// 导航菜单配置数据
+import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
 
+// 布局通用组件
 import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
-import AdsMobile from './Ads/Mobile'; // advertisementMobile
-import GameList from './Games/Games';
 
+// 广告管理
+import AdsMobile from './Ads/Mobile';
+
+// 游戏管理
+import GameList from './Games/Games';
 import AddGame from './Games/editor';
+
+// 内容管理
 import { DataTable, AddContent } from './Content/Subject';
 import { Action, Addaction } from './Content/Activitys';
 import Servers from './Content/Servers';
-
-
-import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
 
 const Home = () => (
   <div>
@@ -43,7 +48,6 @@ class SiderMenuRoutes extends Component {
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />
           <Route path="/content/servers" component={Servers} />
-
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />
           {/* <Redirect to="/404" /> */}

@@ -10,7 +10,10 @@ import SiderToggleLightAction from '../../Action/SiderAction';
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 
-
+/**
+ * [arrayToTree cheng]
+ * @type {[type]}
+ */
 class SiderMenu extends Component {
   // componentDidMount() {
   //   console.log(mockSiderMenusJson);
