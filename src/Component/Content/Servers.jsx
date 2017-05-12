@@ -9,12 +9,14 @@ import DropOption from '../Common/DropOption';
 const children = [];
 const Selector = function Selector(props) {
   const options = props.options;
-  console.log('444');
-  console.log(options);
+  for (const value of options) {
+    children.push(<Option key={value} value={value}>{ value }</Option>);
+  }
+  console.log(children);
 
-
-  const dynamicOpiton = options.map(option =>
-    <Option key={option} value={option}>{ option }</Option>);
+  //
+  // const dynamicOpiton = options.map(option =>
+  //   children.push(<Option key={option} value={option}>{ option }</Option>));
   return (
     <span className="gameList_selector" >
       {props.children} :
@@ -27,7 +29,7 @@ const Selector = function Selector(props) {
           filterOption={(input, option) =>
           option.props.value.indexOf(input) >= 0}
         >
-          {dynamicOpiton}
+          {children}
         </Select>
       </span>
     </span>
