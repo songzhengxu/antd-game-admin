@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LzEditor from 'react-lz-editor';
 import DropOption from '../Common/DropOption';
-// import data from '../ContentManagementModule/tableData';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const confirm = Modal.confirm;
 
-
+/**
+ * 生成表格
+ * @type {class}
+ */
 class DataTable extends Component {
   constructor() {
     super();
@@ -25,20 +27,28 @@ class DataTable extends Component {
   componentDidMount() {
     this.fetch();
   }
+  /**
+   * 判断操作按钮发生对应的操作
+   * @param  {[type]} record [列表数据]
+   * @param  {[type]} event  [事件]
+   */
   handleMenu(record, event) {
     if (event.key === '1') {
-      console.log('编辑专题$({record.key})');
+      console.log(`编辑专题${record.key}`);
     } else if (event.key === '2') {
-      console.log('编辑游戏列表$({record.key})');
+      console.log(`编辑游戏列表${record.key}`);
     } else if (event.key === '3') {
       confirm({
         title: 'Are you delect this record?',
         onOk() {
-          console.log('删除$({record.key})');
+          console.log(`删除${record.key}`);
         },
       });
     }
   }
+  /**
+   * [获取数据，返回数据]
+   */
   fetch() {
     this.setState({ loading: true });
     axios.get('api/content/subject')
@@ -52,7 +62,10 @@ class DataTable extends Component {
       });
     });
   }
-
+/**
+ * [handleTableChange 切换页数]
+ * @param  {[Number]} pagination [页数]
+ */
   handleTableChange(pagination) {
     const pager = { ...this.state.pagination };
     pager.current = pagination.current;
@@ -60,6 +73,10 @@ class DataTable extends Component {
       pagination: pager,
     });
   }
+  /**
+   * [render 渲染]
+   * @return {[html]} [标签模版]
+   */
   render() {
     const columns = [{
       title: '序号',
@@ -94,7 +111,6 @@ class DataTable extends Component {
         </Link>
         <Table
           columns={columns}
-          rowKey={record => record.registered}
           dataSource={this.state.data}
           pagination={{ defaultPageSize: 2 }}
           loading={this.state.loading}
@@ -106,61 +122,20 @@ class DataTable extends Component {
 
 }
 
-
-// class Addsubject extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       value: 1,
-//     };
-//   }
-//   render() {
-//     return (
-//       <Form>
-//         <FormItem
-//           label="专题名称"
-//         >
-//           <Input />
-//         </FormItem>
-//         <FormItem
-//           label="Dragger"
-//         >
-//           <div className="dropbox">
-//             <Upload.Dragger name="files" action="/upload.do">
-//               <p className="ant-upload-drag-icon">
-//                 <Icon type="inbox" />
-//               </p>
-//               <p className="ant-upload-text">Click or drag file to this area to upload</p>
-//               <p
-//                 className="ant-upload-hint"
-//               >Support for a single or bulk upload.
-//               Strictly prohibit from uploading company data or other band files
-//             </p>
-//             </Upload.Dragger>
-//           </div>
-//         </FormItem>
-//         <div>专题内容:</div>
-//         <LzEditor
-//           active="true"
-//         />
-//         <div>热门:</div>
-//         <RadioGroup className="radioStyle">
-//           <Radio value={1}>是</Radio>
-//           <Radio value={2}>否</Radio>
-//         </RadioGroup>
-//         <div className="submit">
-//           <FormItem>
-//             <Button type="Submit" size="large">添加</Button>
-//             <a href={undefined}>返回</a>
-//           </FormItem>
-//         </div>
-//       </Form>
-//     );
-//   }
-// }
-//
-//
+/**
+ * [Addsubject 添加专题表单]
+ * @type {[class]}
+ */
 class Addsubject extends Component {
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+/**
+ * [handleSubmit 提交form表单]
+ * @param  {[object]} e [事件]
+ */
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -169,6 +144,11 @@ class Addsubject extends Component {
       }
     });
   }
+  /**
+   * [normFile 点击上传图片]
+   * @param  {[object]} e [事件]
+   * @return {[object]}   [返回上传图片的信息]
+   */
   normFile(e) {
     if (Array.isArray(e)) {
       return e;
@@ -176,7 +156,8 @@ class Addsubject extends Component {
     return e && e.fileList;
   }
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form;  // 用于与表单双向绑定的属性
+    // 定义表单的样式
     const formItemLayout = {
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
@@ -193,7 +174,7 @@ class Addsubject extends Component {
         <FormItem
           {...formItemLayout}
           label="图片【建议尺寸：640*280】"
-          extra="显示图片"
+          // extra="显示图片"
         >
           {getFieldDecorator('upload', {
             valuePropName: 'fileList',
