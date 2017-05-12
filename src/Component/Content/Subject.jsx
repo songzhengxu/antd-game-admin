@@ -159,7 +159,7 @@ class Addsubject extends Component {
     const { getFieldDecorator } = this.props.form;  // 用于与表单双向绑定的属性
     // 定义表单的样式
     const formItemLayout = {
-      labelCol: { span: 6 },
+      labelCol: { span: 4 },
       wrapperCol: { span: 14 },
     };
     return (
