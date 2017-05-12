@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
+import viewsAction from '../Action/Views';
+
 // 导航菜单配置数据
 import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
 
@@ -10,7 +12,6 @@ import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
-<<<<<<< HEAD
 
 // 广告管理
 import AdsMobile from './Ads/Mobile';
@@ -18,14 +19,8 @@ import AdsMobile from './Ads/Mobile';
 // 游戏管理
 import GameList from './Games/Games';
 import AddGame from './Games/editor';
-
-// 内容管理
-=======
-import AdsMobile from './Ads/Mobile'; // advertisementMobile
-import GameList from './Games/Games';
-import AddGame from './Games/editor';
 import Information from './Games/informations';
->>>>>>> 76cbc05d760e6620a2ab053cf2ff4439be3e5d90
+// 内容管理
 import { DataTable, AddContent } from './Content/Subject';
 import { Action, Addaction } from './Content/Activitys';
 import Servers from './Content/Servers';
@@ -67,15 +62,15 @@ class SiderMenuRoutes extends Component {
 
 class App extends Component {
   render() {
-    const { HeaderReducer, SiderReducer } = this.props;
+    const { Views } = this.props;
     return (
       <div>
-        <div className={HeaderReducer.collapsed ? 'layout fold' : 'layout'}>
-          <aside className={!SiderReducer.light ? 'sider light' : 'sider'}>
-            <Sider theme={SiderReducer.light ? 'dark' : 'light'} />
+        <div className={Views.collapsed ? 'layout fold' : 'layout'}>
+          <aside className={!Views.light ? 'sider light' : 'sider'}>
+            <Sider {...this.props} theme={Views.light ? 'dark' : 'light'} />
           </aside>
           <div className="main">
-            <Header />
+            <Header {...this.props} />
             <div className="container">
               <Bread {...breadProps} location={location} />
               <div className="content">
@@ -90,5 +85,4 @@ class App extends Component {
   }
 }
 
-export default connect(state =>
-   ({ HeaderReducer: state.HeaderReducer, SiderReducer: state.SiderReducer }), null)(App);
+export default connect(state => ({ Views: state.Views }), viewsAction)(App);

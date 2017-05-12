@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Form, Input, Radio, Upload, Icon } from 'antd';
-
+import { connect } from 'react-redux';
 
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
@@ -124,12 +124,6 @@ class CreateModal extends Component {
   }
 }
 
-
-<<<<<<< HEAD
 const CreateModalContainer = connect(state =>
   ({ Mobile: state.AdsMobileReducer.Mobile }))(CreateModal);
 export default Form.create()(CreateModalContainer);
-=======
-const WarppedCreateModal = Form.create()(CreateModal);
-export default WarppedCreateModal;
->>>>>>> 76cbc05d760e6620a2ab053cf2ff4439be3e5d90
