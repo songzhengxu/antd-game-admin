@@ -24,9 +24,9 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((response) => {
   /* 对响应数据做些事*/
   NProgress.done();
-  const { code, data, msg, config } = response;
+  const { code, data, msg, config } = response.data;
   // 通过后端返回的状态码，判断是否登录，是否有权限，接口错误，参数错误等等情况
-  if (code !== '200') {
+  if (code !== 200) {
     // 处理一些事情
     console.log(`${config.url}接口返回格式错误`);
   } else {

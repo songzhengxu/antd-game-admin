@@ -89,7 +89,7 @@ class Main extends Component {
         <SiderMenu {...this.props} theme={theme} />
         <div className="switchtheme">
           <span><Icon type="bulb" />Switch Theme</span>
-          {!Views.collapsed ? <Switch onChange={changeLight} /> : ''}
+          {!Views.collapsed ? <Switch defaultChecked={Views.light} onChange={changeLight} /> : ''}
         </div>
       </div>
     );
