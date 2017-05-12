@@ -92,7 +92,7 @@ class TabelComponent extends Component {
       pagination.total = 200;
       this.setState({
         loading: false,
-        data: response.data.gameList,
+        data: response,
         pagination,
       });
     });
