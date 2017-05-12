@@ -1,70 +1,14 @@
 import React, { Component } from 'react';
-import { Modal, Form, Input, Radio, Upload, Icon } from 'antd';
-
+import { Modal, Form, Input, Radio } from 'antd';
+import PicturesWall from './PictureWall';
 
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 
 
-class PicturesWall extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      previewVisible: false,
-      previewImage: '',
-      fileList: [],
-    };
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handlePreview = this.handlePreview.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-
-  handleCancel() { this.setState({ previewVisible: false }); }
-
-  handlePreview(file) {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    });
-  }
-
-  handleChange({ fileList }) {
-    this.setState({ fileList });
-    const file = this.props.id;
-    this.props.setFieldsValue({ [file]: { fileList } });
-  }
-  render() {
-    const { previewVisible, previewImage, fileList } = this.state;
-
-    const uploadButton = (
-      <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    );
-    return (
-      <div className="clearfix">
-        <Upload
-          action="//jsonplaceholder.typicode.com/posts/"
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={this.handlePreview}
-          onChange={this.handleChange}
-        >
-          {fileList.length >= 1 ? null : uploadButton}
-        </Upload>
-        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-          <img alt="example" style={{ width: '100%' }} src={previewImage} />
-        </Modal>
-      </div>
-    );
-  }
-}
-
 class CreateModal extends Component {
   getForm() {
-    const { form, normFile, item } = this.props;
+    const { form, normFile, item, visible } = this.props;
     const { getFieldDecorator, setFieldsValue } = form;
     return (<Form layout="horizontal">
       <FormItem label="游戏ID" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} hasFeedback>
@@ -82,7 +26,7 @@ class CreateModal extends Component {
           valuePropName: 'fileList',
           getValueFromEvent: normFile,
         })(
-          <PicturesWall setFieldsValue={setFieldsValue} isCreate={!item.key} />,
+          <PicturesWall setFieldsValue={setFieldsValue} visible={visible} />,
         )}
       </FormItem>
       <FormItem label="URL(以http://开头)" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} hasFeedback>
@@ -126,4 +70,4 @@ class CreateModal extends Component {
 
 
 const WarppedCreateModal = Form.create()(CreateModal);
-export default WarppedCreateModal;
+export { WarppedCreateModal, CreateModal };

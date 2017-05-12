@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Button } from 'antd';
 import Table from './Tabel';
-import WarppedCreateModal from './UpdateForm';
+import { WarppedCreateModal } from './UpdateForm';
 
 /**
  * [Mobile]
@@ -13,7 +13,6 @@ class Mobile extends Component {
     super();
     this.state = {
       visible: false,
-      fileList: [],
       selectedData: {},
     };
     this.showModal = this.showModal.bind(this);
@@ -21,29 +20,40 @@ class Mobile extends Component {
     this.handleCreate = this.handleCreate.bind(this);
     this.saveFormRef = this.saveFormRef.bind(this);
     this.normFile = this.normFile.bind(this);
-    this.handleUpdatePicture = this.handleUpdatePicture.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
 
+  /**
+   * [showModal 使 WarppedCreateModal 改为展示状态]
+   * @return {[type]} [description]
+   */
   showModal() {
-    console.log(this.state.fileList);
     this.setState({ visible: true });
   }
+  /**
+   * [handleCancel  WarppedCreateModal cancel 时触发的事件 把表单清空]
+   * @return {[type]} [description]
+   */
   handleCancel() {
-    this.setState({ selectedData: {}, visible: false, fileList: [] });
+    const form = this.form;
+    form.resetFields();
+    this.setState({ selectedData: {}, visible: false });
   }
+  /**
+   * [handleCreate 使 WarppedCreateModal onOk触发事件]
+   * @return {[type]} [description]
+   */
+
   handleCreate() {
     const form = this.form;
     form.validateFields((err, values) => {
       if (err) {
         return;
       }
-
+        // TODO需要该为向服务端发送请求
       console.log('Received values of form: ', values);
       form.resetFields();
-      this.setState({ selectedData: {}, visible: false, fileList: [] });
-      // this.setState({ selectedData: {} });
-      // this.setState({ visible: false });
+      this.setState({ selectedData: {}, visible: false });
     });
   }
   saveFormRef(form) {
@@ -57,8 +67,12 @@ class Mobile extends Component {
     return event && event.fileList;
   }
 
-  handleUpdatePicture({ fileList }) { this.setState({ fileList }); }
 
+  /**
+   * [handleSelect Tabel选择编辑时调用的方法]
+   * @param  {[Object]} selectedData [选择中的对应tabelItem中的数据]
+   * @return {[type]}              [description]
+   */
   handleSelect(selectedData) {
     this.setState({ selectedData });
   }
@@ -74,8 +88,7 @@ class Mobile extends Component {
         ref={this.saveFormRef}
         visible={this.state.visible} item={this.state.selectedData}
         onCancel={this.handleCancel} onCreate={this.handleCreate}
-        normFile={this.normFile} fileList={this.state.fileList}
-        handleUpdatePicture={this.handleUpdatePicture}
+        normFile={this.normFile}
       />
     </div>);
   }

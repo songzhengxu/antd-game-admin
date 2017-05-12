@@ -7,7 +7,9 @@ import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
-import AdsMobile from './Ads/Mobile'; // advertisementMobile
+import AdsMobile from './Ads/Mobile';
+import AdsWeb from './Ads/Web';
+import AdsGamebox from './Ads/Gamebox';
 import GameList from './Games/Games';
 import AddGame from './Games/editor';
 import Information from './Games/informations';
@@ -36,6 +38,8 @@ class SiderMenuRoutes extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/ads/mobile" component={AdsMobile} />
+          <Route path="/ads/web" component={AdsWeb} />
+          <Route path="/ads/gamebox" component={AdsGamebox} />
           <Route exact path="/games/games" component={GameList} />
           <Route exact path="/games/editor" component={AddGame} />
           <Route exact path="/games/informations" component={Information} />
