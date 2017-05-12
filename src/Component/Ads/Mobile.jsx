@@ -4,64 +4,17 @@ import { Button } from 'antd';
 import Table from './Tabel';
 import WarppedCreateModal from './UpdateForm';
 
-// class PicturesWall extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       previewVisible: false,
-//       previewImage: '',
-//       fileList: [],
-//     };
-//     this.handleCancel = this.handleCancel.bind(this);
-//     this.handlePreview = this.handlePreview.bind(this);
-//     this.handleChange = this.handleChange.bind(this);
-//   }
-//
-//
-//   handleCancel() { this.setState({ previewVisible: false }); }
-//
-//   handlePreview(file) {
-//     this.setState({
-//       previewImage: file.url || file.thumbUrl,
-//       previewVisible: true,
-//     });
-//   }
-//
-//   handleChange({ fileList }) { this.setState({ fileList }); }
-//   render() {
-//     const { previewVisible, previewImage, fileList } = this.state;
-//     const uploadButton = (
-//       <div>
-//         <Icon type="plus" />
-//         <div className="ant-upload-text">Upload</div>
-//       </div>
-//     );
-//     return (
-//       <div className="clearfix">
-//         <Upload
-//           action="//jsonplaceholder.typicode.com/posts/"
-//           listType="picture-card"
-//           fileList={fileList}
-//           onPreview={this.handlePreview}
-//           onChange={this.handleChange}
-//         >
-//           {fileList.length >= 1 ? null : uploadButton}
-//         </Upload>
-//         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-//           <img alt="example" style={{ width: '100%' }} src={previewImage} />
-//         </Modal>
-//       </div>
-//     );
-//   }
-// }
-
-
+/**
+ * [Mobile]
+ * @type {Component}
+ */
 class Mobile extends Component {
   constructor() {
     super();
     this.state = {
       visible: false,
       fileList: [],
+      selectedData: {},
     };
     this.showModal = this.showModal.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
@@ -69,12 +22,15 @@ class Mobile extends Component {
     this.saveFormRef = this.saveFormRef.bind(this);
     this.normFile = this.normFile.bind(this);
     this.handleUpdatePicture = this.handleUpdatePicture.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
+
   showModal() {
+    console.log(this.state.fileList);
     this.setState({ visible: true });
   }
   handleCancel() {
-    this.setState({ visible: false });
+    this.setState({ selectedData: {}, visible: false, fileList: [] });
   }
   handleCreate() {
     const form = this.form;
@@ -85,7 +41,9 @@ class Mobile extends Component {
 
       console.log('Received values of form: ', values);
       form.resetFields();
-      this.setState({ visible: false });
+      this.setState({ selectedData: {}, visible: false, fileList: [] });
+      // this.setState({ selectedData: {} });
+      // this.setState({ visible: false });
     });
   }
   saveFormRef(form) {
@@ -101,13 +59,20 @@ class Mobile extends Component {
 
   handleUpdatePicture({ fileList }) { this.setState({ fileList }); }
 
+  handleSelect(selectedData) {
+    this.setState({ selectedData });
+  }
+
   render() {
     return (<div>
       <Button className="editable-add-btn" onClick={this.showModal}>Create</Button>
-      <Table />
+      <Table
+        showModal={this.showModal}
+        handleSelect={this.handleSelect}
+      />
       <WarppedCreateModal
         ref={this.saveFormRef}
-        visible={this.state.visible}
+        visible={this.state.visible} item={this.state.selectedData}
         onCancel={this.handleCancel} onCreate={this.handleCreate}
         normFile={this.normFile} fileList={this.state.fileList}
         handleUpdatePicture={this.handleUpdatePicture}

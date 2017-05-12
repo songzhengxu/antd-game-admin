@@ -10,6 +10,7 @@ import Header from './Common/Header';
 import Footer from './Common/Footer';
 import Sider from './Common/Sider';
 import Bread from './Common/Bread';
+<<<<<<< HEAD
 
 // 广告管理
 import AdsMobile from './Ads/Mobile';
@@ -19,6 +20,12 @@ import GameList from './Games/Games';
 import AddGame from './Games/editor';
 
 // 内容管理
+=======
+import AdsMobile from './Ads/Mobile'; // advertisementMobile
+import GameList from './Games/Games';
+import AddGame from './Games/editor';
+import Information from './Games/informations';
+>>>>>>> 76cbc05d760e6620a2ab053cf2ff4439be3e5d90
 import { DataTable, AddContent } from './Content/Subject';
 import { Action, Addaction } from './Content/Activitys';
 import Servers from './Content/Servers';
@@ -43,6 +50,7 @@ class SiderMenuRoutes extends Component {
           <Route path="/ads/mobile" component={AdsMobile} />
           <Route exact path="/games/games" component={GameList} />
           <Route exact path="/games/editor" component={AddGame} />
+          <Route exact path="/games/informations" component={Information} />
           <Route path="/gameType" component={AdsMobile} />
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
