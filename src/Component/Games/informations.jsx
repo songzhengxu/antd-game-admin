@@ -45,7 +45,7 @@ function WithDiscription(Wrapper, whatToSay) {
 const Hello = WithDiscription('hello', 'first');
 const World = WithDiscription('world', 'second');
 
-export const Display = function Display() {
+const Display = function Display() {
   return (
     <div>
       <Hello />
@@ -67,6 +67,7 @@ function HeaderMaker(Wrapper, content, handler) {
     constructor(props) {
       super(props);
       this.handler = handler.bind(this);
+      this.state = { value: 1 };
     }
     render() {
       return (
@@ -75,6 +76,7 @@ function HeaderMaker(Wrapper, content, handler) {
     }
   };
 }
+
 
 // 生成构造器
 const FirstHeader = HeaderMaker(Header, 'hello', function Handler() {
