@@ -191,7 +191,7 @@ class AddServers extends Component {
           {...formItemLayout}
           label="新服名称"
         >
-          {getFieldDecorator('website', {
+          {getFieldDecorator('input', {
             rules: [{ required: true, message: '请填写开服名称!' }],
           })(
             <Input />,
