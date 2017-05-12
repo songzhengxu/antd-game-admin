@@ -28,7 +28,7 @@ import Information from './Games/informations';
 // 内容管理
 import { DataTable, AddContent } from './Content/Subject';
 import { Action, Addaction } from './Content/Activitys';
-import Servers from './Content/Servers';
+import { Servers, AddServer } from './Content/Servers';
 
 const Home = () => (
   <div>
@@ -57,7 +57,7 @@ class SiderMenuRoutes extends Component {
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />
-          <Route path="/content/servers" component={Servers} />
+          <Route path="/content/servers" component={AddServer} />
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />
           {/* <Redirect to="/404" /> */}
