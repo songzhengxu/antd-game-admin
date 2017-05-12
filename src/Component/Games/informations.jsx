@@ -1,64 +1,98 @@
 import React from 'react';
-import { Table } from 'antd';
 
-const data = {};
-data.title = {
-  name: '姓名',
-  age: '年龄',
-  address: '住址',
-};
-data.dataSource = [
-  { name: '胡彦斌', age: 55, address: '中国大陆' },
-  { name: '吴彦祖', age: 42, address: '美国旧金山' },
-  { name: '梅西', age: 29, address: '阿根廷' },
-];
-const extrasCondition = {
-  name: {
-    render: text => <a>{ text }</a>,
-  },
-  age: {
-    render: text => <a>{ text }</a>,
-  },
-  address: {
-    render: text => <a>{ text }</a>,
-  },
-};
 
-const MakeTable = function MakeTable(sourceData,
-  columnsKey, dataSourceKey, extras, restProperties) {
-  function dataSourceTransFrom(dataWaitingForTrans,
-    reactColumnsKey, reactDataSourceKey, extrasConditions) {
-    const columns = [];
-    const title = dataWaitingForTrans.title;
-    const titleKeys = Object.keys(title);
-    for (let index = 0; index < titleKeys.length; index += 1) {
-      const titleKey = titleKeys[index];
-      let column = {};
-      column.title = title[titleKey];
-      column.key = reactColumnsKey + titleKey;
-      column.dataIndex = titleKey;
-      if (Object.prototype.hasOwnProperty.call(extrasConditions, titleKey)) {
-        column = Object.assign({}, column, extrasConditions[titleKey]);
-      }
-      columns.push(column);
-    }
-    const dataSource = data.dataSource;
-    for (let index = 0; index < dataSource.length; index += 1) {
-      dataSource[index].key = reactDataSourceKey + index;
-    }
-    return { columns, dataSource };
+/*
+class Hello extends React.Component {
+  componentDidMount() {
+    console.log('first hello');
   }
-  const { columns, dataSource } =
-  dataSourceTransFrom(sourceData, columnsKey, dataSourceKey, extras);
+  render() {
+    return (
+      <h1>hello</h1>
+    );
+  }
+}
+class AnotherHello extends React.Component {
+  componentDidMount() {
+    console.log('second hello');
+  }
+  render() {
+    return (
+      <h1>world</h1>
+    );
+  }
+}
+*/
+
+/**
+ * [WithDiscription HOC example]
+ * @param {[String]} Wrapper   [变动的参数]
+ * @param {[String]} whatToSay [变动的参数]
+ */
+function WithDiscription(Wrapper, whatToSay) {
+  return class extends React.Component {
+    componentDidMount() {
+      console.log(whatToSay);
+    }
+    render() {
+      return (
+        <h1>{Wrapper}</h1>
+      );
+    }
+  };
+}
+
+const Hello = WithDiscription('hello', 'first');
+const World = WithDiscription('world', 'second');
+
+export const Display = function Display() {
   return (
-    <Table columns={columns} dataSource={dataSource} {...restProperties} />
+    <div>
+      <Hello />
+      <World />
+    </div>
   );
 };
 
-const TestTable = function TestTable() {
+
+const Header = function Header(props) {
   return (
-    MakeTable(data, 'testColumns', 'testData', extrasCondition, { bordered: true, size: 'small' })
+    <h1 onClick={props.onClick} >{props.children}</h1>
   );
 };
 
-export default TestTable;
+function HeaderMaker(Wrapper, content, handler) {
+  return class extends React.Component {
+    // 构造时触发
+    constructor(props) {
+      super(props);
+      this.handler = handler.bind(this);
+    }
+    render() {
+      return (
+        <Wrapper onClick={this.handler} >{content}</Wrapper>
+      );
+    }
+  };
+}
+
+// 生成构造器
+const FirstHeader = HeaderMaker(Header, 'hello', function Handler() {
+  console.log(this);
+});
+// 生成构造器
+const SecondMaker = HeaderMaker(Header, 'world', () => {
+  console.log(this);
+});
+
+const SecondDisplay = function SecondDisplay() {
+  return (
+    // 真正构造组件, 所以this 只想SecondDisplay
+    <div>
+      <FirstHeader />
+      <SecondMaker />
+    </div>
+  );
+};
+
+export default SecondDisplay;

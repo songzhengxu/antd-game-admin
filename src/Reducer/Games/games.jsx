@@ -1,22 +1,26 @@
-import update from 'react-addons-update';
+import update from 'react-addons-update'; // 引入react-addons-update创建，用于immutable 更新data
 
-const data = {};
-data.gameList = {};
-// 状态要写在每一个独立的数据源里面。否则，一次更新，整个state更新。
-data.gameList.status = 'WAIT_FOR_FETCHING'; // REFRESH_DATA, GET_DATA
-data.gameList.filterWord = {};
-data.gameList.filterWord.need = false;
-data.gameList.filterWord.shaixuanzhuangtai = [];
-data.gameList.filterWord.shaixuanyouxileixing = [];
-data.gameList.filterWord.shaixuanyouximingcheng = '';
+const data = {
+  gameList: {
+    status: 'WAIT_FOR_FETCHING',
+    filterWord: {
+      need: false,
+      shaixuanzhuangtai: [],
+      shaixuanyouxileixing: [],
+      shaixuanyouximingcheng: '',
+    },
+  },
+};
 
-const GameManagementReducer = function GameManagement(state = data, action) {
-  switch (action.type) {
+
+export default function GameManagementReducer(state = data, action) {
+  const { type } = action;
+  switch (type) {
     case 'GET_DATA':
       {
         const newState = update(state,
           { gameList:
-          { status: { $set: action.type },
+          { status: { $set: type },
             data: { $set: action.data },
           },
           });
@@ -31,6 +35,4 @@ const GameManagementReducer = function GameManagement(state = data, action) {
     default:
       return state;
   }
-};
-
-export default GameManagementReducer;
+}
