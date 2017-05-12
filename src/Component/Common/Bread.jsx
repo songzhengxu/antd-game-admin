@@ -9,21 +9,23 @@ const Bread = ({ menu }) => {
   // 匹配当前路由寻找出当前的菜单
   const pathArray = [];
   let current;
-  for (const index in menu) {
+
+  // 通过当前url来查找出当前的菜单项
+  for (let index = 0; index < menu.length; index += 1) {
     if (menu[index].router && pathToRegexp(menu[index].router).exec(location.pathname)) {
       current = menu[index];
       break;
     }
   }
 
-  // 定义函数来
+  // 定义函数来通过bpid查找父级
   const getPathArray = (item) => {
     pathArray.unshift(item);
     if (item.bpid) {
       getPathArray(queryArray(menu, item.bpid, 'id'));
     }
   };
-
+  // 通过当前项匹配，找出当前菜单项的所有父级
   if (!current) {
     pathArray.push({
       id: 404,

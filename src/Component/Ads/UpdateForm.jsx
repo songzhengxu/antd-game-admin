@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import { Modal, Form, Input, Radio } from 'antd';
 import PicturesWall from './PictureWall';
+
 
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;

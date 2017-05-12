@@ -71,8 +71,6 @@ class TabelComponent extends Component {
         title: 'Are you sure delete this record?',
         onOk() {
           // onDeleteItem(record.id);
-
-          console.log(`删除当前元素id${record.key}`);
         },
       });
     }
@@ -94,7 +92,7 @@ class TabelComponent extends Component {
       pagination.total = 200;
       this.setState({
         loading: false,
-        data: response.data.gameList,
+        data: response,
         pagination,
       });
     });
