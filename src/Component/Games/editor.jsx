@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button, Radio, Checkbox, Upload, Modal } from 'antd';
 
 const FormItem = Form.Item;
@@ -61,49 +62,19 @@ class PicturesWall extends React.Component {
     );
   }
 }
-/*
-const GameTypeRadio = function GameTypeRadio() {
-  return (
-    <RadioGroup>
-      <Radio value={1}>网游</Radio>
-      <Radio value={2}>单机</Radio>
-    </RadioGroup>
-  );
+
+PicturesWall.propTypes = {
+  id: PropTypes.string.isRequired,
+  setFieldsValue: PropTypes.func.isRequired,
+  limit: PropTypes.number.isRequired,
 };
 
-class TestRadio extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: 1 };
-    this.onchangHandler = this.onchangHandler.bind(this);
-  }
-  onchangHandler(event) {
-    this.setState({
-      value: event.target.value,
-    });
-  }
-  render() {
-    return (
-      <RadioGroup value={this.state.value} onChange={this.onchangHandler} >
-        <Radio value={1}>网游</Radio>
-        <Radio value={2}>单机</Radio>
-      </RadioGroup>
-    );
-  }
-}
-*/
 class Hello extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.hasErrors = this.hasErrors.bind(this);
   }
-  /*
-  componentDidMount() {
-    // To disabled submit button at the beginning.
-    this.props.form.validateFields();
-  }
-  */
   handleSubmit(event) {
     event.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -321,6 +292,7 @@ class Hello extends React.Component {
               } }],
           })(
             <PicturesWall
+              id="youxiicon"
               setFieldsValue={setFieldsValue}
               getFieldValue={getFieldValue} limit={1}
             />,
@@ -342,6 +314,7 @@ class Hello extends React.Component {
               } }],
           })(
             <PicturesWall
+              id="youxibeijing"
               setFieldsValue={setFieldsValue}
               getFieldValue={getFieldValue} limit={1}
             />,
@@ -363,6 +336,7 @@ class Hello extends React.Component {
               } }],
           })(
             <PicturesWall
+              id="youxijietu"
               setFieldsValue={setFieldsValue}
               getFieldValue={getFieldValue} limit={5}
             />,
@@ -463,5 +437,41 @@ class Hello extends React.Component {
     );
   }
 }
+
+Hello.propTypes = {
+  form: PropTypes.shape({
+    getFieldsValue: PropTypes.func,
+    getFieldValue: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    setFields: PropTypes.func,
+    validateFields: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+    getFieldError: PropTypes.func,
+    getFieldsError: PropTypes.func,
+    isFieldValidating: PropTypes.func,
+    isFieldTouched: PropTypes.func,
+    isFieldsTouched: PropTypes.func,
+    resetFields: PropTypes.func,
+    getFieldDecorator: PropTypes.func,
+  }).isRequired,
+  history: PropTypes.shape({
+    length: PropTypes.number,
+    action: PropTypes.string,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+      hash: PropTypes.string,
+      state: PropTypes.stirng,
+      push: PropTypes.func,
+    }),
+    push: PropTypes.func,
+    replace: PropTypes.func,
+    go: PropTypes.func,
+    goBack: PropTypes.func,
+    goForward: PropTypes.func,
+    block: PropTypes.func,
+  }).isRequired,
+};
+
 const WrappedHorizontalLoginForm = Form.create()(Hello);
 export default WrappedHorizontalLoginForm;

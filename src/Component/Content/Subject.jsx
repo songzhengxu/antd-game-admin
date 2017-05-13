@@ -57,7 +57,7 @@ class DataTable extends Component {
       pagination.total = 200;
       this.setState({
         loading: false,
-        data: response.data.datas,
+        data: response,
         pagination,
       });
     });

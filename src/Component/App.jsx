@@ -29,7 +29,10 @@ import Information from './Games/informations';
 // 内容管理
 import { DataTable, AddContent } from './Content/Subject';
 import { Action, Addaction } from './Content/Activitys';
-import Servers from './Content/Servers';
+import { Servers, AddServer } from './Content/Servers';
+
+// 平台币管理
+import Editor from './Currency/Editor';
 
 // 玩家管理
 import Players from './Player/Players';
@@ -64,7 +67,8 @@ class SiderMenuRoutes extends Component {
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />
-          <Route path="/content/servers" component={Servers} />
+          <Route path="/content/servers" component={AddServer} />
+          <Route path="/currency/eidtor" component={Editor} />
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />
           <Route path="/player/players" component={Players} />
