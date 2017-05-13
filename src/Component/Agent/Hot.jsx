@@ -1,10 +1,14 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
 import axios from 'axios';
-import PicturesWall from './PictureWall';
-import TableOld from './Tabel';
-import { CreateModal } from './UpdateForm';
-import Mobile from './Mobile';
+import PicturesWall from '../Ads/PictureWall';
+import TableOld from '../Ads/Tabel';
+import { CreateModal } from '../Ads/UpdateForm';
+import Mobile from '../Ads/Mobile';
+
+import ViewsAction from '../../Action/ViewsAction';
+
+const viewsActionExtend = new ViewsAction();
 
 
 const FormItem = Form.Item;
@@ -18,6 +22,11 @@ class CreateModalToWeb extends CreateModal {
     const { form, normFile, item, visible } = this.props;
     const { getFieldDecorator, setFieldsValue } = form;
     return (<Form layout="horizontal">
+      <FormItem label="游戏ID" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} hasFeedback>
+        {getFieldDecorator('gameName', { rules: [{ required: true, message: '请输入游戏ID' }], initialValue: item && item.key })(
+          <Input />,
+        )}
+      </FormItem>
       <FormItem label="游戏名称" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} hasFeedback>
         {getFieldDecorator('gameName', { rules: [{ required: true, message: '请输入游戏名称' }], initialValue: item && item.gameName })(
           <Input />,
@@ -63,7 +72,7 @@ class Table extends TableOld {
   }
 }
 
-class Web extends Mobile {
+class Hot extends Mobile {
   render() {
     return (<div>
       <Button className="editable-add-btn" onClick={this.showModal}>Create</Button>
@@ -82,4 +91,4 @@ class Web extends Mobile {
 
 }
 
-export default Web;
+export default Hot;

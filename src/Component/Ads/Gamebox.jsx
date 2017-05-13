@@ -64,7 +64,7 @@ class Table extends TableOld {
       pagination.total = 200;
       this.setState({
         loading: false,
-        data: response.data.gameList,
+        data: response,
         pagination,
       });
     });
