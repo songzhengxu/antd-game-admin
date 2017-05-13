@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
-import viewsAction from '../Action/Views';
+// import viewsAction from '../Action/Views';
+import ViewsActionFactor from '../Action/ViewsAction';
 
 // 导航菜单配置数据
 import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
@@ -29,6 +30,12 @@ import Information from './Games/informations';
 import { DataTable, AddContent } from './Content/Subject';
 import { Action, Addaction } from './Content/Activitys';
 import Servers from './Content/Servers';
+
+// 玩家管理
+import Players from './Player/Players';
+
+// 开发平台
+import AgentHot from './Agent/Hot';
 
 const Home = () => (
   <div>
@@ -60,6 +67,8 @@ class SiderMenuRoutes extends Component {
           <Route path="/content/servers" component={Servers} />
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />
+          <Route path="/player/players" component={Players} />
+          <Route path="/agent/hots" component={AgentHot} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>
@@ -92,4 +101,5 @@ class App extends Component {
   }
 }
 
+const viewsAction = (new ViewsActionFactor().getAction).bind(new ViewsActionFactor());
 export default connect(state => ({ Views: state.Views }), viewsAction)(App);
