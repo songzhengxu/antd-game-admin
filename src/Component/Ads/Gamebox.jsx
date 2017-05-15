@@ -18,6 +18,7 @@ class CreateModalToWeb extends CreateModal {
   getForm() {
     const { form, normFile, item, visible } = this.props;
     const { getFieldDecorator, setFieldsValue } = form;
+    console.log(item);
     return (<Form layout="horizontal">
       <FormItem label="图片(尺寸:640*280)" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} hasFeedback>
         {getFieldDecorator('upload', {
@@ -33,7 +34,7 @@ class CreateModalToWeb extends CreateModal {
         )}
       </FormItem>
       <FormItem label="是否显示" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} hasFeedback>
-        {getFieldDecorator('isShow')(
+        {getFieldDecorator('isShow', { initialValue: item && item.isShow })(
           <RadioGroup>
             <Radio value="show">显示</Radio>
             <Radio value="hide">隐藏</Radio>

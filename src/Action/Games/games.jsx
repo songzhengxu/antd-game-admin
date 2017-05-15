@@ -16,7 +16,7 @@ const fetchData = function fetchData(url) {
     url,
     responseType: 'json',
   })
-    .then(response => response.data.data)
+    // .then(response => response.data.data)
     // .then(data => data.data)
     .then(data => dispatch({ type: getData, data }));
 };

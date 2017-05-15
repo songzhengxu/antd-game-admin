@@ -39,6 +39,15 @@ import Players from './Player/Players';
 
 // 开发平台
 import AgentHot from './Agent/Hot';
+import AgentSummarizes from './Agent/Summarizes';
+import AgentPendinglists from './Agent/Pendinglists';
+import AgentAuditlists from './Agent/Auditlists';
+import AgentAccounts from './Agent/Accounts';
+import AgentQualities from './Agent/Qualities';
+import AgentChanneldata from './Agent/Channeldata';
+
+// 数据统计
+import StatisticsKeep from './Statistics/Keep';
 
 const Home = () => (
   <div>
@@ -73,6 +82,13 @@ class SiderMenuRoutes extends Component {
           <Route path="/addAction" component={Addaction} />
           <Route path="/player/players" component={Players} />
           <Route path="/agent/hots" component={AgentHot} />
+          <Route path="/agent/summarizes" component={AgentSummarizes} />
+          <Route path="/agent/pendinglists" component={AgentPendinglists} />
+          <Route path="/agent/auditlists" component={AgentAuditlists} />
+          <Route path="/agent/accounts" component={AgentAccounts} />
+          <Route path="/agent/qualities" component={AgentQualities} />
+          <Route path="/agent/channeldata" component={AgentChanneldata} />
+          <Route path="/statistics/keep" component={StatisticsKeep} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>
@@ -105,5 +121,6 @@ class App extends Component {
   }
 }
 
-const viewsAction = (new ViewsActionFactor().getAction).bind(new ViewsActionFactor());
+const newAction = new ViewsActionFactor();
+const viewsAction = (newAction.getAction).bind(newAction);
 export default connect(state => ({ Views: state.Views }), viewsAction)(App);
