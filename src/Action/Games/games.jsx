@@ -16,7 +16,7 @@ const fetchData = function fetchData(url) {
     url,
     responseType: 'json',
   })
-    .then(response => response.data.data)
+    // .then(response => response.data.data)
     // .then(data => data.data)
     .then(data => dispatch({ type: getData, data }));
 };
@@ -29,6 +29,7 @@ const fetchData = function fetchData(url) {
  */
 const shouldFetchDate = function shouldFetchDate(state) {
   const status = state.GameManagement.gameList.status;
+  console.log(status);
   /*
   if (status === waitForFetching || status === refreshData) {
     return true;

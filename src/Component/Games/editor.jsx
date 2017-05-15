@@ -108,6 +108,7 @@ class Hello extends React.Component {
               prefix={<Icon
                 type="lock"
                 style={{ fontSize: 13 }}
+                disabled
               />}
               placeholder="请输入游戏名称"
             />,
