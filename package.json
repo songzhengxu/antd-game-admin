@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "rimraf dist &&set NODE_ENV=development&&node server.js",
     "test": "set NODE_ENV=test&&mocha",
+    "dev:mac": "rimraf dist &&export NODE_ENV=development&&node server.js",
+    "test:mac": "export NODE_ENV=test&&mocha",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha",
-    "build": "rimraf dist && webpack --progress --colors -p --config webpack.config.production.js",
-    "start": "node server.js"
+    "build": "set NODE_ENV=production &&  webpack --progress --colors -p --config webpack.config.production.js",
+    "build:mac": "export NODE_ENV=production &&  webpack --progress --colors -p --config webpack.config.production.js"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
