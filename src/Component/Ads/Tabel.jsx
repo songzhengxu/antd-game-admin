@@ -88,6 +88,7 @@ class TabelComponent extends Component {
     this.setState({ loading: true });
     axios.get('api/get/ads/mobile')
     .then((response) => {
+      console.log(response);
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
       this.setState({
@@ -104,9 +105,9 @@ class TabelComponent extends Component {
     return (
       <Table
         bordered columns={columns} dataSource={this.state.data}
-        pagination={this.pagination}
-        loading={this.loading}
-        onChange={this.handleTableChange}
+        pagination={this.state.pagination}
+        loading={this.state.loading}
+        onChange={this.state.handleTableChange}
       />
 
     );

@@ -4,7 +4,9 @@
  */
 import Views from './views';
 import GameManagement from './Games/games';
+import { firstInformationReducer, secondInformationReducer } from '../utils/HighOrderReducerExample';
 import AdsMobileReducer from './Ads/MobileReducer';
 
-
-export default { Views, GameManagement, AdsMobileReducer };
+export default {
+  Views, GameManagement, AdsMobileReducer, firstInformationReducer, secondInformationReducer,
+};
