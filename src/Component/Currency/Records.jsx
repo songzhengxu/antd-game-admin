@@ -73,11 +73,11 @@ class Records extends Component {
             </AutoComplete>
           </div>
         </FormItem>
-
       </Form>
 
     );
   }
 }
+
 const Record = Form.create()(Records);
 export default Record;
