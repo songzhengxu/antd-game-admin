@@ -1,12 +1,8 @@
-
 import React from 'react';
-import { Select, DatePicker, Input, Menu, Dropdown, Button, Tabs, Form, Upload, Radio, Icon, Modal } from 'antd';
-import LzEditor from 'react-lz-editor';
+import { Menu, Dropdown, Tabs, Button, Upload, Radio, Icon, Modal, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import MakeTable from '../../utils/TableMaker';
 
-const Option = Select.Option;
-const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -14,48 +10,39 @@ const RadioGroup = Radio.Group;
 const data = {};
 data.title = {
   order: '序号',
-  time: '时间',
-  gameID: '游戏ID',
-  gameName: '游戏名称',
-  type: '类型',
-  title: '标题',
-  top: '是否置顶',
+  type: '类型名称',
+  picture: '图片',
+  status: '状态',
   action: '操作',
 };
 data.dataSource = [
   {
-    order: 367,
-    time: '2017-05-04',
-    gameID: 100164,
-    gameName: '御天传奇',
-    type: '攻略',
-    title: '只要998,吕布带回家',
-    top: '不置顶',
-    action: ['置顶', '编辑', '删除'],
+    order: 2,
+    type: '体育类',
+    picture: 'http://h5admin.jimugame.com/upload/logo/3.png',
+    status: '显示',
+    action: ['编辑', '删除'],
   },
   {
-    order: 365,
-    time: '2017-05-04',
-    gameID: 100164,
-    gameName: '御天传奇',
-    type: '攻略',
-    title: '《御天传奇》充值技巧全曝光',
-    top: '不置顶',
-    action: ['置顶', '编辑', '删除'],
+    order: 3,
+    type: '动作类',
+    picture: 'http://h5admin.jimugame.com/upload/logo/1.png',
+    status: '显示',
+    action: ['编辑', '删除'],
   },
   {
-    order: 364,
-    time: '2017-05-04',
-    gameID: 100164,
-    gameName: '御天传奇',
-    type: '攻略',
-    title: '老司机带你玩转《御天传奇H5》',
-    top: '置顶',
-    action: ['取消置顶', '编辑', '删除'],
+    order: 4,
+    type: '策略类',
+    picture: 'http://h5admin.jimugame.com/upload/logo/4.png',
+    status: '显示',
+    action: ['编辑', '删除'],
   },
 ];
 
 const extrasConditions = {
+  picture: {
+    render: text => <img alt={text} src={text} />,
+  },
   action: {
     render: (text, record) => {
       const menuUnit = record.action.map((value, index) =>
@@ -75,52 +62,9 @@ const extrasConditions = {
   },
 };
 
-const Selector = function Selector(props) {
-  const options = props.options;
-  // 根据参数动态生成搜索栏的option
-  const dynamicOpiton = options.map(option =>
-    <Option key={option} value={option}>{ option }</Option>);
+const Types = function Types() {
   return (
-    <span className="gameList_selector" >
-      {props.children} :
-      <span className="gameList_selector_unit">
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder=" 请选择 "
-          optionFilterProp="children"
-          filterOption={(input, option) =>
-          option.props.value.indexOf(input) >= 0}
-        >
-          {dynamicOpiton}
-        </Select>
-      </span>
-    </span>
-  );
-};
-
-Selector.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  children: PropTypes.string.isRequired,
-};
-
-const SearchBar = function SearchBar() {
-  return (
-    <div className="gameInfromation_searchBar">
-      <Selector options={['全部', '新闻', '攻略']}>类型</Selector>
-      <span >时间： <RangePicker /></span>
-      <span>标题关键字： <Input style={{ width: 200 }} placeholder="请输入关键字" /></span>
-      <span><Button>搜索</Button></span>
-    </div>
-  );
-};
-
-const GameInformation = function GameInformation() {
-  return (
-    <div>
-      <SearchBar />
-      {MakeTable(data, 'information_columns', 'information_datasource', extrasConditions, { bordered: true })}
-    </div>
+    MakeTable(data, 'typeColumns', 'typeDatasource', extrasConditions, { bordered: true })
   );
 };
 
@@ -179,7 +123,6 @@ class PicturesWall extends React.Component {
     );
   }
 }
-
 PicturesWall.propTypes = {
   id: PropTypes.string.isRequired,
   setFieldsValue: PropTypes.func.isRequired,
@@ -214,42 +157,11 @@ class Hello extends React.Component {
     // const youximingchengError = isFieldTouched('userName') && getFieldError('userName');
     return (
       <Form layout="horizontal" onSubmit={this.handleSubmit}>
-        <FormItem
-          label="游戏名称"
-          hasFeedback
-        >
-          {getFieldDecorator('addInformations_gameName', {
-            rules: [{ required: true, message: '请选择游戏名称' }],
-          })(
-            <Selector options={['精灵比卡丘', '吉姆战棋', '御天传奇']}>类型</Selector>,
-          )}
-        </FormItem>
-        <FormItem label="资讯类型" >
+        <FormItem label="游戏类型名称" >
           {getFieldDecorator('addInformations_informationType', {
-            rules: [{ required: true, message: '请选择资讯类型' }],
+            rules: [{ required: true, message: '请输入游戏类型名称' }],
           })(
-            <RadioGroup>
-              <Radio value={1}>新闻</Radio>
-              <Radio value={2}>攻略</Radio>
-            </RadioGroup>,
-          )}
-        </FormItem>
-        <FormItem label="标题" hasFeedback >
-          {getFieldDecorator('addInformations_title', {
-            rules: [{ required: true, message: '请输入标题' }],
-          })(
-            <Input
-              placeholder="请输入标题"
-            />,
-          )}
-        </FormItem>
-        <FormItem label="关键字" hasFeedback >
-          {getFieldDecorator('addInformations_keywords', {
-            rules: [{ required: true, message: '请输入关键字' }],
-          })(
-            <Input
-              placeholder="请输入关键字，多关键字之间用空格或者英文隔开"
-            />,
+            <Input />,
           )}
         </FormItem>
         <FormItem label="缩略图" >
@@ -274,31 +186,13 @@ class Hello extends React.Component {
             />,
           )}
         </FormItem>
-        <FormItem label="发布时间" >
-          {getFieldDecorator('information_emitTime', {
-            rules: [{ required: true, message: '请选择发布时间' }],
-          })(
-            <DatePicker />,
-          )}
-        </FormItem>
-        <FormItem label="游戏简介" >
-          {getFieldDecorator('addInformations_intruduction', {
-            rules: [{ required: true, message: '没有输入游戏简介,或者字段过长', whitespace: true, max: 200 }],
-          })(
-            <LzEditor
-              cbReceiver={content =>
-                setFieldsValue({ addInformations_intruduction: content })}
-            />,
-          )}
-        </FormItem>
         <FormItem label="当前状态" >
           {getFieldDecorator('dangqianzhuangtai', {
             rules: [{ required: true, message: '请选择当前状态' }],
           })(
             <RadioGroup>
-              <Radio value={1}>程序接入</Radio>
-              <Radio value={2}>上线</Radio>
-              <Radio value={3}>下线</Radio>
+              <Radio value={1}>显示</Radio>
+              <Radio value={2}>隐藏</Radio>
             </RadioGroup>,
           )}
         </FormItem>
@@ -357,17 +251,17 @@ Hello.propTypes = {
 
 const NewForm = Form.create()(Hello);
 
-const GameInformationWithTabs = function GameInformationWithTabs(props) {
+const GameTypeWithInformation = function GameTypeWithInformation(props) {
   const { history } = props;
   return (
     <Tabs defaultActiveKey="1">
-      <TabPane tab="资讯列表" key="1">{<GameInformation />}</TabPane>
-      <TabPane tab="添加资讯" key="2">{<NewForm history={history} />}</TabPane>
+      <TabPane tab="游戏类型" key="1">{<Types />}</TabPane>
+      <TabPane tab="添加游戏类型" key="2">{<NewForm history={history} />}</TabPane>
     </Tabs>
 
   );
 };
-GameInformationWithTabs.propTypes = {
+GameTypeWithInformation.propTypes = {
   history: PropTypes.shape({
     length: PropTypes.number,
     action: PropTypes.string,
@@ -386,5 +280,4 @@ GameInformationWithTabs.propTypes = {
     block: PropTypes.func,
   }).isRequired,
 };
-
-export default GameInformationWithTabs;
+export default GameTypeWithInformation;

@@ -72,7 +72,7 @@ const MakeTable = function MakeTable(sourceData,
     }
 
     // 遍历dataSource , 生成Table组件可以直接使用的dataSource, 同时生成filters需要的数据
-    const dataSource = data.dataSource;
+    const dataSource = dataWaitingForTrans.dataSource;
     for (let index = 0; index < dataSource.length; index += 1) {
       // 处理datasource
       dataSource[index].key = reactDataSourceKey + index;

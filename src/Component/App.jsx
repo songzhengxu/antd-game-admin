@@ -24,7 +24,10 @@ import AdsGamebox from './Ads/Gamebox';
 import GameList from './Games/Games';
 import AddGame from './Games/editor';
 import Information from './Games/informations';
+import Type from './Games/types';
 
+// 设置
+import SettingMenu from './Setting/Menu';
 
 // 内容管理
 import { DataTable, AddContent } from './Content/Subject';
@@ -68,7 +71,8 @@ class SiderMenuRoutes extends Component {
           <Route exact path="/games/games" component={GameList} />
           <Route exact path="/games/editor" component={AddGame} />
           <Route exact path="/games/informations" component={Information} />
-          <Route path="/gameType" component={AdsMobile} />
+          <Route exact path="/games/types" component={Type} />
+          <Route exact path="/setting/menus" component={SettingMenu} />
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />

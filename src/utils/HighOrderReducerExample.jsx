@@ -49,7 +49,7 @@ class ReducerMaker {
   }
   makeReduer() {
     const reducerName = this.reducerName;
-    return (state, action) => { // 产出的state 实际上这里的stae，所以这里产出的state是独立的，不同的
+    return (state, action) => { // 产出的state 实际上这里的stae，所以这里产出的state是独立的，不同的 新的reduer
       const { name } = action;
       const isInitializetionCall = state === undefined;
       if (name !== reducerName && !isInitializetionCall) {
