@@ -149,9 +149,9 @@ class GameList extends React.Component {
       return (
         <div className="gameListTable">
           <div className="gameList_selectBar" >
-            <Selector options={shaixuanzhuangtai} >状态</Selector>
-            <Selector options={shaixuanyouxileixing} >游戏类型</Selector>
-            <span className="ganmeList_searchGameName">游戏名称：<Input /></span>
+            <Selector options={shaixuanzhuangtai} >{'状态'}</Selector>
+            <Selector options={shaixuanyouxileixing} >{'游戏类型'}</Selector>
+            <span className="ganmeList_searchGameName">{'游戏名称：'}<Input /></span>
           </div>
           <Table
             columns={columns}
