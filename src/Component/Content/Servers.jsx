@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Table, Select, Input, Button, Icon, Form, DatePicker } from 'antd';
 import axios from 'axios';
 import DropOption from '../Common/DropOption';
+import DropdownList from '../Common/DropdownList';
+import data from './../../mock/Content/tableData';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -11,36 +13,30 @@ const Option = Select.Option;
  * TODO 下拉列表的数据接入 开服信息和添加开服信息模块
  * 把专题模块，活动模块，开服模块公共列表封装
  */
+// const children = [];
+// const Selector = function Selector(props) {
+//   const options = props.games;
+//   for (const value of options) {
+//     children.push(<Option key={value} value={value}>{ value }</Option>);
+//   }
+//   return (
+//     <span className="gameList_selector" >
+//       <span className="gameList_selector_unit">
+//         <Select
+//           showSearch="true"
+//           style={{ width: 200 }}
+//           placeholder=" 请选择 "
+//           optionFilterProp="children"
+//           filterOption={(input, option) =>
+//            option.props.value.indexOf(input) >= 0}
+//         >
+//           {children}
+//         </Select>
+//       </span>
+//     </span>
+//   );
+// };
 
-/**
- * [Selector 生成下拉列表]
- * @param  {[array]} props [数据]
- * @type {class}
- */
-const children = [];
-const Selector = function Selector(props) {
-  const options = props.options;
-  for (const value of options) {
-    children.push(<Option key={value} value={value}>{ value }</Option>);
-  }
-  return (
-    <span className="gameList_selector" >
-      {props.children} :
-      <span className="gameList_selector_unit">
-        <Select
-          showSearch="true"
-          style={{ width: 200 }}
-          placeholder=" 请选择 "
-          optionFilterProp="children"
-          filterOption={(input, option) =>
-          option.props.value.indexOf(input) >= 0}
-        >
-          {children}
-        </Select>
-      </span>
-    </span>
-  );
-};
 /**
  * [Servers 生成表格]
  * @type {class}
@@ -94,8 +90,9 @@ class Servers extends Component {
     });
   }
   render() {
-    const selectData = this.state.data;
-
+    const selector = new DropdownList(data, 'textName');
+  //  const selector = this.selector;
+    // console.log(selector);
     const columns = [{
       title: '序号',
       dataIndex: 'index',
@@ -121,7 +118,7 @@ class Servers extends Component {
     return (
       <div>
         <div className="gameList_selectBar" >
-          <Selector options={selectData}>游戏</Selector>
+          <selector>游戏</selector>
           <Button className="search-btn" type="primary">
             <Icon type="search" />
           </Button>

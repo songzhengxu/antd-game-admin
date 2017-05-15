@@ -41,6 +41,10 @@ import Players from './Player/Players';
 // 开发平台
 import AgentHot from './Agent/Hot';
 
+// 网站管理
+import TabComponent from './Web/Website';
+import { Service, Amends } from './Web/Service';
+
 const Home = () => (
   <div>
     <h2>首页</h2>
@@ -68,13 +72,15 @@ class SiderMenuRoutes extends Component {
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />
-          <Route path="/content/servers" component={AddServer} />
+          <Route path="/content/servers" component={Servers} />
           <Route path="/currency/eidtor" component={Editor} />
           <Route path="/currency/records" component={Record} />
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />
           <Route path="/player/players" component={Players} />
           <Route path="/agent/hots" component={AgentHot} />
+          <Route path="/web/website" component={TabComponent} />
+          <Route path="/web/service" component={Amends} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>
