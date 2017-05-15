@@ -33,6 +33,7 @@ import { Servers, AddServer } from './Content/Servers';
 
 // 平台币管理
 import Editor from './Currency/Editor';
+import Record from './Currency/Records';
 
 // 玩家管理
 import Players from './Player/Players';
@@ -69,6 +70,7 @@ class SiderMenuRoutes extends Component {
           <Route path="/content/activitys" component={Action} />
           <Route path="/content/servers" component={AddServer} />
           <Route path="/currency/eidtor" component={Editor} />
+          <Route path="/currency/records" component={Record} />
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />
           <Route path="/player/players" component={Players} />
