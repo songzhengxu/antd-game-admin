@@ -24,7 +24,10 @@ import AdsGamebox from './Ads/Gamebox';
 import GameList from './Games/Games';
 import AddGame from './Games/editor';
 import Information from './Games/informations';
+import Type from './Games/types';
 
+// 设置
+import SettingMenu from './Setting/Menu';
 
 // 内容管理
 import { DataTable, AddContent } from './Content/Subject';
@@ -33,6 +36,7 @@ import { Servers, AddServer } from './Content/Servers';
 
 // 平台币管理
 import Editor from './Currency/Editor';
+import Record from './Currency/Records';
 
 // 玩家管理
 import Players from './Player/Players';
@@ -48,6 +52,10 @@ import AgentChanneldata from './Agent/Channeldata';
 
 // 数据统计
 import StatisticsKeep from './Statistics/Keep';
+
+// 网站管理
+import TabComponent from './Web/Website';
+import { Service, Amends } from './Web/Service';
 
 const Home = () => (
   <div>
@@ -72,12 +80,14 @@ class SiderMenuRoutes extends Component {
           <Route exact path="/games/games" component={GameList} />
           <Route exact path="/games/editor" component={AddGame} />
           <Route exact path="/games/informations" component={Information} />
-          <Route path="/gameType" component={AdsMobile} />
+          <Route exact path="/games/types" component={Type} />
+          <Route exact path="/setting/menus" component={SettingMenu} />
           <Route path="/gameNews" component={AdsMobile} />
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />
-          <Route path="/content/servers" component={AddServer} />
+          <Route path="/content/servers" component={Servers} />
           <Route path="/currency/eidtor" component={Editor} />
+          <Route path="/currency/records" component={Record} />
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />
           <Route path="/player/players" component={Players} />
@@ -89,6 +99,8 @@ class SiderMenuRoutes extends Component {
           <Route path="/agent/qualities" component={AgentQualities} />
           <Route path="/agent/channeldata" component={AgentChanneldata} />
           <Route path="/statistics/keep" component={StatisticsKeep} />
+          <Route path="/web/website" component={TabComponent} />
+          <Route path="/web/service" component={Amends} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>
