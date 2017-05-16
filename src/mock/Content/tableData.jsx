@@ -82,6 +82,90 @@ module.exports = {
     content: '',
   },
   ],
+  pictures: [
+    {
+      index: 1,
+      pictureName: 'wap首页推广图1',
+      picture: 'http://h5admin.jimugame.com/upload/pcimage/pcimage_1494573378.jpg',
+      url: 'http://m.jimugame.com/detail/index/appid/100164',
+      time: '2017-05-12 15:16:18',
+      key: 1,
+    }, {
+      index: 2,
+      pictureName: 'wap首页推广图2',
+      picture: 'http://h5admin.jimugame.com/upload/pcimage/pcimage_1494067254.jpg',
+      url: '',
+      time: '2017-05-06 18:40:54',
+      key: 2,
+    }, {
+      index: 3,
+      pictureName: 'APP二维码',
+      picture: 'http://h5admin.jimugame.com/upload/pcimage/pcimage_1491012423.png',
+      url: '',
+      time: '2017-05-02 18:24:37',
+      key: 3,
+    }, {
+      index: 4,
+      pictureName: '微信二维码',
+      picture: 'http://h5admin.jimugame.com/upload/pcimage/pcimage_1493364502.jpg',
+      url: '',
+      time: '2017-04-28 15:28:22',
+      key: 4,
+    }, {
+      index: 5,
+      pictureName: 'PC官网LOGO',
+      picture: 'http://h5admin.jimugame.com/upload/pcimage/pcimage_1493361988.png',
+      url: 'http://h5.jimugame.com',
+      time: '2017-04-28 14:46:28',
+      key: 5,
+    }],
+  company: [
+    {
+      index: 1,
+      name: '百度统计Key值',
+      message: '456978912',
+      time: '2017-04-08 18:28:23',
+      key: 1,
+    }, {
+      index: 2,
+      name: '公司名称',
+      message: '广州炫娱网络科技有限公司',
+      time: '2017-04-10 21:22:12',
+      key: 2,
+    }, {
+      index: 3,
+      name: '公司地址',
+      message: '广州市天河区棠下涌东路306号D座501房',
+      time: '2017-04-10 21:22:23',
+      key: 3,
+    }, {
+      index: 4,
+      name: '公司电话',
+      message: '0716-1234567451',
+      time: '2017-04-08 18:11:18',
+      key: 4,
+    }, {
+      index: 5,
+      name: 'ICP备案域名',
+      message: '粤ICP备17030790号-1',
+      time: '2017-04-10 21:22:48',
+      key: 5,
+    }, {
+      index: 6,
+      name: '版权信息',
+      message: 'Copyright © 2016',
+      time: '2017-04-10 21:23:51',
+      key: 6,
+    }],
+  blogroll: [
+    {
+      index: 1,
+      id: 'ID',
+      name: '链接名称',
+      url: '链接地址',
+      statue: '状态',
+      key: 1,
+    }],
 };
 
 

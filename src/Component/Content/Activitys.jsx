@@ -103,20 +103,20 @@ class Action extends Component {
 }
 
 class AddAction extends Component {
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   this.props.form.validateFields((err, values) => {
-  //     if (!err) {
-  //       console.log('Received values of form: ', values);
-  //     }
-  //   });
-  // }
-  // normFile(e) {
-  //   if (Array.isArray(e)) {
-  //     return e;
-  //   }
-  //   return e && e.fileList;
-  // }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
+  normFile(e) {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {

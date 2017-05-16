@@ -47,6 +47,9 @@ import AgentHot from './Agent/Hot';
 // 网站管理
 import TabComponent from './Web/Website';
 import { Service, Amends } from './Web/Service';
+import WebiteTab from './Web/Pictures';
+import CompanyTab from './Web/Company';
+import BlogrollTab from './Web/Blogroll';
 
 const Home = () => (
   <div>
@@ -84,7 +87,10 @@ class SiderMenuRoutes extends Component {
           <Route path="/player/players" component={Players} />
           <Route path="/agent/hots" component={AgentHot} />
           <Route path="/web/website" component={TabComponent} />
-          <Route path="/web/service" component={Amends} />
+          <Route path="/web/service" component={Service} />
+          <Route path="/web/pictures" component={WebiteTab} />
+          <Route path="/web/company" component={CompanyTab} />
+          <Route path="/web/blogroll" component={BlogrollTab} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>

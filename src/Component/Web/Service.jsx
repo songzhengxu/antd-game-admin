@@ -91,7 +91,10 @@ class Amend extends Component {
         >
           <Input type="text" />,
         </FormItem>
-        <FormItem>
+        <FormItem
+          {...formItemLayout}
+          label="内容"
+        >
           <LzEditor
             active="true"
           />
