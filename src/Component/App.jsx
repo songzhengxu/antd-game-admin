@@ -19,6 +19,9 @@ import AdsMobile from './Ads/Mobile';
 import AdsWeb from './Ads/Web';
 import AdsGamebox from './Ads/Gamebox';
 
+// 礼包管理
+import Gifts from './Gift/Gifts';
+
 // 游戏管理
 
 import GameList from './Games/Games';
@@ -26,8 +29,17 @@ import AddGame from './Games/editor';
 import Information from './Games/informations';
 import Type from './Games/types';
 
+// 信息管理
+import Messages from './Message/Messages';
+import MessageEditor from './Message/Editor';
+
 // 设置
 import SettingMenu from './Setting/Menu';
+import UserInfo from './Setting/UserInfo';
+import PasswordComponent from './Setting/Password';
+import Smtp from './Setting/Smtp';
+import RoleMangementWithTabs from './Setting/Rbac';
+import AdminsWithTabs from './Setting/Admins';
 
 // 内容管理
 import { DataTable, AddContent } from './Content/Subject';
@@ -69,7 +81,14 @@ class SiderMenuRoutes extends Component {
           <Route exact path="/games/informations" component={Information} />
           <Route exact path="/games/types" component={Type} />
           <Route exact path="/setting/menus" component={SettingMenu} />
-          <Route path="/gameNews" component={AdsMobile} />
+          <Route exact path="/setting/user/userinfo" component={UserInfo} />
+          <Route exact path="/setting/user/password" component={PasswordComponent} />
+          <Route exact path="/setting/mail/smtp" component={Smtp} />
+          <Route exact path="/setting/rbac" component={RoleMangementWithTabs} />
+          <Route exact path="/setting/admins" component={AdminsWithTabs} />
+          <Route exact path="/message/messages" component={Messages} />
+          <Route exact path="/message/editor" component={MessageEditor} />
+          <Route exact path="/gift/gifts" component={Gifts} />
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />
           <Route path="/content/servers" component={AddServer} />
