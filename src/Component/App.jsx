@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
-// import viewsAction from '../Action/Views';
-import ViewsActionFactor from '../Action/ViewsAction';
+import viewsAction from '../Action/Views';
 
 // 导航菜单配置数据
 import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
@@ -107,5 +106,4 @@ class App extends Component {
   }
 }
 
-const viewsAction = (new ViewsActionFactor().getAction).bind(new ViewsActionFactor());
 export default connect(state => ({ Views: state.Views }), viewsAction)(App);

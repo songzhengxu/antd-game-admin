@@ -1,7 +1,7 @@
 {
   "name": "antd-game-admin",
   "version": "1.0.0",
-  "description": "antd-game-admin\r ===============",
+  "description": "antd-game-admin",
   "main": "index.js",
   "scripts": {
     "dev": "rimraf dist &&set NODE_ENV=development&&node server.js",
