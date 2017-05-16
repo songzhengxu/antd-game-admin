@@ -2,7 +2,7 @@ import React from 'react';
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, Icon } from 'antd';
-import { queryArray } from '../../utils';
+import { queryArray } from '~/utils';
 
 
 const Bread = ({ menu }) => {
@@ -17,6 +17,7 @@ const Bread = ({ menu }) => {
       break;
     }
   }
+
 
   // 定义函数来通过bpid查找父级
   const getPathArray = (item) => {
@@ -66,5 +67,10 @@ const Bread = ({ menu }) => {
     </div>
   );
 };
+
+Bread.propTypes = {
+  menu: React.PropTypes.array.isRequired,
+};
+
 
 export default Bread;

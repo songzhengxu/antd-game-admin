@@ -83,6 +83,8 @@ const Selector = function Selector(props) {
   // 根据参数动态生成搜索栏的option
   const dynamicOpiton = options.map(option =>
     <Option key={option} value={option}>{ option }</Option>);
+  console.log('dynamicOpiton');
+  console.log(dynamicOpiton);
   return (
     <span className="gameList_selector" >
       {props.children} :
@@ -113,6 +115,8 @@ class GameList extends React.Component {
     dispatch(fetchDataIfNeed('api/games.json'));
   }
   render() {
+    console.log('0000');
+    console.log(Selector);
     const { data } = this.props.gameList;
     // 通过判断数据是否存在来确定显示内容
     if (data) {
@@ -149,9 +153,9 @@ class GameList extends React.Component {
       return (
         <div className="gameListTable">
           <div className="gameList_selectBar" >
-            <Selector options={shaixuanzhuangtai} >状态</Selector>
-            <Selector options={shaixuanyouxileixing} >游戏类型</Selector>
-            <span className="ganmeList_searchGameName">游戏名称：<Input /></span>
+            <Selector options={shaixuanzhuangtai} >{'状态'}</Selector>
+            <Selector options={shaixuanyouxileixing} >{'游戏类型'}</Selector>
+            <span className="ganmeList_searchGameName">{'游戏名称：'}<Input /></span>
           </div>
           <Table
             columns={columns}
