@@ -361,7 +361,7 @@
       "mpid": 31,
       "index": 0,
       "isHidden": false,
-      "router": "/agent/channeldate"
+      "router": "/agent/channeldata"
     },
     {
       "id": 40,

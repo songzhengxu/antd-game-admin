@@ -55,6 +55,19 @@ import Players from './Player/Players';
 
 // 开发平台
 import AgentHot from './Agent/Hot';
+import AgentSummarizes from './Agent/Summarizes';
+import AgentPendinglists from './Agent/Pendinglists';
+import AgentAuditlists from './Agent/Auditlists';
+import AgentAccounts from './Agent/Accounts';
+import AgentQualities from './Agent/Qualities';
+import AgentChanneldata from './Agent/Channeldata';
+
+// 数据统计
+import StatisticsKeep from './Statistics/Keep';
+
+// 网站管理
+import TabComponent from './Web/Website';
+import { Service, Amends } from './Web/Service';
 
 const Home = () => (
   <div>
@@ -91,13 +104,22 @@ class SiderMenuRoutes extends Component {
           <Route exact path="/gift/gifts" component={Gifts} />
           <Route path="/content/subjects" component={DataTable} />
           <Route path="/content/activitys" component={Action} />
-          <Route path="/content/servers" component={AddServer} />
+          <Route path="/content/servers" component={Servers} />
           <Route path="/currency/eidtor" component={Editor} />
           <Route path="/currency/records" component={Record} />
           <Route path="/addContent" component={AddContent} />
           <Route path="/addAction" component={Addaction} />
           <Route path="/player/players" component={Players} />
           <Route path="/agent/hots" component={AgentHot} />
+          <Route path="/agent/summarizes" component={AgentSummarizes} />
+          <Route path="/agent/pendinglists" component={AgentPendinglists} />
+          <Route path="/agent/auditlists" component={AgentAuditlists} />
+          <Route path="/agent/accounts" component={AgentAccounts} />
+          <Route path="/agent/qualities" component={AgentQualities} />
+          <Route path="/agent/channeldata" component={AgentChanneldata} />
+          <Route path="/statistics/keep" component={StatisticsKeep} />
+          <Route path="/web/website" component={TabComponent} />
+          <Route path="/web/service" component={Amends} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>
@@ -130,5 +152,6 @@ class App extends Component {
   }
 }
 
-const viewsAction = (new ViewsActionFactor().getAction).bind(new ViewsActionFactor());
+const newAction = new ViewsActionFactor();
+const viewsAction = (newAction.getAction).bind(newAction);
 export default connect(state => ({ Views: state.Views }), viewsAction)(App);

@@ -59,6 +59,7 @@
     "react": "^15.5.4",
     "react-addons-update": "^15.5.2",
     "react-dom": "^15.5.4",
+    "react-draft-wysiwyg": "^1.9.9",
     "react-lz-editor": "^0.10.15",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
