@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Button, Tabs, Menu, Dropdown, Form } from 'antd';
+import { Input, Button, Tabs, Menu, Dropdown, Form, Select } from 'antd';
 import MakeTable from '../../utils/TableMaker';
 
 const { TabPane } = Tabs;
 const FormItem = Form.Item;
+const Option = Select.Option;
 const data = {};
 data.title = {
   order: '排序',
@@ -117,15 +118,102 @@ class AddMenu extends React.Component {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   render() {
-    const { getFieldDecorator, setFieldsValue, getFieldValue } = this.props.form;
+    const { getFieldDecorator } = this.props.form;
     // const youximingchengError = isFieldTouched('userName') && getFieldError('userName');
     return (
-      <Form layout="horizontal" onSubmit={this.handleSubmit}>
-        <FormItem label="游戏类型名称" >
-          {getFieldDecorator('addInformations_informationType', {
-            rules: [{ required: true, message: '请输入游戏类型名称' }],
+      <Form className="addMenuForm" layout="horizontal" onSubmit={this.handleSubmit}>
+        <FormItem label="上级" >
+          {getFieldDecorator('addMenu_fatherMenu', {
+            rules: [{ required: true, message: '请选择需要添加到的菜单' }],
           })(
-            <Input />,
+            <Select defaultValue="levelOne" style={{ width: 120 }}>
+              <Option value="levelOne">作为一级菜单</Option>
+              <Option value="contentManagement">内容管理</Option>
+              <Option value="moduleManagement">专题管理</Option>
+            </Select>,
+          )}
+        </FormItem>
+        <FormItem label="名称" >
+          {getFieldDecorator('AddMenu_name', {
+            rules: [{ required: true, message: '请选择需要添加到的菜单' }],
+          })(
+            <span><Input style={{ width: 200 }} placeholder="请输入菜单名称" /> *</span>,
+          )}
+        </FormItem>
+        <FormItem label="应用" >
+          {getFieldDecorator('AddMenu_application', {
+            rules: [{ required: true, message: '请选择应用' }],
+          })(
+            <span><Input style={{ width: 200 }} placeholder="请选择应用" /> *</span>,
+          )}
+        </FormItem>
+        <FormItem label="控制器" >
+          {getFieldDecorator('AddMenu_controller', {
+            rules: [{ required: true, message: '请选择控制器' }],
+          })(
+            <span><Input style={{ width: 200 }} placeholder="请选择控制器" /> *</span>,
+          )}
+        </FormItem>
+        <FormItem label="方法" >
+          {getFieldDecorator('AddMenu_method', {
+            rules: [{ required: true, message: '请选择方法' }],
+          })(
+            <span><Input style={{ width: 200 }} placeholder="请选择方法" /> *</span>,
+          )}
+        </FormItem>
+        <FormItem label="参数" >
+          {getFieldDecorator('AddMenu_param', {
+            rules: [{ required: true, message: '请输入参数' }],
+          })(
+            <span><Input style={{ width: 200 }} placeholder="请输入参数" /> 例:id=3&p=3</span>,
+          )}
+        </FormItem>
+        <FormItem label="图标" >
+          {getFieldDecorator('AddMenu_icon', {
+            rules: [{ required: true, message: '输入图标' }],
+          })(
+            <span><Input style={{ width: 200 }} placeholder="请输入图标" /> <a rel="noopener noreferrer" target="_blank" href="https://ant.design/components/icon-cn/">选择图标</a>如：user</span>,
+          )}
+        </FormItem>
+        <FormItem label="备注" >
+          {getFieldDecorator('AddMenu_remark', {
+            rules: [{ required: true, message: '输入备注' }],
+          })(
+            <span><Input type="textarea" rows={4} /></span>,
+          )}
+        </FormItem>
+        <FormItem label="状态" >
+          {getFieldDecorator('AddMenu_status', {
+            rules: [{ required: true, message: '请输入状态' }],
+          })(
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              placeholder=" 请选择 "
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+              option.props.value.indexOf(input) >= 0}
+            >
+              <Option key="show" value="显示">显示</Option>
+              <Option key="hide" value="隐藏">隐藏</Option>
+            </Select>,
+          )}
+        </FormItem>
+        <FormItem label="状态" >
+          {getFieldDecorator('AddMenu_type', {
+            rules: [{ required: true, message: '请输入状态' }],
+          })(
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              placeholder=" 请选择 "
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+              option.props.value.indexOf(input) >= 0}
+            >
+              <Option key="authentication_and_menu" value="权限认证+菜单">权限认证+菜单</Option>
+              <Option key="just_as_menu" value="只作为菜单">只作为菜单</Option>
+            </Select>,
           )}
         </FormItem>
         <FormItem label="提交" >
@@ -183,12 +271,88 @@ AddMenu.propTypes = {
 
 const NewForm = Form.create()(AddMenu);
 
+// 所有菜单
+
+const allMenuData = {};
+allMenuData.title = {
+  order: '排序',
+  id: 'ID',
+  englishName: '菜单英文名称',
+  status: '状态',
+  action: '操作',
+};
+allMenuData.dataSource = [
+  {
+    order: 1000,
+    id: 73,
+    englishName: '添加广告:Admin/Ad/add',
+    status: '隐藏',
+    action: ['修改', '操作'],
+  },
+  {
+    order: 0,
+    id: 74,
+    englishName: '提交添加:Admin/Ad/add_post',
+    status: '隐藏',
+    action: ['修改', '操作'],
+  },
+  {
+    order: 0,
+    id: 68,
+    englishName: '网站广告:Admin/Ad/index',
+    status: '隐藏',
+    action: ['修改', '操作'],
+  },
+];
+
+const allMenuExtrasConditions = {
+  order: {
+    sorter: (a, b) => a.order - b.order,
+    render: (text, record) => <Input
+      style={{ width: 50 }}
+      className="orderInput"
+      defaultValue={record.order}
+      onChange={(e) => {
+        const newRecord = record;
+        newRecord.order = e.target.value;
+        return newRecord;
+      }}
+    />,
+  },
+  action: {
+    render: (text, record) => {
+      const menuUnit = record.action.map((value, index) =>
+        <Menu.Item key={value + index}>{value}</Menu.Item>);
+      const menu = (
+        <Menu>
+          {menuUnit}
+        </Menu>
+      );
+      const dropDownMenu = (
+        <Dropdown.Button overlay={menu} >
+          操作
+        </Dropdown.Button>
+      );
+      return dropDownMenu;
+    },
+  },
+};
+
+const AllMenu = function AllMenu() {
+  return (
+    <div className="allMenu" >
+      {MakeTable(allMenuData, 'all_menu_columns', 'all_menu_datasource', allMenuExtrasConditions, { bordered: true })}
+    </div>
+  );
+};
+
 const SettingWithTabs = function SettingWithTabs(props) {
   const { history } = props;
   return (
     <Tabs defaultActiveKey="1">
       <TabPane tab="后台菜单" key="1">{<SettingMenu />}</TabPane>
       <TabPane tab="添加菜单" key="2">{<NewForm history={history} />}</TabPane>
+      <TabPane tab="所有菜单" key="3">{<AllMenu />}</TabPane>
     </Tabs>
 
   );

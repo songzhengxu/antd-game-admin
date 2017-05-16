@@ -33,4 +33,10 @@ class Main extends Component {
     );
   }
 }
+
+Main.propTypes = {
+  Views: React.PropTypes.object.isRequired,
+  changeCollapsed: React.PropTypes.func.isRequired,
+};
+
 export default Main;

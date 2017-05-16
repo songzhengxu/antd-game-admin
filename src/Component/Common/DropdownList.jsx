@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Select } from 'antd';
+
 /**
  * [Selector 生成下拉列表]
  * @param  {[array]} props [数据]
  * @type {class}
  */
-
-
 class Selector {
   constructor(props, text) {
     this.props = props;
