@@ -52,6 +52,10 @@ import AgentChanneldata from './Agent/Channeldata';
 
 // 数据统计
 import StatisticsKeep from './Statistics/Keep';
+import StatisticsRecharge from './Statistics/Recharge';
+import StatisticsConsume from './Statistics/Consume';
+import StatisticsDaily from './Statistics/Daily';
+import StatisticsGame from './Statistics/Game';
 
 // 网站管理
 import TabComponent from './Web/Website';
@@ -99,6 +103,10 @@ class SiderMenuRoutes extends Component {
           <Route path="/agent/qualities" component={AgentQualities} />
           <Route path="/agent/channeldata" component={AgentChanneldata} />
           <Route path="/statistics/keep" component={StatisticsKeep} />
+          <Route path="/statistics/recharge" component={StatisticsRecharge} />
+          <Route path="/statistics/consume" component={StatisticsConsume} />
+          <Route path="/statistics/daily" component={StatisticsDaily} />
+          <Route path="/statistics/game" component={StatisticsGame} />
           <Route path="/web/website" component={TabComponent} />
           <Route path="/web/service" component={Amends} />
           {/* <Redirect to="/404" /> */}

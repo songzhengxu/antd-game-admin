@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Table, DatePicker } from 'antd';
+import { Button, Table, DatePicker, Input } from 'antd';
 
 const { RangePicker } = DatePicker;
 
 
 // TODO 这里用的是本地数据需要更改为服务端请求
-const mockDataFirst = { date: '2017-09-08', enrollment: 7, twoDays: 0, threeDays: 0, fourDays: 0, fiveDays: 0, sixDays: 0, sevenDays: 0, fifteenDays: 0, thirtyDays: 0 };
-const mockDataTwo = { date: '2017-09-09', enrollment: 8, twoDays: 0, threeDays: 0, fourDays: 0, fiveDays: 0, sixDays: 0, sevenDays: 0, fifteenDays: 0, thirtyDays: 0 };
+const mockDataFirst = { date: '2017-09-08', game: 'game', income: 100, orderQuantity: 10, playerNumber: 100 };
+const mockDataTwo = { date: '2017-09-08', game: 'game', income: 100, orderQuantity: 10, playerNumber: 100 };
 
 class TabelComponent extends Component {
   constructor() {
@@ -28,41 +28,21 @@ class TabelComponent extends Component {
       dataIndex: 'date',
       key: 'date',
     }, {
-      title: '注册人数',
-      dataIndex: 'enrollment',
-      key: 'enrollment',
+      title: '游戏',
+      dataIndex: 'game',
+      key: 'game',
     }, {
-      title: '二日',
-      dataIndex: 'twoDays',
-      key: 'twoDays',
+      title: '收入',
+      dataIndex: 'income',
+      key: 'income',
     }, {
-      title: '三日',
-      dataIndex: 'threeDays',
-      key: 'threeDays',
+      title: '订单数',
+      dataIndex: 'orderQuantity',
+      key: 'orderQuantity',
     }, {
-      title: '四日',
-      dataIndex: 'fourDays',
-      key: 'fourDays',
-    }, {
-      title: '五日',
-      dataIndex: 'fiveDays',
-      key: 'fiveDays',
-    }, {
-      title: '六日',
-      dataIndex: 'sixDays',
-      key: 'sixDays',
-    }, {
-      title: '七日',
-      dataIndex: 'sevenDays',
-      key: 'sevenDays',
-    }, {
-      title: '15日',
-      dataIndex: 'fifteenDays',
-      key: 'fifteenDays',
-    }, {
-      title: '30日',
-      dataIndex: 'thirtyDays',
-      key: 'thirtyDays',
+      title: '玩家数',
+      dataIndex: 'playerNumber',
+      key: 'playerNumber',
     }];
   }
 
@@ -91,7 +71,7 @@ class TabelComponent extends Component {
 }
 
 
-class Keep extends Component {
+class Daily extends Component {
   constructor() {
     super();
     this.state = {
@@ -115,6 +95,7 @@ class Keep extends Component {
   render() {
     return (<div className="summarizes">
       <div className="summarizes_selectBar">
+        <span>游戏名称：<Input placeholder="请输入游戏名称" /></span>
         <span>时间：
         <RangePicker
           showTime
@@ -125,7 +106,6 @@ class Keep extends Component {
         <Button >搜索</Button>
         <Button >导出数据</Button>
       </div>
-      <div>*隔天数据*</div>
       <TabelComponent
         data={this.state.data}
       />
@@ -133,4 +113,4 @@ class Keep extends Component {
   }
 }
 
-export default Keep;
+export default Daily;

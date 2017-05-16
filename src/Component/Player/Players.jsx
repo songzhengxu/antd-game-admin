@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Input, Icon, Tabs } from 'antd';
+import { Button, Input, Icon, Tabs, Modal } from 'antd';
 import axios from 'axios';
 import TableOld from '../Ads/Tabel';
 
 // import Mobile from '../Ads/Mobile';
 import DropOption from '../Common/DropOption';
+import Editor from './Editor';
 
-
+const confirm = Modal.confirm;
 const TabPane = Tabs.TabPane;
 
 /**
@@ -19,6 +20,7 @@ class Table extends TableOld {
     this.state = {
       visible: false,
       data: [],
+      oldata: [],
       pagination: {},
       loading: false,
       selectedData: {},
@@ -40,20 +42,14 @@ class Table extends TableOld {
     this.setState({
       filterDropdownVisible: false,
       filtered: !!searchText,
-      data: this.state.data.map((record) => {
-        const match = record.name.match(reg);
+      data: this.state.oldata.map((record) => {
+        const match = record.index.toString().match(reg);
         if (!match) {
           return null;
         }
         return {
           ...record,
-          name: (
-            <span>
-              {record.name.split(reg).map((text, i) => (
-                i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text
-              ))}
-            </span>
-          ),
+          index: record.index,
         };
       }).filter(record => !!record),
     });
@@ -98,11 +94,11 @@ class Table extends TableOld {
       key: 'accounts',
     }, {
       title: '昵称',
-      dataIndex: 'nickname',
-      key: 'nickname',
+      dataIndex: 'nickName',
+      key: 'nickName',
     }, {
       title: '帐号类型',
-      dataIndex: 'accountTypev',
+      dataIndex: 'accountType',
       key: 'accountType',
     }, {
       title: '注册渠道|游戏',
@@ -134,8 +130,9 @@ class Table extends TableOld {
       this.props.handleSelect();
       console.log(`编辑操作${record.key}`);
     } else if (e.key === '2') {
+      const title = record.isForbit ? '是否禁用' : '是否启用';
       confirm({
-        title: record.isForbit ? '是否禁用' : '是否启用',
+        title,
         onOk() {
           // onDeleteItem(record.id);
         },
@@ -153,6 +150,7 @@ class Table extends TableOld {
       this.setState({
         loading: false,
         data: response,
+        oldata: response,
         pagination,
       });
     });
@@ -165,12 +163,14 @@ class Players extends Component {
     super();
     this.newTabIndex = 0;
     this.add = this.add.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onEdit = this.onEdit.bind(this);
     const panes = [
       { title: '玩家列表',
         content: <Table
           handleSelect={this.add}
         />,
-        key: '1',
+        key: '0',
         closable: false },
     ];
     this.state = {
@@ -185,20 +185,21 @@ class Players extends Component {
     const removeActiveKey = this.state.panes[1].key;
     if (activeKey !== removeActiveKey) {
       this.remove(removeActiveKey);
+      this.newTabIndex = 0;
     }
   }
   onEdit(targetKey, action) {
     this[action](targetKey);
   }
   getPane(pane = { title: 'new tabs', content: <div>div</div>, key: '0', closable: true }) {
-    return [pane];
+    return pane;
   }
 
   add() {
     const panes = this.state.panes;
     if (this.newTabIndex < 1) {
       const activeKey = `newTab${this.newTabIndex += 1}`;
-      panes.push(this.getPane({ title: '用户修改', content: 'Content of new Tab', key: activeKey }));
+      panes.push(this.getPane({ title: '用户修改', content: <Editor />, key: activeKey }));
       this.setState({ panes, activeKey });
     }
   }
@@ -215,6 +216,7 @@ class Players extends Component {
       activeKey = panes[lastIndex].key;
     }
     this.setState({ panes, activeKey });
+    this.newTabIndex = 0;
   }
 
   render() {
