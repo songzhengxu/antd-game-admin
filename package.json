@@ -1,7 +1,7 @@
 {
   "name": "antd-game-admin",
   "version": "1.0.0",
-  "description": "antd-game-admin\r ===============",
+  "description": "antd-game-admin",
   "main": "index.js",
   "scripts": {
     "dev": "rimraf dist &&set NODE_ENV=development&&node server.js",
@@ -54,6 +54,7 @@
     "antd": "^2.10.0",
     "axios": "^0.16.1",
     "nprogress": "^0.2.0",
+    "obj-merged": "^1.0.5",
     "path-to-regexp": "^1.7.0",
     "prop-types": "^15.5.9",
     "react": "^15.5.4",

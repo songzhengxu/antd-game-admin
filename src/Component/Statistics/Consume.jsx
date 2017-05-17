@@ -7,8 +7,8 @@ const { RangePicker } = DatePicker;
 
 
 // TODO 这里用的是本地数据需要更改为服务端请求
-const mockDataFirst = { index: 1, date: '2017-09-12', playerId: '111', playerAccounts: '123', rechargeAmount: '300', rechargeSource: 'QQ', rechargeStyle: '淘宝', orderNumber: '2222', thirdPartOrderNumber: '3333', status: '成功' };
-const mockDataTwo = { index: 2, date: '2017-09-12', playerId: '111', playerAccounts: '123', rechargeAmount: '300', rechargeSource: 'QQ', rechargeStyle: '淘宝', orderNumber: '2222', thirdPartOrderNumber: '3333', status: '成功' };
+const mockDataFirst = { index: 1, date: '2017-09-12', playerId: '111', playerAccounts: '123', gameName: 'game', goods: 'goods', value: '300', rechargeStyle: '淘宝', orderNumber: '2222', status: '成功' };
+const mockDataTwo = { index: 2, date: '2017-09-12', playerId: '111', playerAccounts: '123', gameName: 'game', goods: 'goods', value: '300', rechargeStyle: '淘宝', orderNumber: '2222', status: '成功' };
 class TabelComponent extends Component {
   constructor() {
     super();
@@ -40,13 +40,17 @@ class TabelComponent extends Component {
       dataIndex: 'playerAccounts',
       key: 'playerAccounts',
     }, {
-      title: '充值金额',
-      dataIndex: 'rechargeAmount',
-      key: 'rechargeAmount',
+      title: '游戏名称',
+      dataIndex: 'gameName',
+      key: 'gameName',
     }, {
-      title: '充值来源',
-      dataIndex: 'rechargeSource',
-      key: 'rechargeSource',
+      title: '购买商品',
+      dataIndex: 'goods',
+      key: 'goods',
+    }, {
+      title: '价值金额(元)',
+      dataIndex: 'value',
+      key: 'value',
     }, {
       title: '充值方式',
       dataIndex: 'rechargeStyle',
@@ -56,13 +60,13 @@ class TabelComponent extends Component {
       dataIndex: 'orderNumber',
       key: 'orderNumber',
     }, {
-      title: '第三方订单号',
-      dataIndex: 'thirdPartOrderNumber',
-      key: 'thirdPartOrderNumber',
-    }, {
       title: '状态',
       dataIndex: 'status',
       key: 'status',
+    }, {
+      title: '操作',
+      dataIndex: 'control',
+      key: 'control',
     }];
   }
 
@@ -124,7 +128,7 @@ Selector.propTypes = {
 };
 
 
-class Recharge extends Component {
+class Consume extends Component {
   constructor() {
     super();
     this.state = {
@@ -147,15 +151,13 @@ class Recharge extends Component {
 
   render() {
     const rechargeStatus = ['全部', '1', '2', '3'];
-    const rechargeStyle = ['3', '2', '1'];
     return (<div className="summarizes">
       <div className="summarizes_selectBar">
         <span>玩家帐号：<Input placeholder="请输入玩家帐号" /></span>
         <span>玩家ID：<Input placeholder="请输入玩家ID" /></span>
         <span>订单号：<Input placeholder="请输入订单号" /></span>
-        <span>充值来源：<Input placeholder="请输入充值来源" /></span>
+        <span>游戏名称：<Input placeholder="请输入游戏名称" /></span>
         <span><Selector options={rechargeStatus} placeholder="全部">充值状态</Selector></span>
-        <span><Selector options={rechargeStyle} placeholder="请选择">充值方式</Selector></span>
         <span>时间：
         <RangePicker
           showTime
@@ -173,4 +175,4 @@ class Recharge extends Component {
   }
 }
 
-export default Recharge;
+export default Consume;
