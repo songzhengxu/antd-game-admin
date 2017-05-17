@@ -1,71 +1,76 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Menu, Dropdown, Icon, Form, Input, Button, Radio } from 'antd';
+import { Tabs, Menu, Dropdown, Icon, Form, Input, Button, Radio, Spin } from 'antd';
+import { connect } from 'react-redux';
 import MakeTable from '../../utils/TableMaker';
+import AsyncAction from '../../utils/asyncAction';
 
 
 const { TabPane } = Tabs;
 const RadioGroup = Radio.Group;
 
-
-const data = {};
-data.title = {
-  id: 'ID',
-  role: '角色名称',
-  description: '角色描述',
-  status: '状态',
-  action: '操作',
-};
-data.dataSource = [
-  {
-    id: 14,
-    role: '老六看数据',
-    description: '',
-    status: 'check',
-    action: ['权限设置', '编辑', '操作'],
-  },
-  {
-    id: 13,
-    role: '乔巴',
-    description: '乔巴专用',
-    status: 'check',
-    action: ['权限设置', '编辑', '操作'],
-  },
-  {
-    id: 11,
-    role: '导演',
-    description: '导演',
-    status: 'check',
-    action: ['权限设置', '编辑', '操作'],
-  },
-];
-
-const extrasConditions = {
-  status: {
-    render: (text, record) => <Icon type={record.status} />,
-  },
-  action: {
-    render: (text, record) => {
-      const menuUnit = record.action.map((value, index) =>
-        <Menu.Item key={value + index}>{value}</Menu.Item>);
-      const menu = (
-        <Menu>
-          {menuUnit}
-        </Menu>
+// RoleMangementTable
+class RoleMangementTable extends React.Component {
+  componentDidMount() {
+    const gameTypeAsyncAction = new AsyncAction('api/rbac.json', 'get', 'RbacListReducer', 'rbacList', 'rbacList');
+    const { dispatch } = this.props;
+    dispatch(gameTypeAsyncAction.fetchDataIfNeed());
+  }
+  render() {
+    const status = this.props.rbacList.status;
+    if (status === 'WAIT_FOR_FETCHING') {
+      return (
+        <div className="gamerbacListLoading">
+          <Spin />
+        </div>
       );
-      const dropDownMenu = (
-        <Dropdown.Button overlay={menu} >
-          操作
-        </Dropdown.Button>
-      );
-      return dropDownMenu;
-    },
-  },
+    }
+    const dataSource = this.props.rbacList.data;
+    const data = {};
+    data.title = {
+      id: 'ID',
+      role: '角色名称',
+      description: '角色描述',
+      status: '状态',
+      action: '操作',
+    };
+    data.dataSource = dataSource;
+    const extrasConditionsrbacList = {
+      status: {
+        render: (text, record) => <Icon type={record.status} />,
+      },
+      action: {
+        render: (text, record) => {
+          const menuUnit = record.action.map((value, index) =>
+            <Menu.Item key={value + index}>{value}</Menu.Item>);
+          const menu = (
+            <Menu>
+              {menuUnit}
+            </Menu>
+          );
+          const dropDownMenu = (
+            <Dropdown.Button overlay={menu} >
+              操作
+            </Dropdown.Button>
+          );
+          return dropDownMenu;
+        },
+      },
+    };
+    return MakeTable(data, 'rbacList_columns', 'rbacList_datasource', extrasConditionsrbacList, { bordered: true });
+  }
+}
+RoleMangementTable.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  rbacList: PropTypes.shape({
+    status: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
-const RoleMangement = function RoleMangement() {
-  return MakeTable(data, 'Rbac_columns', 'Rbac_datasource', extrasConditions, { bordered: true });
-};
+const RoleMangementTableContainer = connect(state =>
+  ({ rbacList: state.RbacListReducer.rbacList }))(RoleMangementTable);
+
 
 const FormItem = Form.Item;
 class AddRole extends React.Component {
@@ -177,7 +182,7 @@ const RoleMangementWithTabs = function RoleMangementWithTabs(props) {
   const { history } = props;
   return (
     <Tabs defaultActiveKey="1">
-      <TabPane tab="角色管理" key="1">{<RoleMangement />}</TabPane>
+      <TabPane tab="角色管理" key="1">{<RoleMangementTableContainer />}</TabPane>
       <TabPane tab="添加角色" key="2">{<NewForm history={history} />}</TabPane>
     </Tabs>
 

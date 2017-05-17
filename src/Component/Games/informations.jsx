@@ -1,79 +1,19 @@
 
 import React from 'react';
-import { Select, DatePicker, Input, Menu, Dropdown, Button, Tabs, Form, Upload, Radio, Icon, Modal } from 'antd';
+import { Select, DatePicker, Input, Menu, Dropdown, Button, Tabs, Form, Upload, Radio, Icon, Modal, Spin } from 'antd';
 import LzEditor from 'react-lz-editor';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import MakeTable from '../../utils/TableMaker';
+import AsyncAction from '../../utils/asyncAction';
+
+const informationAsyncAction = new AsyncAction('api/gamesInformation.json', 'get', 'GameInformationReducer', 'informationList', 'informationList');
 
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
-
-const data = {};
-data.title = {
-  order: '序号',
-  time: '时间',
-  gameID: '游戏ID',
-  gameName: '游戏名称',
-  type: '类型',
-  title: '标题',
-  top: '是否置顶',
-  action: '操作',
-};
-data.dataSource = [
-  {
-    order: 367,
-    time: '2017-05-04',
-    gameID: 100164,
-    gameName: '御天传奇',
-    type: '攻略',
-    title: '只要998,吕布带回家',
-    top: '不置顶',
-    action: ['置顶', '编辑', '删除'],
-  },
-  {
-    order: 365,
-    time: '2017-05-04',
-    gameID: 100164,
-    gameName: '御天传奇',
-    type: '攻略',
-    title: '《御天传奇》充值技巧全曝光',
-    top: '不置顶',
-    action: ['置顶', '编辑', '删除'],
-  },
-  {
-    order: 364,
-    time: '2017-05-04',
-    gameID: 100164,
-    gameName: '御天传奇',
-    type: '攻略',
-    title: '老司机带你玩转《御天传奇H5》',
-    top: '置顶',
-    action: ['取消置顶', '编辑', '删除'],
-  },
-];
-
-const extrasConditions = {
-  action: {
-    render: (text, record) => {
-      const menuUnit = record.action.map((value, index) =>
-        <Menu.Item key={value + index}>{value}</Menu.Item>);
-      const menu = (
-        <Menu>
-          {menuUnit}
-        </Menu>
-      );
-      const dropDownMenu = (
-        <Dropdown.Button overlay={menu} >
-          操作
-        </Dropdown.Button>
-      );
-      return dropDownMenu;
-    },
-  },
-};
 
 const Selector = function Selector(props) {
   const options = props.options;
@@ -115,11 +55,72 @@ const SearchBar = function SearchBar() {
   );
 };
 
+// InformationTable写一个
+class InformationTable extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(informationAsyncAction.fetchDataIfNeed());
+  }
+  render() {
+    const status = this.props.informationList.status;
+    if (status === 'WAIT_FOR_FETCHING') {
+      return (
+        <div className="gameinformationListLoading">
+          <Spin />
+        </div>
+      );
+    }
+    const dataSource = this.props.informationList.data;
+    const data = {};
+    data.title = {
+      order: '序号',
+      time: '时间',
+      gameID: '游戏ID',
+      gameName: '游戏名称',
+      type: '类型',
+      title: '标题',
+      top: '是否置顶',
+      action: '操作',
+    };
+    data.dataSource = dataSource;
+    const extrasConditionsInfromationList = {
+      action: {
+        render: (text, record) => {
+          const menuUnit = record.action.map((value, index) =>
+            <Menu.Item key={value + index}>{value}</Menu.Item>);
+          const menu = (
+            <Menu>
+              {menuUnit}
+            </Menu>
+            );
+          const dropDownMenu = (
+            <Dropdown.Button overlay={menu} >
+                操作
+              </Dropdown.Button>
+            );
+          return dropDownMenu;
+        },
+      },
+    };
+    return MakeTable(data, 'information_columns', 'information_datasource', extrasConditionsInfromationList, { bordered: true });
+  }
+}
+InformationTable.propTypes = {
+  dispatch: PropTypes.func,
+  informationList: PropTypes.shape({
+    status: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+};
+
+const InformationTableContainer = connect(state =>
+  ({ informationList: state.GameInformationReducer.informationList }))(InformationTable);
+
 const GameInformation = function GameInformation() {
   return (
     <div>
       <SearchBar />
-      {MakeTable(data, 'information_columns', 'information_datasource', extrasConditions, { bordered: true })}
+      <InformationTableContainer />
     </div>
   );
 };
