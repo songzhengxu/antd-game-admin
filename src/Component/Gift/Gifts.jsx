@@ -1,57 +1,75 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Menu, Dropdown, Form, Input, Button, Select, DatePicker } from 'antd';
+import { Tabs, Menu, Dropdown, Form, Input, Button, Select, DatePicker, Spin } from 'antd';
+import { connect } from 'react-redux';
 import MakeTable from '../../utils/TableMaker';
+import AsyncAction from '../../utils/asyncAction';
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
-const data = {};
-data.title = {
-  order: '序号',
-  gameName: '游戏名称',
-  gameId: '游戏ID',
-  giftTitle: '礼包标题',
-  rest: '剩余',
-  beginFrom: '开始时间',
-  endAt: '结束时间',
-  action: '操作管理',
-};
-data.dataSource = [
-  {
-    order: 66,
-    gameName: '御天传奇',
-    gameId: 100164,
-    giftTitle: '《御龙传奇》奉先新兵礼包',
-    rest: '473/500',
-    beginFrom: '2017年04月26日 00:00',
-    endAt: '2017年05月31日 00:00',
-    action: ['修改', '删除'],
-  },
-];
 
-const extrasConditions = {
-  action: {
-    render: (text, record) => {
-      const menuUnit = record.action.map((value, index) =>
-        <Menu.Item key={value + index}>{value}</Menu.Item>);
-      const menu = (
-        <Menu>
-          {menuUnit}
-        </Menu>
+// GiftListTable
+class GiftListTabel extends React.Component {
+  componentDidMount() {
+    const gameTypeAsyncAction = new AsyncAction('api/gift.json', 'get', 'GiftListReducer', 'giftList', 'giftList');
+    const { dispatch } = this.props;
+    dispatch(gameTypeAsyncAction.fetchDataIfNeed());
+  }
+  render() {
+    const status = this.props.giftList.status;
+    if (status === 'WAIT_FOR_FETCHING') {
+      return (
+        <div className="gamegiftListLoading">
+          <Spin />
+        </div>
       );
-      const dropDownMenu = (
-        <Dropdown.Button overlay={menu} >
-          操作
-        </Dropdown.Button>
-      );
-      return dropDownMenu;
-    },
-  },
+    }
+    const dataSource = this.props.giftList.data;
+    const data = {};
+    data.title = {
+      order: '序号',
+      gameName: '游戏名称',
+      gameId: '游戏ID',
+      giftTitle: '礼包标题',
+      rest: '剩余',
+      beginFrom: '开始时间',
+      endAt: '结束时间',
+      action: '操作管理',
+    };
+    data.dataSource = dataSource;
+    const extrasConditionsgiftList = {
+      action: {
+        render: (text, record) => {
+          const menuUnit = record.action.map((value, index) =>
+            <Menu.Item key={value + index}>{value}</Menu.Item>);
+          const menu = (
+            <Menu>
+              {menuUnit}
+            </Menu>
+          );
+          const dropDownMenu = (
+            <Dropdown.Button overlay={menu} >
+              操作
+            </Dropdown.Button>
+          );
+          return dropDownMenu;
+        },
+      },
+    };
+    return MakeTable(data, 'giftList_columns', 'giftList_datasource', extrasConditionsgiftList, { bordered: true });
+  }
+}
+GiftListTabel.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  giftList: PropTypes.shape({
+    status: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
-const GiftTable = function GiftTable() {
-  return MakeTable(data, 'Rbac_columns', 'Rbac_datasource', extrasConditions, { bordered: true });
-};
+const GiftListTabelContainer = connect(state =>
+  ({ giftList: state.GiftListReducer.giftList }))(GiftListTabel);
+
 
 const Gift = function Gift() {
   return (
@@ -66,7 +84,7 @@ const Gift = function Gift() {
           placeholder="请输入游戏名称"
         /><Button>搜索</Button></span>
       </div>
-      <GiftTable />
+      <GiftListTabelContainer />
     </div>
   );
 };

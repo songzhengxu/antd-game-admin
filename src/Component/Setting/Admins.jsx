@@ -1,76 +1,75 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Menu, Dropdown, Form, Input, Button, Checkbox } from 'antd';
+import { Tabs, Menu, Dropdown, Form, Input, Button, Checkbox, Spin } from 'antd';
+import { connect } from 'react-redux';
 import MakeTable from '../../utils/TableMaker';
+import AsyncAction from '../../utils/asyncAction';
 
 
 const { TabPane } = Tabs;
 const CheckboxGroup = Checkbox.Group;
 
-
-const data = {};
-data.title = {
-  id: 'ID',
-  userName: '用户名',
-  lastLoginIp: '最后登录IP',
-  lastLoginTime: '最后登录时间',
-  email: '邮箱',
-  status: '状态',
-  action: '操作',
-};
-data.dataSource = [
-  {
-    id: 113,
-    userName: 'ceshiqudao',
-    lastLoginIp: '183.234.61.206',
-    lastLoginTime: '2017-05-11 11:58:24',
-    email: '2467483609@qq.com',
-    status: '正常',
-    action: ['编辑', '删除', '拉黑'],
-  },
-  {
-    id: 110,
-    userName: 'laoliu',
-    lastLoginIp: '119.130.228.250',
-    lastLoginTime: '2017-05-16 13:55:52',
-    email: 'yuyang@lhgroup.com.cn',
-    status: '正常',
-    action: ['编辑', '删除', '拉黑'],
-  },
-  {
-    id: 105,
-    userName: 'qiaoba',
-    lastLoginIp: '119.129.118.228',
-    lastLoginTime: '2017-05-16 13:18:56',
-    email: 'weilh@xuanyuyouxi.com',
-    status: '正常',
-    action: ['编辑', '删除', '拉黑'],
-  },
-];
-
-const extrasConditions = {
-  action: {
-    render: (text, record) => {
-      const menuUnit = record.action.map((value, index) =>
-        <Menu.Item key={value + index}>{value}</Menu.Item>);
-      const menu = (
-        <Menu>
-          {menuUnit}
-        </Menu>
+// AdminListTable
+class AdminListTable extends React.Component {
+  componentDidMount() {
+    const gameTypeAsyncAction = new AsyncAction('api/admins.json', 'get', 'AdminListReducer', 'adminList', 'adminList');
+    const { dispatch } = this.props;
+    dispatch(gameTypeAsyncAction.fetchDataIfNeed());
+  }
+  render() {
+    const status = this.props.adminList.status;
+    if (status === 'WAIT_FOR_FETCHING') {
+      return (
+        <div className="gameadminListLoading">
+          <Spin />
+        </div>
       );
-      const dropDownMenu = (
-        <Dropdown.Button overlay={menu} >
-          操作
-        </Dropdown.Button>
-      );
-      return dropDownMenu;
-    },
-  },
+    }
+    const dataSource = this.props.adminList.data;
+    const data = {};
+    data.title = {
+      id: 'ID',
+      userName: '用户名',
+      lastLoginIp: '最后登录IP',
+      lastLoginTime: '最后登录时间',
+      email: '邮箱',
+      status: '状态',
+      action: '操作',
+    };
+    data.dataSource = dataSource;
+    const extrasConditionsadminList = {
+      action: {
+        render: (text, record) => {
+          const menuUnit = record.action.map((value, index) =>
+            <Menu.Item key={value + index}>{value}</Menu.Item>);
+          const menu = (
+            <Menu>
+              {menuUnit}
+            </Menu>
+          );
+          const dropDownMenu = (
+            <Dropdown.Button overlay={menu} >
+              操作
+            </Dropdown.Button>
+          );
+          return dropDownMenu;
+        },
+      },
+    };
+    return MakeTable(data, 'adminList_columns', 'adminList_datasource', extrasConditionsadminList, { bordered: true });
+  }
+}
+AdminListTable.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  adminList: PropTypes.shape({
+    status: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
-const AdminsManagement = function AdminsManagement() {
-  return MakeTable(data, 'Rbac_columns', 'Rbac_datasource', extrasConditions, { bordered: true });
-};
+const AdminListTableContainer = connect(state =>
+  ({ adminList: state.AdminListReducer.adminList }))(AdminListTable);
+
 
 const FormItem = Form.Item;
 class AddRole extends React.Component {
@@ -193,7 +192,7 @@ const AdminsWithTabs = function AdminsWithTabs(props) {
   const { history } = props;
   return (
     <Tabs defaultActiveKey="1">
-      <TabPane tab="角色管理" key="1">{<AdminsManagement />}</TabPane>
+      <TabPane tab="角色管理" key="1">{<AdminListTableContainer />}</TabPane>
       <TabPane tab="添加角色" key="2">{<NewForm history={history} />}</TabPane>
     </Tabs>
 

@@ -1,96 +1,88 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Button, Tabs, Menu, Dropdown, Form, Select } from 'antd';
+import { Input, Button, Tabs, Menu, Dropdown, Form, Select, Spin } from 'antd';
+import { connect } from 'react-redux';
 import MakeTable from '../../utils/TableMaker';
+import AsyncAction from '../../utils/asyncAction';
 
 const { TabPane } = Tabs;
 const FormItem = Form.Item;
 const Option = Select.Option;
-const data = {};
-data.title = {
-  order: '排序',
-  id: 'ID',
-  application: '应用',
-  menuName: '菜单名称',
-  status: '状态',
-  action: '操作',
-};
 
-data.dataSource = [
-  {
-    order: 0,
-    id: 206,
-    application: 'Content/Index/index',
-    menuName: '内容管理',
-    status: '显示',
-    action: ['添加子菜单', '编辑', '删除'],
-    children: [
-      {
-        order: 1,
-        id: 206,
-        application: 'Content/Index/index',
-        menuName: '内容管理',
-        status: '显示',
-        action: ['添加子菜单', '编辑', '删除'],
+
+// SettingMenuTable
+class SettingMenuListTable extends React.Component {
+  componentDidMount() {
+    const gameTypeAsyncAction = new AsyncAction('api/settingMenu.json', 'get', 'SettingMenuListReducer', 'settingMenuList', 'settingMenuList');
+    const { dispatch } = this.props;
+    dispatch(gameTypeAsyncAction.fetchDataIfNeed());
+  }
+  render() {
+    const status = this.props.settingMenuList.status;
+    if (status === 'WAIT_FOR_FETCHING') {
+      return (
+        <div className="gamesettingMenuListLoading">
+          <Spin />
+        </div>
+      );
+    }
+    const dataSource = this.props.settingMenuList.data;
+    const data = {};
+    data.title = {
+      order: '排序',
+      id: 'ID',
+      application: '应用',
+      menuName: '菜单名称',
+      status: '状态',
+      action: '操作',
+    };
+    data.dataSource = dataSource;
+    const extrasConditionssettingMenuList = {
+      order: {
+        sorter: (a, b) => a.order - b.order,
+        render: (text, record) => <Input
+          className="orderInput"
+          style={{ width: 50 }}
+          defaultValue={record.order}
+          onChange={(e) => {
+            const newRecord = record;
+            newRecord.order = e.target.value;
+            return newRecord;
+          }}
+        />,
       },
-    ],
-  },
-  {
-    order: 1,
-    id: 206,
-    application: 'Content/Index/index',
-    menuName: '内容管理',
-    status: '显示',
-    action: ['添加子菜单', '编辑', '删除'],
-  },
-  {
-    order: 2,
-    id: 206,
-    application: 'Content/Index/index',
-    menuName: '内容管理',
-    status: '显示',
-    action: ['添加子菜单', '编辑', '删除'],
-  },
-];
-const extrasConditions = {
-  order: {
-    sorter: (a, b) => a.order - b.order,
-    render: (text, record) => <Input
-      className="orderInput"
-      defaultValue={record.order}
-      onChange={(e) => {
-        const newRecord = record;
-        newRecord.order = e.target.value;
-        return newRecord;
-      }}
-    />,
-  },
-  action: {
-    render: (text, record) => {
-      const menuUnit = record.action.map((value, index) =>
-        <Menu.Item key={value + index}>{value}</Menu.Item>);
-      const menu = (
-        <Menu>
-          {menuUnit}
-        </Menu>
-      );
-      const dropDownMenu = (
-        <Dropdown.Button overlay={menu} >
-          操作
-        </Dropdown.Button>
-      );
-      return dropDownMenu;
-    },
-  },
+      action: {
+        render: (text, record) => {
+          const menuUnit = record.action.map((value, index) =>
+            <Menu.Item key={value + index}>{value}</Menu.Item>);
+          const menu = (
+            <Menu>
+              {menuUnit}
+            </Menu>
+          );
+          const dropDownMenu = (
+            <Dropdown.Button overlay={menu} >
+              操作
+            </Dropdown.Button>
+          );
+          return dropDownMenu;
+        },
+      },
+    };
+    return MakeTable(data, 'settingMenuList_columns', 'settingMenuList_datasource', extrasConditionssettingMenuList, { bordered: true });
+  }
+}
+SettingMenuListTable.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  settingMenuList: PropTypes.shape({
+    status: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
-const SettingMenu = function SettingMenu() {
-  return (
-    <div className="settingMenu" >
-      {MakeTable(data, 'setting_menu_columns', 'setting_menu_datasource', extrasConditions, { bordered: true })}
-    </div>
-  );
-};
+const SettingMenuListTableContainer = connect(state =>
+  ({ settingMenuList: state.SettingMenuListReducer.settingMenuList }))(SettingMenuListTable);
+
 
 // 添加菜单
 
@@ -273,86 +265,85 @@ const NewForm = Form.create()(AddMenu);
 
 // 所有菜单
 
-const allMenuData = {};
-allMenuData.title = {
-  order: '排序',
-  id: 'ID',
-  englishName: '菜单英文名称',
-  status: '状态',
-  action: '操作',
-};
-allMenuData.dataSource = [
-  {
-    order: 1000,
-    id: 73,
-    englishName: '添加广告:Admin/Ad/add',
-    status: '隐藏',
-    action: ['修改', '操作'],
-  },
-  {
-    order: 0,
-    id: 74,
-    englishName: '提交添加:Admin/Ad/add_post',
-    status: '隐藏',
-    action: ['修改', '操作'],
-  },
-  {
-    order: 0,
-    id: 68,
-    englishName: '网站广告:Admin/Ad/index',
-    status: '隐藏',
-    action: ['修改', '操作'],
-  },
-];
-
-const allMenuExtrasConditions = {
-  order: {
-    sorter: (a, b) => a.order - b.order,
-    render: (text, record) => <Input
-      style={{ width: 50 }}
-      className="orderInput"
-      defaultValue={record.order}
-      onChange={(e) => {
-        const newRecord = record;
-        newRecord.order = e.target.value;
-        return newRecord;
-      }}
-    />,
-  },
-  action: {
-    render: (text, record) => {
-      const menuUnit = record.action.map((value, index) =>
-        <Menu.Item key={value + index}>{value}</Menu.Item>);
-      const menu = (
-        <Menu>
-          {menuUnit}
-        </Menu>
+// AllMenuTable
+class AllMenuListTable extends React.Component {
+  componentDidMount() {
+    const gameTypeAsyncAction = new AsyncAction('api/allMenu.json', 'get', 'AllMenuListReducer', 'allMenuList', 'allMenuList');
+    const { dispatch } = this.props;
+    dispatch(gameTypeAsyncAction.fetchDataIfNeed());
+  }
+  render() {
+    const status = this.props.allMenuList.status;
+    if (status === 'WAIT_FOR_FETCHING') {
+      return (
+        <div className="gameallMenuListLoading">
+          <Spin />
+        </div>
       );
-      const dropDownMenu = (
-        <Dropdown.Button overlay={menu} >
-          操作
-        </Dropdown.Button>
-      );
-      return dropDownMenu;
-    },
-  },
+    }
+    const dataSource = this.props.allMenuList.data;
+    const data = {};
+    data.title = {
+      order: '排序',
+      id: 'ID',
+      englishName: '菜单英文名称',
+      status: '状态',
+      action: '操作',
+    };
+    data.dataSource = dataSource;
+    const extrasConditionsallMenuList = {
+      order: {
+        sorter: (a, b) => a.order - b.order,
+        render: (text, record) => <Input
+          style={{ width: 50 }}
+          className="orderInput"
+          defaultValue={record.order}
+          onChange={(e) => {
+            const newRecord = record;
+            newRecord.order = e.target.value;
+            return newRecord;
+          }}
+        />,
+      },
+      action: {
+        render: (text, record) => {
+          const menuUnit = record.action.map((value, index) =>
+            <Menu.Item key={value + index}>{value}</Menu.Item>);
+          const menu = (
+            <Menu>
+              {menuUnit}
+            </Menu>
+          );
+          const dropDownMenu = (
+            <Dropdown.Button overlay={menu} >
+              操作
+            </Dropdown.Button>
+          );
+          return dropDownMenu;
+        },
+      },
+    };
+    return MakeTable(data, 'allMenuList_columns', 'allMenuList_datasource', extrasConditionsallMenuList, { bordered: true });
+  }
+}
+AllMenuListTable.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  allMenuList: PropTypes.shape({
+    status: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
-const AllMenu = function AllMenu() {
-  return (
-    <div className="allMenu" >
-      {MakeTable(allMenuData, 'all_menu_columns', 'all_menu_datasource', allMenuExtrasConditions, { bordered: true })}
-    </div>
-  );
-};
+const AllMenuListTableContainer = connect(state =>
+  ({ allMenuList: state.AllMenuListReducer.allMenuList }))(AllMenuListTable);
 
 const SettingWithTabs = function SettingWithTabs(props) {
   const { history } = props;
   return (
     <Tabs defaultActiveKey="1">
-      <TabPane tab="后台菜单" key="1">{<SettingMenu />}</TabPane>
+      <TabPane tab="后台菜单" key="1">{<SettingMenuListTableContainer />}</TabPane>
       <TabPane tab="添加菜单" key="2">{<NewForm history={history} />}</TabPane>
-      <TabPane tab="所有菜单" key="3">{<AllMenu />}</TabPane>
+      <TabPane tab="所有菜单" key="3">{<AllMenuListTableContainer />}</TabPane>
     </Tabs>
 
   );
