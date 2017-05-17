@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Row, Form, Input, message } from 'antd';
 import config from '../utils/config';
-// import { connect } from 'react-redux';
 
 const FormItem = Form.Item;
 
@@ -18,12 +17,12 @@ class Main extends Component {
     message.error('帐号或密码错误');
   }
   handleSubmit(event) {
-    const { history } = this.props;
+    const { history, form } = this.props;
     event.preventDefault();
-
-    this.props.form.validateFields((error, values) => {
+    form.validateFields((error, values) => {
       if (!error) {
         this.setState({ loading: !this.state.loading });
+        // 模拟登录操作
         setTimeout(() => {
           if (values.userName !== 'guest' || values.password !== 'guest') {
             this.showerror();
@@ -38,7 +37,6 @@ class Main extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const loginLoading = this.state.loading;
-
     return (
       <div className="login">
         <div className="form">
@@ -83,5 +81,11 @@ class Main extends Component {
     );
   }
 }
+
+Main.propTypes = {
+  history: React.PropTypes.object.isRequired,
+  form: React.PropTypes.object.isRequired,
+};
+
 
 export default Form.create()(Main);

@@ -12,7 +12,6 @@ const AUTH_TOKEN = {
 axios.interceptors.request.use((config) => {
      /* 在发送请求之前做某事*/
   NProgress.start();
-  console.log(config);
   return config;
 }, (error) => {
    /* 请求错误时做些事*/
@@ -24,7 +23,7 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((response) => {
   /* 对响应数据做些事*/
   NProgress.done();
-  const { code, data, msg } = response.data;
+  const { code, data, msg, config } = response.data;
   // 通过后端返回的状态码，判断是否登录，是否有权限，接口错误，参数错误等等情况
   if (code !== 200) {
     // 处理一些事情
