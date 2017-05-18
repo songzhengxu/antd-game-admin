@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 import { Form, Input, Table, Button } from 'antd';
 import axios from 'axios';
 
@@ -82,6 +82,32 @@ class FormComponent extends Component {
     }
   }
 }
+
+FormComponent.propTypes = {
+
+  form: PropTypes.shape({
+    getFieldsValue: PropTypes.func,
+    getFieldValue: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    setFields: PropTypes.func,
+    validateFields: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+    getFieldError: PropTypes.func,
+    getFieldsError: PropTypes.func,
+    isFieldValidating: PropTypes.func,
+    isFieldTouched: PropTypes.func,
+    isFieldsTouched: PropTypes.func,
+    resetFields: PropTypes.func,
+    getFieldDecorator: PropTypes.func,
+  }).isRequired,
+  item: PropTypes.shape({
+
+  }),
+};
+FormComponent.defaultProps = {
+  item: {},
+};
+
 const WarppedFormComponent = Form.create()(FormComponent);
 
 // TODO img的 src 用 import from 路径 可以 直接 使用不可用
@@ -133,6 +159,16 @@ class TabelComponent extends Component {
     );
   }
 }
+
+TabelComponent.propTypes = {
+
+  data: PropTypes.shape({
+
+  }),
+};
+TabelComponent.defaultProps = {
+  data: {},
+};
 
 // TODO 用接口去获取数据
 class Editor extends Component {

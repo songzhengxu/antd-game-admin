@@ -87,6 +87,8 @@ class TabelComponent extends Component {
   render() {
     const columns = this.getColumns();
     const data = this.props.data;
+    console.log('data');
+    console.log(data);
     return (
       <Table
         bordered columns={columns} dataSource={data}
@@ -97,6 +99,17 @@ class TabelComponent extends Component {
     );
   }
 }
+
+TabelComponent.propTypes = {
+  showModal: PropTypes.func,
+  handleSelect: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
+};
+
+TabelComponent.defaultProps = {
+  showModal() {},
+  data: [],
+};
 
 // 搜索栏组件
 const Selector = function Selector(props) {
@@ -109,7 +122,7 @@ const Selector = function Selector(props) {
       {props.children} :
       <span className="gameList_selector_unit">
         <Select
-          mode="tags"
+          mode="combobox"
           showSearch
           style={{ width: 200 }}
           placeholder=" 全部 "
@@ -125,8 +138,8 @@ const Selector = function Selector(props) {
 };
 
 Selector.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string.isRequired),
-  children: PropTypes.String,
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  children: PropTypes.string.isRequired,
 };
 
 class CreateModalToWeb extends Component {
@@ -215,6 +228,28 @@ class CreateModalToWeb extends Component {
     );
   }
 }
+CreateModalToWeb.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    getFieldsValue: PropTypes.func,
+    getFieldValue: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    setFields: PropTypes.func,
+    validateFields: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+    getFieldError: PropTypes.func,
+    getFieldsError: PropTypes.func,
+    isFieldValidating: PropTypes.func,
+    isFieldTouched: PropTypes.func,
+    isFieldsTouched: PropTypes.func,
+    resetFields: PropTypes.func,
+    getFieldDecorator: PropTypes.func,
+  }).isRequired,
+  item: PropTypes.shape({
+
+  }).isRequired,
+};
 const WarppedCreateModal = Form.create()(CreateModalToWeb);
 
 

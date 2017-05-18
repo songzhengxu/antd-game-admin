@@ -93,6 +93,13 @@ class TabelComponent extends Component {
     );
   }
 }
+TabelComponent.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+};
+
+TabelComponent.defaultProps = {
+  data: [],
+};
 
 // 搜索栏组件
 const Selector = function Selector(props) {
@@ -122,9 +129,9 @@ const Selector = function Selector(props) {
 };
 
 Selector.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string.isRequired),
-  placeholder: PropTypes.String,
-  children: PropTypes.String,
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  placeholder: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
 };
 
 

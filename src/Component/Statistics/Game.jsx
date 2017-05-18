@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Button, Table, DatePicker, Input } from 'antd';
 
 const { RangePicker } = DatePicker;
@@ -9,7 +10,12 @@ const { RangePicker } = DatePicker;
 const mockDataFirst = { index: '1', gameId: '1', gameName: 'gameName', rechargeAmount: 100, rechargeTimes: 10, rechargeNumber: 9, biggestSingleAmount: 102, biggestSinglePlayer: 'tim', activePlayersNumber: 11, newPlayersNumber: 12, rechargeRate: '7.69%', ARPU: 0.11, ARPPU: 0.21 };
 const mockDataTwo = { index: '2', gameId: '1', gameName: 'gameName', rechargeAmount: 100, rechargeTimes: 10, rechargeNumber: 9, biggestSingleAmount: 102, biggestSinglePlayer: 'tim', activePlayersNumber: 11, newPlayersNumber: 12, rechargeRate: '7.69%', ARPU: 0.11, ARPPU: 0.21 };
 
-const mockStatisticsData = { rechargeAmount: 33666462, rechargeTimes: 5999, rechargeNumber: 222, activePlayersNumber: 1111, newPlayersNumber: 999 };
+const mockStatisticsData = {
+  rechargeAmount: 33666462,
+  rechargeTimes: 5999,
+  rechargeNumber: 222,
+  activePlayersNumber: 1111,
+  newPlayersNumber: 999 };
 
 class TabelComponent extends Component {
   constructor() {
@@ -81,14 +87,6 @@ class TabelComponent extends Component {
   }
 
 
-  handleTableChange(pagination) {
-    const paper = { ...this.status.pagination };
-    paper.current = pagination.current;
-    this.setState({
-      pagination: paper,
-    });
-  }
-
   getFooter(statistics) {
     return (
       <div className="statisticsFooter">
@@ -100,7 +98,13 @@ class TabelComponent extends Component {
       </div>
     );
   }
-
+  handleTableChange(pagination) {
+    const paper = { ...this.status.pagination };
+    paper.current = pagination.current;
+    this.setState({
+      pagination: paper,
+    });
+  }
   render() {
     const columns = this.getColumns();
     const { data, statisticsData } = this.props;
@@ -116,6 +120,17 @@ class TabelComponent extends Component {
     );
   }
 }
+TabelComponent.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  statisticsData: PropTypes.shape({
+
+  }),
+};
+
+TabelComponent.defaultProps = {
+  data: [],
+  statisticsData: {},
+};
 
 
 class Game extends Component {

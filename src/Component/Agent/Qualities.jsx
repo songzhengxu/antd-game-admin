@@ -83,6 +83,15 @@ class TabelComponent extends Component {
   }
 }
 
+TabelComponent.propTypes = {
+  handleSelect: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
+};
+
+TabelComponent.defaultProps = {
+  data: [],
+};
+
 // 搜索栏组件
 const Selector = function Selector(props) {
   const options = props.options;
@@ -94,7 +103,7 @@ const Selector = function Selector(props) {
       {props.children} :
       <span className="gameList_selector_unit">
         <Select
-          mode="tags"
+          mode="combobox"
           showSearch
           style={{ width: 200 }}
           placeholder=" 请选择 "
@@ -110,8 +119,8 @@ const Selector = function Selector(props) {
 };
 
 Selector.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string.isRequired),
-  children: PropTypes.String,
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  children: PropTypes.string.isRequired,
 };
 
 

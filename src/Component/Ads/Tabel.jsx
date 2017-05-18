@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Table, Modal } from 'antd';
 import DropOption from '../Common/DropOption';
 
@@ -112,5 +113,14 @@ class TabelComponent extends Component {
     );
   }
 }
+
+TabelComponent.propTypes = {
+  showModal: PropTypes.func,
+  handleSelect: PropTypes.func.isRequired,
+};
+
+TabelComponent.defaultProps = {
+  showModal() {},
+};
 
 export default TabelComponent;
