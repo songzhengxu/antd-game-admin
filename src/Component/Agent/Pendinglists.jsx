@@ -1,3 +1,4 @@
+// Copyright (c) 2017 5 18 Thursday by Jiangdewei. Mail:228575834@qq.com
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';

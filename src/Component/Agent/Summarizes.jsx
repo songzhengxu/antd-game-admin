@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Button, Table, Input, DatePicker } from 'antd';
 
@@ -76,7 +77,13 @@ class TabelComponent extends Component {
     );
   }
 }
+TabelComponent.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.string.isRequired),
+};
 
+TabelComponent.defaultProps = {
+  data: [],
+};
 
 class Summarizes extends Component {
   constructor() {
