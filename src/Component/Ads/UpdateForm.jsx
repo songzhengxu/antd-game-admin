@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 import { Modal, Form, Input, Radio } from 'antd';
 import PicturesWall from './PictureWall';
 
@@ -70,6 +70,30 @@ class CreateModal extends Component {
   }
 }
 
+CreateModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onCreate: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    getFieldsValue: PropTypes.func,
+    getFieldValue: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    setFields: PropTypes.func,
+    validateFields: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+    getFieldError: PropTypes.func,
+    getFieldsError: PropTypes.func,
+    isFieldValidating: PropTypes.func,
+    isFieldTouched: PropTypes.func,
+    isFieldsTouched: PropTypes.func,
+    resetFields: PropTypes.func,
+    getFieldDecorator: PropTypes.func,
+  }).isRequired,
+  normFile: PropTypes.func.isRequired,
+  item: PropTypes.shape({
+
+  }).isRequired,
+};
 
 const WarppedCreateModal = Form.create()(CreateModal);
 export { WarppedCreateModal, CreateModal };

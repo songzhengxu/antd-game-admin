@@ -1,58 +1,71 @@
 import React from 'react';
-import { Input, Button, Menu, Dropdown } from 'antd';
+import { Input, Button, Menu, Dropdown, Spin } from 'antd';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import MakeTable from '../../utils/TableMaker';
+import AsyncAction from '../../utils/asyncAction';
 
-const data = {};
-data.title = {
-  order: '序号',
-  senderName: '发送方昵称',
-  content: '内容',
-  URL: 'URL',
-  time: '时间',
-  action: '操作',
-};
-data.dataSource = [
-  {
-    order: 2,
-    senderName: '游戏平台',
-    content: '平台官方群2370500',
-    URL: 'http://h5.jimugame.com/zx/detail/id/368/appid/100164',
-    time: '2017-05-09',
-    action: ['编辑', '删除'],
-  },
-  {
-    order: 3,
-    senderName: '游戏平台',
-    content: '御龙在天福利资讯',
-    URL: 'http://h5.jimugame.com/zx/detail/id/368/appid/100164',
-    time: '2017-05-09',
-    action: ['编辑', '删除'],
-  },
-];
 
-const extrasConditions = {
-  action: {
-    render: (text, record) => {
-      const menuUnit = record.action.map((value, index) =>
-        <Menu.Item key={value + index}>{value}</Menu.Item>);
-      const menu = (
-        <Menu>
-          {menuUnit}
-        </Menu>
+// MessageListTable
+class MessageListTable extends React.Component {
+  componentDidMount() {
+    const messageListTabelAsyncAction = new AsyncAction('api/message.json', 'get', 'MessageListReducer', 'messageList', 'messageList');
+    const { dispatch } = this.props;
+    dispatch(messageListTabelAsyncAction.fetchDataIfNeed());
+  }
+  render() {
+    const status = this.props.messageList.status;
+    if (status === 'WAIT_FOR_FETCHING') {
+      return (
+        <div className="gamemessageListLoading">
+          <Spin />
+        </div>
       );
-      const dropDownMenu = (
-        <Dropdown.Button overlay={menu} >
-          操作
-        </Dropdown.Button>
-      );
-      return dropDownMenu;
-    },
-  },
+    }
+    const dataSource = this.props.messageList.data;
+    const data = {};
+    data.title = {
+      order: '序号',
+      senderName: '发送方昵称',
+      content: '内容',
+      URL: 'URL',
+      time: '时间',
+      action: '操作',
+    };
+    data.dataSource = dataSource;
+    const extrasConditionsmessageList = {
+      action: {
+        render: (text, record) => {
+          const menuUnit = record.action.map((value, index) =>
+            <Menu.Item key={value + index}>{value}</Menu.Item>);
+          const menu = (
+            <Menu>
+              {menuUnit}
+            </Menu>
+          );
+          const dropDownMenu = (
+            <Dropdown.Button overlay={menu} >
+              操作
+            </Dropdown.Button>
+          );
+          return dropDownMenu;
+        },
+      },
+    };
+    return MakeTable(data, 'messageList_columns', 'messageList_datasource', extrasConditionsmessageList, { bordered: true });
+  }
+}
+MessageListTable.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  messageList: PropTypes.shape({
+    status: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
-const MessagesTable = function MessagesTable() {
-  return MakeTable(data, 'Rbac_columns', 'Rbac_datasource', extrasConditions, { bordered: true });
-};
+const MessageListTableContainer = connect(state =>
+  ({ messageList: state.MessageListReducer.messageList }))(MessageListTable);
+
 
 const Messages = function Messages() {
   return (
@@ -63,7 +76,7 @@ const Messages = function Messages() {
           placeholder="请输入搜索信息"
         /><Button>搜索</Button></span>
       </div>
-      <MessagesTable />
+      <MessageListTableContainer />
     </div>
   );
 };

@@ -30,12 +30,6 @@ const fetchData = function fetchData(url) {
 const shouldFetchDate = function shouldFetchDate(state) {
   const status = state.GameManagement.gameList.status;
   console.log(status);
-  /*
-  if (status === waitForFetching || status === refreshData) {
-    return true;
-  }
-  return false;
-  */
   return !!((status === waitForFetching || status === refreshData));
 };
 

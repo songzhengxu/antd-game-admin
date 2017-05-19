@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Upload, Icon } from 'antd';
 
 
@@ -67,5 +68,15 @@ class PicturesWall extends Component {
     );
   }
 }
+
+PicturesWall.propTypes = {
+  id: PropTypes.string,
+  setFieldsValue: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
+};
+PicturesWall.defaultProps = {
+  id: '',
+};
+
 
 export default PicturesWall;

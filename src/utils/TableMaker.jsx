@@ -76,6 +76,15 @@ const MakeTable = function MakeTable(sourceData,
     for (let index = 0; index < dataSource.length; index += 1) {
       // 处理datasource
       dataSource[index].key = reactDataSourceKey + index;
+      // 为dataSourcec.children添加key，理论上应该遍历，现在暂时不实现，后补。
+      if (dataSource[index].children) {
+        const children = dataSource[index].children;
+        for (let childrenIndex = 0; childrenIndex < children.length; childrenIndex += 1) {
+          const firstRandomNumber = Math.random();
+          const secondRandomNumber = Math.random();
+          children[childrenIndex].key = reactDataSourceKey + firstRandomNumber + secondRandomNumber;
+        }
+      }
       // 将datasource里面需要排序的数据全部存放到filterDatas里面
       for (let waitToFilterIndex = 0;
         waitToFilterIndex < waitToFilter.length; waitToFilterIndex += 1) {

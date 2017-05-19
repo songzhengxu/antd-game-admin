@@ -6,7 +6,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // 引入 fetchDataIfNeed 方法，用于异步拉取数据
-import fetchDataIfNeed from '../../Action/Games/games';
+// import fetchDataIfNeed from '../../Action/Games/games';
+
+import AsyncAction from '../../utils/asyncAction';
+
+const gameListAsyncAction = new AsyncAction('api/games.json', 'get', 'GameManagement', 'gameList', 'gameList');
+// const fetchDataIfNeed = gameListAsyncAction.fetchDataIfNeed.bind(gameListAsyncAction);
 
 const Option = Select.Option;
 
@@ -112,7 +117,8 @@ Selector.propTypes = {
 class GameList extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchDataIfNeed('api/games.json'));
+    // dispatch(fetchDataIfNeed('api/games.json'));
+    dispatch(gameListAsyncAction.fetchDataIfNeed());
   }
   render() {
     const { data } = this.props.gameList;

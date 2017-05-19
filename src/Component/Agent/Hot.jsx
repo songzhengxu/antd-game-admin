@@ -6,10 +6,6 @@ import TableOld from '../Ads/Tabel';
 import { CreateModal } from '../Ads/UpdateForm';
 import Mobile from '../Ads/Mobile';
 
-import ViewsAction from '../../Action/ViewsAction';
-
-const viewsActionExtend = new ViewsAction();
-
 
 const FormItem = Form.Item;
 

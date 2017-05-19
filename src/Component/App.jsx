@@ -57,6 +57,7 @@ import Players from './Player/Players';
 
 // 开发平台
 import AgentHot from './Agent/Hot';
+import AgentChannels from './Agent/Channels';
 import AgentSummarizes from './Agent/Summarizes';
 import AgentPendinglists from './Agent/Pendinglists';
 import AgentAuditlists from './Agent/Auditlists';
@@ -124,6 +125,7 @@ class SiderMenuRoutes extends Component {
           <Route path="/addAction" component={Addaction} />
           <Route path="/player/players" component={Players} />
           <Route path="/agent/hots" component={AgentHot} />
+          <Route path="/agent/channels" component={AgentChannels} />
           <Route path="/agent/summarizes" component={AgentSummarizes} />
           <Route path="/agent/pendinglists" component={AgentPendinglists} />
           <Route path="/agent/auditlists" component={AgentAuditlists} />

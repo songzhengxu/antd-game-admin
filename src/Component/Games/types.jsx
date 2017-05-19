@@ -1,72 +1,81 @@
 import React from 'react';
-import { Menu, Dropdown, Tabs, Button, Upload, Radio, Icon, Modal, Form, Input } from 'antd';
+import { Menu, Dropdown, Tabs, Button, Upload, Radio, Icon, Modal, Form, Input, Spin } from 'antd';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import MakeTable from '../../utils/TableMaker';
+import AsyncAction from '../../utils/asyncAction';
 
+/*
+const gameTypeAsyncAction = new AsyncAction('api/gameTypes.json', 'get',
+'GameTypeReducer', 'gameTypeList', 'gameTypeList');
+*/
 const { TabPane } = Tabs;
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
-const data = {};
-data.title = {
-  order: '序号',
-  type: '类型名称',
-  picture: '图片',
-  status: '状态',
-  action: '操作',
-};
-data.dataSource = [
-  {
-    order: 2,
-    type: '体育类',
-    picture: 'http://h5admin.jimugame.com/upload/logo/3.png',
-    status: '显示',
-    action: ['编辑', '删除'],
-  },
-  {
-    order: 3,
-    type: '动作类',
-    picture: 'http://h5admin.jimugame.com/upload/logo/1.png',
-    status: '显示',
-    action: ['编辑', '删除'],
-  },
-  {
-    order: 4,
-    type: '策略类',
-    picture: 'http://h5admin.jimugame.com/upload/logo/4.png',
-    status: '显示',
-    action: ['编辑', '删除'],
-  },
-];
 
-const extrasConditions = {
-  picture: {
-    render: text => <img alt={text} src={text} />,
-  },
-  action: {
-    render: (text, record) => {
-      const menuUnit = record.action.map((value, index) =>
-        <Menu.Item key={value + index}>{value}</Menu.Item>);
-      const menu = (
-        <Menu>
-          {menuUnit}
-        </Menu>
+// GameTypeTable
+class GameTypeTable extends React.Component {
+  componentDidMount() {
+    const gameTypeAsyncAction = new AsyncAction('api/gameTypes.json', 'get', 'GameTypeReducer', 'gameTypeList', 'gameTypeList');
+    const { dispatch } = this.props;
+    dispatch(gameTypeAsyncAction.fetchDataIfNeed());
+  }
+  render() {
+    const status = this.props.gameTypeList.status;
+    if (status === 'WAIT_FOR_FETCHING') {
+      return (
+        <div className="gamegameTypeListLoading">
+          <Spin />
+        </div>
       );
-      const dropDownMenu = (
-        <Dropdown.Button overlay={menu} >
-          操作
-        </Dropdown.Button>
-      );
-      return dropDownMenu;
-    },
-  },
+    }
+    const dataSource = this.props.gameTypeList.data;
+    const data = {};
+    data.title = {
+      order: '序号',
+      type: '类型名称',
+      picture: '图片',
+      status: '状态',
+      action: '操作',
+    };
+    data.dataSource = dataSource;
+    const extrasConditionsGameTypeList = {
+      picture: {
+        render: text => <img alt={text} src={text} />,
+      },
+      action: {
+        render: (text, record) => {
+          const menuUnit = record.action.map((value, index) =>
+            <Menu.Item key={value + index}>{value}</Menu.Item>);
+          const menu = (
+            <Menu>
+              {menuUnit}
+            </Menu>
+          );
+          const dropDownMenu = (
+            <Dropdown.Button overlay={menu} >
+              操作
+            </Dropdown.Button>
+          );
+          return dropDownMenu;
+        },
+      },
+    };
+    return MakeTable(data, 'gameType_columns', 'gameType_datasource', extrasConditionsGameTypeList, { bordered: true });
+  }
+}
+GameTypeTable.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  gameTypeList: PropTypes.shape({
+    status: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
-const Types = function Types() {
-  return (
-    MakeTable(data, 'typeColumns', 'typeDatasource', extrasConditions, { bordered: true })
-  );
-};
+const GameTypeTableContainer = connect(state =>
+  ({ gameTypeList: state.GameTypeReducer.gameTypeList }))(GameTypeTable);
+
 
 class PicturesWall extends React.Component {
   constructor(props) {
@@ -255,7 +264,7 @@ const GameTypeWithInformation = function GameTypeWithInformation(props) {
   const { history } = props;
   return (
     <Tabs defaultActiveKey="1">
-      <TabPane tab="游戏类型" key="1">{<Types />}</TabPane>
+      <TabPane tab="游戏类型" key="1">{<GameTypeTableContainer />}</TabPane>
       <TabPane tab="添加游戏类型" key="2">{<NewForm history={history} />}</TabPane>
     </Tabs>
 
