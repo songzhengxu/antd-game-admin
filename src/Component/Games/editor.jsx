@@ -77,6 +77,7 @@ class Hello extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.props.form);
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);

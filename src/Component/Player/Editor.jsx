@@ -22,47 +22,47 @@ class FormComponent extends Component {
       return (<Form layout="horizontal">
         <FormItem label="游戏ID" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('playerID', { initialValue: item && item.id })(
-            <span>{item.id}</span>,
+            <span>{item && item.id}</span>,
           )}
         </FormItem>
         <FormItem label="玩家帐号" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('accounts', { initialValue: item && item.accounts })(
-            <span>{item.accounts}</span>,
+            <span>{item && item.accounts}</span>,
           )}
         </FormItem>
         <FormItem label="玩家昵称" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('nickname', { initialValue: item && item.nickname })(
-            <span>{item.nickname}</span>,
+            <span>{item && item.nickname}</span>,
           )}
         </FormItem>
         <FormItem label="平台币历史总额" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('currencyHistoryAmount', { initialValue: item && item.currencyHistoryAmount })(
-            <span>{item.currencyHistoryAmount}</span>,
+            <span>{item && item.currencyHistoryAmount}</span>,
           )}
         </FormItem>
         <FormItem label="平台币数量" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('currencyAmount', { initialValue: item && item.currencyAmount })(
-            <span>{item.currencyAmount}</span>,
+            <span>{item && item.currencyAmount}</span>,
           )}
         </FormItem>
         <FormItem label="性别" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('sex', { initialValue: item && item.sex })(
-            <span>{item.sex}</span>,
+            <span>{item && item.sex}</span>,
           )}
         </FormItem>
         <FormItem label="手机" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('phone', { initialValue: item && item.phone })(
-            <span>{item.phone}</span>,
+            <span>{item && item.phone}</span>,
           )}
         </FormItem>
         <FormItem label="QQ" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('QQ', { initialValue: item && item.QQ })(
-            <span>{item.QQ}</span>,
+            <span>{item && item.QQ}</span>,
           )}
         </FormItem>
         <FormItem label="帐号来源" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('accountsSource', { initialValue: item && item.accountsSource })(
-            <span>{item.accountsSource}</span>,
+            <span>{item && item.accountsSource}</span>,
           )}
         </FormItem>
         <FormItem label="密码" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
@@ -72,7 +72,7 @@ class FormComponent extends Component {
         </FormItem>
         <FormItem label="连续签到" labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
           {getFieldDecorator('days', { initialValue: item && item.days })(
-            <span>{item.days}</span>,
+            <span>{item && item.days}</span>,
           )}
         </FormItem>
         <FormItem >
@@ -134,6 +134,7 @@ class TabelComponent extends Component {
   }
 }
 
+// TODO 用接口去获取数据
 class Editor extends Component {
   constructor() {
     super();
@@ -143,7 +144,7 @@ class Editor extends Component {
     this.fetch = this.fetch.bind(this);
   }
   componentWillMount() {
-    this.fetch();
+    // this.fetch();
   }
   fetch() {
     this.setState({ loading: true });

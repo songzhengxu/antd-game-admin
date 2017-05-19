@@ -88,7 +88,6 @@ class TabelComponent extends Component {
     this.setState({ loading: true });
     axios.get('api/get/ads/mobile')
     .then((response) => {
-      console.log(response);
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
       this.setState({

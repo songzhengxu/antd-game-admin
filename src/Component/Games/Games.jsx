@@ -115,8 +115,6 @@ class GameList extends React.Component {
     dispatch(fetchDataIfNeed('api/games.json'));
   }
   render() {
-    console.log('0000');
-    console.log(Selector);
     const { data } = this.props.gameList;
     // 通过判断数据是否存在来确定显示内容
     if (data) {

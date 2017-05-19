@@ -130,7 +130,7 @@ class Edit extends Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
       <div>
@@ -194,7 +194,6 @@ class Edit extends Component {
 Edit.propTypes = {
   id: PropTypes.string.isRequired,
   setFieldsValue: PropTypes.func.isRequired,
-  limit: PropTypes.number.isRequired,
 };
 const Edits = Form.create()(Edit);
 class WebiteTab extends Component {
@@ -203,7 +202,7 @@ class WebiteTab extends Component {
     return (
       <Tabs type="card">
         <TabPane tab="PC图片列表" key="1"><Pictures /></TabPane>
-        <TabPane tab="修改PC图片" key="2"><Edits /></TabPane>
+        <TabPane tab="添加PC图片" key="2"><Edits /></TabPane>
       </Tabs>
     );
   }

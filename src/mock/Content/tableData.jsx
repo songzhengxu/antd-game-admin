@@ -78,8 +78,23 @@ module.exports = {
   },
   ],
   service: [{
-    title: '客服信息',
+    title: '联系我们',
     content: '',
+    key: 1,
+  }, {
+    title: '新手帮助',
+    content: '',
+    key: 2,
+  },
+  {
+    title: '商务合作',
+    content: '',
+    key: 3,
+  },
+  {
+    title: '公司简介',
+    content: '',
+    key: 4,
   },
   ],
   pictures: [
@@ -193,3 +208,44 @@ module.exports = {
   },
   ],
 };
+
+// {
+//   "data":[
+//     {
+//       account:'qq1385939',
+//       total:'980',
+//       remaining:'0',
+//       registerTime:'2017-05-17 10:30:46',
+//       rechargeTime:'1970-01-01 08:00:00',
+//       key:1
+//     },{
+//       account:'qq13848756',
+//       total:'980',
+//       remaining:'0',
+//       registerTime:'	2017-05-16 09:54:46',
+//       rechargeTime:'1970-01-01 08:00:00',
+//       key:2
+//     },{
+//       account:'13438752018',
+//       total:'10100',
+//       remaining:'0',
+//       registerTime:'2017-05-09 11:47:03',
+//       rechargeTime:'1970-01-01 08:00:00',
+//       key:3
+//     },{
+//       account:'qq13747702',
+//       total:'60',
+//       remaining:'0',
+//       registerTime:'2017-05-09 00:55:23',
+//       rechargeTime:'1970-01-01 08:00:00',
+//       key:4
+//     },{
+//       account:'qq13728389',
+//       total:'1000',
+//       remaining:'0',
+//       registerTime:'2017-05-07 22:20:24',
+//       rechargeTime:'1970-01-01 08:00:00',
+//       key:5
+//     }
+//   ]
+// }

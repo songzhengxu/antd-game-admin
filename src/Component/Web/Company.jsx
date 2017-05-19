@@ -11,8 +11,8 @@ const confirm = Modal.confirm;
 
 /* 生成编辑表单*/
 class Update extends Component {
-  getForm() {
-    const { form, normFile, item, visible } = this.props;
+  get() {
+    const { form, item, visible } = this.props;
     const { getFieldDecorator } = form;
     const formItemLayout = {
       labelCol: {
@@ -48,10 +48,9 @@ class Update extends Component {
 
   render() {
     const { visible, onCancel, onCreate, item } = this.props;
-    console.log(item.key);
 
     // TODO mock 中的 image 与需要使用的fileList中数据格式不一致
-    const formComponents = this.getForm();
+    const formComponents = this.get();
 
     return (
       <Modal
@@ -134,6 +133,7 @@ class Company extends Component {
   }
 
   handleMenu(record, event) {
+    console.log(record);
     if (event.key === '1') {
       this.showModal();
       this.handleSelect(record);
@@ -304,6 +304,21 @@ class CompanyTab extends Component {
     );
   }
 }
+
+AddMessage.propTypes = {
+  form: PropTypes.shape({
+    getFieldsValue: PropTypes.func,
+    getFieldValue: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    setFields: PropTypes.func,
+    validateFields: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+    getFieldError: PropTypes.func,
+    getFieldsError: PropTypes.func,
+    resetFields: PropTypes.func,
+    getFieldDecorator: PropTypes.func,
+  }).isRequired,
+};
 
 
 export default CompanyTab;

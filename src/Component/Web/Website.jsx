@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Tabs } from 'antd';
-import Tab from '../Common/Tab';
+import PropTypes from 'prop-types';
+// import Tab from '../Common/Tab';
 
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 
 
 class Website extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
   render() {
     const formItemLayout = {
       labelCol: {
@@ -20,7 +33,7 @@ class Website extends Component {
     };
 
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
           label="后台地址加密码"
@@ -52,6 +65,18 @@ class Website extends Component {
 }
 
 class SEOSetting extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
   render() {
     const formItemLayout = {
       labelCol: {
@@ -65,7 +90,7 @@ class SEOSetting extends Component {
     };
 
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
           label="SEO标题"
@@ -93,24 +118,35 @@ class SEOSetting extends Component {
     );
   }
 }
+
+const Websites = Form.create()(Website);
+const SEOSettings = Form.create()(SEOSetting);
 class TabComponent extends Component {
-  // constructor() {
-  //   super();
-  //   const components = [new Website()];
-  //   const website = new Website();
-  //   this.tab = new Tab('网站信息', new Website());
-  //   console.log(this.tab);
-  //   // this.object = { title: '网站信息', component: new Website() };
-  // }
   render() {
-  //  const HeaderTab = this.tab;
     return (
       <Tabs type="card">
-        <TabPane tab="网站信息" key="1"><Website /></TabPane>
-        <TabPane tab="SEO设置" key="2"><SEOSetting /></TabPane>
+        <TabPane tab="网站信息" key="1"><Websites /></TabPane>
+        <TabPane tab="SEO设置" key="2"><SEOSettings /></TabPane>
       </Tabs>
     );
   }
 }
 
+Websites.propTypes = {
+  form: PropTypes.shape({
+    getFieldsValue: PropTypes.func,
+    getFieldValue: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    setFields: PropTypes.func,
+    validateFields: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+    getFieldError: PropTypes.func,
+    getFieldsError: PropTypes.func,
+    isFieldValidating: PropTypes.func,
+    isFieldTouched: PropTypes.func,
+    isFieldsTouched: PropTypes.func,
+    resetFields: PropTypes.func,
+    getFieldDecorator: PropTypes.func,
+  }).isRequired,
+};
 export default TabComponent;
