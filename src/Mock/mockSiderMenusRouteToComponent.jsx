@@ -35,6 +35,7 @@ import { Servers } from '~/Component/Content/Servers';
 // 平台币管理
 import Editor from '~/Component/Currency/Editor';
 import Record from '~/Component/Currency/Records';
+import Summarize from '~/Component/Currency/Summarize';
 
 // 玩家管理
 import Players from '~/Component/Player/Players';
@@ -58,7 +59,13 @@ import StatisticsGame from '~/Component/Statistics/Game';
 
 // 网站管理
 import TabComponent from '~/Component/Web/Website';
-import { Amends } from '~/Component/Web/Service';
+import Service from '~/Component/Web/Service';
+import Amend from '~/Component/Web/AmendService';
+import WebiteTab from '~/Component/Web/Pictures';
+import CompanyTab from '~/Component/Web/Company';
+import BlogrollTab from '~/Component/Web/Blogroll';
+import Contact from '~/Component/Web/Contact';
+import AmendContact from '~/Component/Web/AmendContact';
 
 
 const mockRouterToComponent =
@@ -87,6 +94,7 @@ const mockRouterToComponent =
       '/content/addAction': Addaction,
       '/currency/eidtor': Editor,
       '/currency/records': Record,
+      '/currency/summarize': Summarize,
       '/player/players': Players,
       '/agent/hots': AgentHot,
       '/agent/channels': AgentChannels,
@@ -102,8 +110,13 @@ const mockRouterToComponent =
       '/statistics/daily': StatisticsDaily,
       '/statistics/game': StatisticsGame,
       '/web/website': TabComponent,
-      '/web/service': Amends,
-
+      '/web/service': Service,
+      '/web/service/Amend': Amend,
+      '/web/pictures': WebiteTab,
+      '/web/company': CompanyTab,
+      '/web/blogroll': BlogrollTab,
+      '/web/contact': Contact,
+      '/web/contact/amendContact': AmendContact,
 
     },
   };

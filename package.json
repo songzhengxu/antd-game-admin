@@ -57,6 +57,7 @@
     "obj-merged": "^1.0.5",
     "path-to-regexp": "^1.7.0",
     "prop-types": "^15.5.9",
+    "query-string": "^4.3.4",
     "react": "^15.5.4",
     "react-addons-update": "^15.5.2",
     "react-dom": "^15.5.4",

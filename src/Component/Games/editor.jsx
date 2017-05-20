@@ -1,3 +1,4 @@
+// Copyright (c) 2017 5 18 Thursday by hopperhuang. Mail: huanjiwe@126.com
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button, Radio, Checkbox, Upload, Modal } from 'antd';
@@ -77,6 +78,7 @@ class Hello extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.props.form);
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);

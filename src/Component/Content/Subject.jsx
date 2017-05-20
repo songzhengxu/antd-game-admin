@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Table, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import DropOption from '../Common/DropOption';
+import editor from '../Content/Editor';
 
 const confirm = Modal.confirm;
 
@@ -17,12 +18,22 @@ class DataTable extends Component {
       data: [],
       pagination: {},
       loading: false,
+      selectedData: {},
     };
     this.fetch = this.fetch.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
   componentDidMount() {
     this.fetch();
+  }
+  /**
+   * [handleSelect Tabel选择编辑时调用的方法]
+   * @param  {[Object]} selectedData [选择中的对应tabelItem中的数据]
+   * @return {[type]}              [description]
+   */
+  handleSelect(selectedData) {
+    this.setState({ selectedData });
   }
   /**
    * 判断操作按钮发生对应的操作
@@ -33,6 +44,7 @@ class DataTable extends Component {
     const { history } = this.props;
     if (event.key === '1') {
       history.push(`/content/subjects/editor?id=${record.index}`);
+      this.handleSelect(record);
     } else if (event.key === '2') {
       console.log(`编辑游戏列表${record.key}`);
     } else if (event.key === '3') {
@@ -114,6 +126,9 @@ class DataTable extends Component {
           pagination={{ defaultPageSize: 10 }}
           loading={this.state.loading}
           onChange={this.handleTableChange}
+        />
+        <editor
+          item={this.state.selectedData}
         />
       </div>
     );

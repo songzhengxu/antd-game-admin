@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Table, Input, Form, Upload, Icon, Button, Modal, DatePicker } from 'antd';
+import { Table, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import LzEditor from 'react-lz-editor';
+
 import DropOption from '../Common/DropOption';
 
-const FormItem = Form.Item;
 const confirm = Modal.confirm;
-const RangePicker = DatePicker.RangePicker;
+
 
 class Action extends Component {
   constructor() {
@@ -30,7 +29,6 @@ class Action extends Component {
       confirm({
         title: 'Are you delect this record?',
         onOk() {
-          console.log(`删除${record.key}`);
           console.log(`删除${record.key}`);
         },
       });
@@ -80,13 +78,13 @@ class Action extends Component {
       key: 'endTime',
     }, {
       title: '操作',
-      dataIndex: '',
+      dataIndex: 'action',
       key: 'action',
       render: (text, record) => <DropOption onMenuClick={event => this.handleMenu(record, event)} menuOptions={[{ key: '1', name: '编辑活动' }, { key: '2', name: '删除' }]} /> },
     ];
     return (
       <div>
-        <Link to="/addAction">
+        <Link to="/content/activitys/Addaction">
           <button className="add-subject">添加活动</button>
         </Link>
         <Table
@@ -102,76 +100,5 @@ class Action extends Component {
   }
 }
 
-class AddAction extends Component {
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   this.props.form.validateFields((err, values) => {
-  //     if (!err) {
-  //       console.log('Received values of form: ', values);
-  //     }
-  //   });
-  // }
-  // normFile(e) {
-  //   if (Array.isArray(e)) {
-  //     return e;
-  //   }
-  //   return e && e.fileList;
-  // }
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    const formItemLayout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 14 },
-    };
-    return (
-      <Form onSubmit={this.handleSubmit}>
-        <FormItem
-          {...formItemLayout}
-          label="专题题目"
-          hasFeedback
-        >
-          <Input type="text" />,
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="图片【建议尺寸：640*280】"
-          extra="显示图片"
-        >
-          {getFieldDecorator('upload', {
-            valuePropName: 'fileList',
-            getValueFromEvent: this.normFile,
-          })(
-            <Upload name="logo" action="/upload.do" listType="picture">
-              <Button>
-                <Icon type="upload" /> Click to upload
-              </Button>
-            </Upload>,
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="起止时间"
-        >
-          <RangePicker />,
-        </FormItem>
-        <FormItem>
-          <LzEditor
-            active="true"
-          />
-        </FormItem>
 
-
-        <FormItem
-          wrapperCol={{ span: 12, offset: 6 }}
-        >
-          <Button type="primary" htmlType="submit">添加</Button>
-          <Link to="/content/activitys">
-            <Button type="primary" htmlType="submit" size="large" className="backtrack">返回</Button>
-          </Link>
-        </FormItem>
-      </Form>
-    );
-  }
-}
-const Addaction = Form.create()(AddAction);
-export { Action, Addaction };
+export default Action;
