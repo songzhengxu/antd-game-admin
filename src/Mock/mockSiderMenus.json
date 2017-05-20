@@ -4,6 +4,7 @@
       "icon": "setting",
       "name": "设置",
       "index": 0,
+      "routeTap": "/setting",
       "isHidden": false
     },
     {
@@ -23,6 +24,7 @@
       "bpid": 1,
       "mpid": 1,
       "index": 0,
+      "routeTap": "/setting/user",
       "isHidden": false
     },
     {
@@ -52,6 +54,7 @@
       "bpid": 1,
       "mpid": 1,
       "index": 0,
+      "routeTap": "/setting/mail",
       "isHidden": false
     },
     {
@@ -89,6 +92,7 @@
       "icon": "contacts",
       "name": "内容管理",
       "index": 0,
+      "routeTap": "/content",
       "isHidden": false
     },
     {
@@ -126,6 +130,7 @@
       "icon": "pay-circle",
       "name": "平台币管理",
       "index": 0,
+      "routeTap": "/currency",
       "isHidden": false
     },
     {
@@ -163,6 +168,7 @@
       "icon": "rocket",
       "name": "游戏管理",
       "index": 0,
+      "routeTap": "/games",
       "isHidden": false
     },
     {
@@ -210,6 +216,7 @@
       "icon": "gift",
       "name": "礼包管理",
       "index": 0,
+      "routeTap": "/gift",
       "isHidden": false
     },
     {
@@ -227,7 +234,8 @@
       "icon": "home",
       "name": "广告",
       "index": 0,
-      "isHidden": false
+      "routeTap": "/ads",
+      "isHidden": true
     },
     {
       "id": 26,
@@ -236,7 +244,7 @@
       "bpid": 25,
       "mpid": 25,
       "index": 0,
-      "isHidden": false,
+      "isHidden": true,
       "router": "/ads/mobile"
     },
     {
@@ -264,6 +272,7 @@
       "icon": "team",
       "name": "玩家管理",
       "index": 0,
+      "routeTap": "/player",
       "isHidden": false
     },
     {
@@ -281,6 +290,7 @@
       "icon": "global",
       "name": "开放平台",
       "index": 0,
+      "routeTap": "/agent",
       "isHidden": false
     },
     {
@@ -368,6 +378,7 @@
       "icon": "bar-chart",
       "name": "数据统计",
       "index": 0,
+      "routeTap": "/statistics",
       "isHidden": false
     },
     {
@@ -435,6 +446,7 @@
       "icon": "message",
       "name": "消息管理",
       "index": 0,
+      "routeTap": "/message",
       "isHidden": false
     },
     {
@@ -462,6 +474,7 @@
       "icon": "home",
       "name": "网站管理",
       "index": 0,
+      "routeTap": "/web",
       "isHidden": false
     },
     {

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-
+import lodash from 'lodash';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import viewsAction from '../Action/Views';
 
 // 导航菜单配置数据
 import mockSiderMenusJson from '../Mock/mockSiderMenus.json';
+// 导航菜单router 和 Component 对应配置数据
+import mockSiderMenusRouteToComponentJson from '../Mock/mockSiderMenusRouteToComponent';
 
 // 布局通用组件
 import Header from './Common/Layout/Header';
@@ -85,13 +88,52 @@ const breadProps = {
   menu: mockSiderMenusJson.menus,
 };
 
+// TODO 添加ComponentConfig（router 和component 名一一对应的名字）
 class SiderMenuRoutes extends Component {
+
+
+  getRoutes(array) {
+    const menus = [];
+    const componentConfig = mockSiderMenusRouteToComponentJson.routerToComponent;
+    console.log(componentConfig);
+    console.log(array);
+    for (const [key, value] of Object.entries(componentConfig)) {
+      console.log(this.isHiddenRoute(key, array));
+      if (!this.isHiddenRoute(key, array)) {
+        const route = <Route exact path={key} component={value} />;
+        menus.push(route);
+      }
+    }
+    return menus;
+  }
+
+  isHiddenRoute(key, array) {
+    const regexFirst = /\/\w*/g;
+    const regexSecond = /\/\w*\/\w*/g;
+    const firstPath = regexFirst.exec(key)[0];
+    const secondPath = regexSecond.exec(key)[0];
+    for (const [key, value] of array.entries()) {
+      if (value.router === firstPath || value.routeTap === firstPath) {
+        return true;
+      }
+    }
+    for (const [key, value] of array.entries()) {
+      if (value.router === secondPath || value.routeTap === secondPath) {
+        return true;
+      }
+    }
+    return false;
+  }
   render() {
+    // 过滤出被隐藏的 menu
+    const hiddenMenus = lodash.cloneDeep(mockSiderMenusJson.menus)
+    .filter(value => value.isHidden === true);
     return (
       <div className="contentInside">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/ads/mobile" component={AdsMobile} />
+          {this.getRoutes(hiddenMenus)}
+          {/* <Route path="/ads/mobile" component={AdsMobile} />
           <Route path="/ads/web" component={AdsWeb} />
           <Route path="/ads/gamebox" component={AdsGamebox} />
           <Route exact path="/games/games" component={GameList} />
@@ -129,23 +171,28 @@ class SiderMenuRoutes extends Component {
           <Route path="/statistics/daily" component={StatisticsDaily} />
           <Route path="/statistics/game" component={StatisticsGame} />
           <Route path="/web/website" component={TabComponent} />
-          <Route path="/web/service" component={Amends} />
-          {/* <Redirect to="/404" /> */}
+          <Route path="/web/service" component={Amends} /> */}
+          <Redirect to="/404" />
         </Switch>
       </div>
     );
   }
 }
 
+
 class App extends Component {
   render() {
     const { Views } = this.props;
     const { collapsed, light } = Views;
+    // 过滤需要隐藏的菜单;
+    const menus = lodash.cloneDeep(mockSiderMenusJson.menus)
+    .filter(value => value.isHidden === false);
+
     return (
       <div>
         <div className={collapsed ? 'layout fold' : 'layout'}>
           <aside className={!light ? 'sider light' : 'sider'}>
-            <Sider {...this.props} theme={light ? 'dark' : 'light'} />
+            <Sider {...this.props} mockSiderMenusJsonMenus={menus} theme={light ? 'dark' : 'light'} />
           </aside>
           <div className="main">
             <Header {...this.props} />
