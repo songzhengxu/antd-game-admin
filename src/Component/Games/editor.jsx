@@ -1,3 +1,4 @@
+// Copyright (c) 2017 5 18 Thursday by hopperhuang. Mail: huanjiwe@126.com
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button, Radio, Checkbox, Upload, Modal } from 'antd';

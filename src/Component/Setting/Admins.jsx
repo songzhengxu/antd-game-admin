@@ -18,6 +18,8 @@ class AdminListTable extends React.Component {
   }
   render() {
     const status = this.props.adminList.status;
+    const adminListData = this.props.adminList.data;
+    console.log(adminListData);
     if (status === 'WAIT_FOR_FETCHING') {
       return (
         <div className="gameadminListLoading">
@@ -41,7 +43,9 @@ class AdminListTable extends React.Component {
       action: {
         render: (text, record) => {
           const menuUnit = record.action.map((value, index) =>
-            <Menu.Item key={value + index}>{value}</Menu.Item>);
+            <Menu.Item key={value + index}><span
+              onClick={() => console.log(record.id)}
+            >{value}</span></Menu.Item>);
           const menu = (
             <Menu>
               {menuUnit}
@@ -188,16 +192,34 @@ AddRole.propTypes = {
 
 const NewForm = Form.create()(AddRole);
 
-const AdminsWithTabs = function AdminsWithTabs(props) {
-  const { history } = props;
-  return (
-    <Tabs defaultActiveKey="1">
-      <TabPane tab="角色管理" key="1">{<AdminListTableContainer />}</TabPane>
-      <TabPane tab="添加角色" key="2">{<NewForm history={history} />}</TabPane>
-    </Tabs>
-
-  );
-};
+class AdminsWithTabs extends React.Component {
+  constructor(props) {
+    super(props);
+    const history = props.history;
+    this.state = {
+      panes: [
+        {
+          title: '角色管理',
+          content: <AdminListTableContainer />,
+        },
+        {
+          title: '添加角色',
+          content: <NewForm history={history} />,
+        },
+      ],
+    };
+  }
+  render() {
+    const panes = this.state.panes;
+    const tp = panes.map((pane, index) =>
+      <TabPane tab={pane.title} key={index + 1}>{pane.content}</TabPane>);
+    return (
+      <Tabs defaultActiveKey="1">
+        {tp}
+      </Tabs>
+    );
+  }
+}
 
 AdminsWithTabs.propTypes = {
   history: PropTypes.shape({
