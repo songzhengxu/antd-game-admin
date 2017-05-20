@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Input, Radio, Form, Upload, Icon, Button } from 'antd';
+import { Input, Radio, Form, Upload, Icon, Button, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import LzEditor from 'react-lz-editor';
+
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -13,6 +14,14 @@ const RadioGroup = Radio.Group;
 class Main extends Component {
   constructor() {
     super();
+    this.state = {
+      previewVisible: false,
+      previewImage: '',
+      fileList: [],
+    };
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handlePreview = this.handlePreview.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -28,19 +37,31 @@ class Main extends Component {
       }
     });
   }
-  /**
-   * [normFile 点击上传图片]
-   * @param  {[object]} e [事件]
-   * @return {[object]}   [返回上传图片的信息]
-   */
-  normFile(e) {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
+  handleCancel() {
+    this.setState({ previewVisible: false });
+  }
+
+  handlePreview(file) {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
+  }
+
+  handleChange({ fileList }) {
+    this.setState({ fileList });
+    const filed = this.props.id;
+    this.props.setFieldsValue({ [filed]: { fileList } });
   }
   render() {
     const { getFieldDecorator } = this.props.form;  // 用于与表单双向绑定的属性
+    const { previewVisible, previewImage, fileList } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
     // 定义表单的样式
     const formItemLayout = {
       labelCol: { span: 6 },
@@ -53,30 +74,42 @@ class Main extends Component {
           label="专题题目"
           hasFeedback
         >
-          <Input type="text" name="title" />
+          {getFieldDecorator('name')(
+            <Input type="text" name="title" />,
+          )}
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label="图片【建议尺寸：640*280】" extra="显示图片"
+          label="图片"
         >
-          {getFieldDecorator('upload', {
-            valuePropName: 'fileList',
-            getValueFromEvent: this.normFile,
-          })(
-            <Upload name="logo" action="/upload.do" listType="picture">
-              <Button>
-                <Icon type="upload" /> Click to upload
-              </Button>
-            </Upload>,
+          {getFieldDecorator('piture')(
+            <div className="clearfix">
+              <Upload
+                action="//jsonplaceholder.typicode.com/posts/"
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={this.handlePreview}
+                onChange={this.handleChange}
+              >
+                {fileList.length >= 1 ? null : uploadButton}
+              </Upload>
+              <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+                <img alt="example" style={{ width: '100%' }} src={previewImage} />
+              </Modal>
+            </div>,
           )}
+
         </FormItem>
         <FormItem
           {...formItemLayout}
           label="专题内容"
         >
-          <LzEditor
-            active="true"
-          />
+          {getFieldDecorator('content')(
+            <LzEditor
+              active="true"
+            />,
+          )}
+
         </FormItem>
 
         <FormItem

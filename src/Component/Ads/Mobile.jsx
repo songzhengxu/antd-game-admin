@@ -36,6 +36,9 @@ class Mobile extends Component {
    */
   handleCancel() {
     const form = this.form;
+    console.log('000');
+    console.log(form);
+    console.log(this);
     form.resetFields();
     this.setState({ selectedData: {}, visible: false });
   }

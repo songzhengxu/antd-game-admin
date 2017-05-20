@@ -1,41 +1,30 @@
 import React, { Component } from 'react';
-import { Table, Select, Input, Button, Icon, Form, DatePicker } from 'antd';
+import { Table, Select, Input, Button, Icon, Form, DatePicker, Tabs } from 'antd';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import DropOption from '../Common/DropOption';
 import DropdownList from '../Common/DropdownList';
-import data from './../../mock/Content/tableData';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const TabPane = Tabs.TabPane;
 
 
 /**
  * TODO 下拉列表的数据接入 开服信息和添加开服信息模块
  * 把专题模块，活动模块，开服模块公共列表封装
  */
-// const children = [];
-// const Selector = function Selector(props) {
-//   const options = props.games;
-//   for (const value of options) {
-//     children.push(<Option key={value} value={value}>{ value }</Option>);
-//   }
-//   return (
-//     <span className="gameList_selector" >
-//       <span className="gameList_selector_unit">
-//         <Select
-//           showSearch="true"
-//           style={{ width: 200 }}
-//           placeholder=" 请选择 "
-//           optionFilterProp="children"
-//           filterOption={(input, option) =>
-//            option.props.value.indexOf(input) >= 0}
-//         >
-//           {children}
-//         </Select>
-//       </span>
-//     </span>
-//   );
-// };
+const selectData = {
+  games: [
+    '全部',
+    '幻城H5',
+    '御龙在天',
+    '群乐消online',
+    '传奇世界之杖剑天涯H5',
+    '测试',
+    '吉姆战旗',
+  ],
+};
 
 /**
  * [Servers 生成表格]
@@ -90,9 +79,6 @@ class Servers extends Component {
     });
   }
   render() {
-    const selector = new DropdownList(data, 'textName');
-  //  const selector = this.selector;
-    // console.log(selector);
     const columns = [{
       title: '序号',
       dataIndex: 'index',
@@ -118,7 +104,7 @@ class Servers extends Component {
     return (
       <div>
         <div className="gameList_selectBar" >
-          <selector>游戏</selector>
+          <DropdownList options={selectData.games}>游戏</DropdownList>
           <Button className="search-btn" type="primary">
             <Icon type="search" />
           </Button>
@@ -178,10 +164,7 @@ class AddServers extends Component {
                { required: true, message: '请选择游戏名!' },
             ],
           })(
-            <Select placeholder="请选择">
-              <Option value="china">China</Option>
-              <Option value="use">U.S.A</Option>
-            </Select>,
+            <DropdownList options={selectData.games} />,
            )}
         </FormItem>
         <FormItem
@@ -191,7 +174,7 @@ class AddServers extends Component {
           {getFieldDecorator('input', {
             rules: [{ required: true, message: '请填写开服名称!' }],
           })(
-            <Input />,
+            <Input style={{ width: 200 }} />,
         )}
         </FormItem>
         <FormItem
@@ -216,4 +199,16 @@ class AddServers extends Component {
   }
 }
 const AddServer = Form.create()(AddServers);
-export { Servers, AddServer };
+
+class ServersTab extends Component {
+  render() {
+    return (
+      <Tabs type="card">
+        <TabPane tab="开服列表" key="1"><Servers /></TabPane>
+        <TabPane tab="添加开服信息" key="2"><AddServer /></TabPane>
+      </Tabs>
+    );
+  }
+}
+
+export default ServersTab;

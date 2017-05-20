@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { Table } from 'antd';
 import axios from 'axios';
+
+
 import DropOption from '../Common/DropOption';
 
-class Service extends Component {
+class Contact extends Component {
   constructor() {
     super();
     this.state = {
       data: [],
       pagination: {},
       loading: false,
+      selectedData: {},
     };
     this.fetch = this.fetch.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
@@ -17,9 +20,15 @@ class Service extends Component {
   componentDidMount() {
     this.fetch();
   }
+  handleMenu(record, event) {
+    const { history } = this.props;
+    if (event.key === '1') {
+      history.push(`/web/contact/amendContact?id=${record.key}`);
+    }
+  }
   fetch() {
     this.setState({ loading: true });
-    axios.get('api/web/service')
+    axios.get('api/web/contact')
     .then((response) => {
       const pagination = { ...this.state.pagination };
       pagination.total = 200;
@@ -30,12 +39,7 @@ class Service extends Component {
       });
     });
   }
-  handleMenu(record, event) {
-    const { history } = this.props;
-    if (event.key === '1') {
-      history.push(`/web/service/Amend?id=${record.key}`);
-    }
-  }
+
   handleTableChange(pagination) {
     const pager = { ...this.state.pagination };
     pager.current = pagination.current;
@@ -64,7 +68,8 @@ class Service extends Component {
           columns={columns}
           rowKey={record => record.registered}
           dataSource={this.state.data}
-          pagination={{ defaultPageSize: 2 }}
+          bordered
+          pagination={false}
           loading={this.state.loading}
           onChange={this.handleTableChange}
         />
@@ -73,8 +78,7 @@ class Service extends Component {
   }
 }
 
-Service.propTypes = {
+Contact.propTypes = {
   history: React.PropTypes.object.isRequired,
 };
-
-export default Service;
+export default Contact;

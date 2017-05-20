@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { DatePicker, Input, Form, AutoComplete, Icon, Button, Col, Table } from 'antd';
+import { DatePicker, Input, Form, Button, Col, Table } from 'antd';
 import axios from 'axios';
+import DropdownList from '../Common/DropdownList';
+
 
 const FormItem = Form.Item;
-// const RangePicker = DatePicker.RangePicker;
-// const Option = AutoComplete.Option;
-// const OptGroup = AutoComplete.OptGroup;
+
+
+const selectData = {
+  records: ['guest', '13232379219'],
+};
 
 class Records extends Component {
   constructor() {
@@ -121,35 +125,16 @@ class Records extends Component {
         <FormItem
           label="订单号"
         >
-          <div className="global-search-wrapper" style={{ width: 230 }}>
-            <AutoComplete
-              className="global-search"
-              size="large"
-              style={{ width: '100%' }}
-            //  dataSource={dataSource.map(renderOption)}
-              // onSelect={onSelect}
-              // onSearch={this.handleSearch}
-              placeholder="请输入注册渠道名称..."
-              optionLabelProp="text"
-            >
-              <Input
-                suffix={(
-                  <Button className="search-btn" size="large" type="primary">
-                    <Icon type="search" />
-                  </Button>
-           )}
-              />
-            </AutoComplete>
-          </div>
+          <DropdownList options={selectData.records} />,
         </FormItem>
-        <Button type="primary" size="large">导出数据</Button>
+        <Button type="primary" size="large">搜索</Button>
+        <Button type="primary" size="large" style={{ marginLeft: 10 }}>导出数据</Button>
         <FormItem />
         <div>
           <Table
             columns={columns}
             rowKey={record => record.registered}
             dataSource={this.state.data}
-            pagination={{ defaultPageSize: 2 }}
             loading={this.state.loading}
             onChange={this.handleTableChange}
           />
@@ -161,5 +146,8 @@ class Records extends Component {
   }
 }
 
+Records.propTypes = {
+  form: React.PropTypes.array.isRequired,
+};
 const Record = Form.create()(Records);
 export default Record;

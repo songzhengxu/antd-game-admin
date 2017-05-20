@@ -43,12 +43,14 @@ import AdminsWithTabs from './Setting/Admins';
 // 内容管理
 import DataTable from './Content/Subject';
 import ContentEditor from './Content/Editor';
-import { Action, Addaction } from './Content/Activitys';
-import { Servers } from './Content/Servers';
+import Action from './Content/Activitys';
+import Addaction from './Content/AddAction';
+import ServersTab from './Content/Servers';
 
 // 平台币管理
 import Editor from './Currency/Editor';
 import Record from './Currency/Records';
+import Summarize from './Currency/Summarize';
 
 // 玩家管理
 import Players from './Player/Players';
@@ -72,7 +74,13 @@ import StatisticsGame from './Statistics/Game';
 
 // 网站管理
 import TabComponent from './Web/Website';
-import { Amends } from './Web/Service';
+import Service from './Web/Service';
+import Amend from './Web/AmendService';
+import WebiteTab from './Web/Pictures';
+import CompanyTab from './Web/Company';
+import BlogrollTab from './Web/Blogroll';
+import Contact from './Web/Contact';
+import AmendContact from './Web/AmendContact';
 
 const Home = () => (
   <div>
@@ -109,8 +117,9 @@ class SiderMenuRoutes extends Component {
           <Route exact path="/gift/gifts" component={Gifts} />
           <Route path="/content/subjects/editor" component={ContentEditor} />
           <Route path="/content/subjects" component={DataTable} />
-          <Route path="/content/activitys" component={Action} />
-          <Route path="/content/servers" component={Servers} />
+          <Route exact path="/content/activitys" component={Action} />
+          <Route exact path="/content/activitys/Addaction" component={Addaction} />
+          <Route path="/content/servers" component={ServersTab} />
           <Route path="/currency/eidtor" component={Editor} />
           <Route path="/currency/records" component={Record} />
           <Route path="/addAction" component={Addaction} />
@@ -129,7 +138,14 @@ class SiderMenuRoutes extends Component {
           <Route path="/statistics/daily" component={StatisticsDaily} />
           <Route path="/statistics/game" component={StatisticsGame} />
           <Route path="/web/website" component={TabComponent} />
-          <Route path="/web/service" component={Amends} />
+          <Route exact path="/web/service" component={Service} />
+          <Route exact path="/web/service/Amend" component={Amend} />
+          <Route path="/web/pictures" component={WebiteTab} />
+          <Route path="/web/company" component={CompanyTab} />
+          <Route path="/web/blogroll" component={BlogrollTab} />
+          <Route exact path="/web/contact" component={Contact} />
+          <Route exact path="/web/contact/amendContact" component={AmendContact} />
+          <Route path="/currency/summarize" component={Summarize} />
           {/* <Redirect to="/404" /> */}
         </Switch>
       </div>

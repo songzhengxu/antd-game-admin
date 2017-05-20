@@ -16,6 +16,8 @@ const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
 const Selector = function Selector(props) {
+  console.log('8888');
+  console.log(props);
   const options = props.options;
   // 根据参数动态生成搜索栏的option
   const dynamicOpiton = options.map(option =>
