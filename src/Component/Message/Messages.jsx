@@ -153,6 +153,7 @@ class Messages extends React.Component {
     // 通过setState强制刷新组件,保持state，改变前组件，和改变后组件状态一致
     this.setState({ state });
   }
+  // 操作同上
   pageSizeChange(current, size) {
     const content = this.state.contentFilter;
     const url = {};
