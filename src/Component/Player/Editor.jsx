@@ -161,13 +161,12 @@ class TabelComponent extends Component {
 }
 
 TabelComponent.propTypes = {
-
-  data: PropTypes.shape({
-
-  }),
+  data: PropTypes.arrayOf(PropTypes.object),
 };
+
 TabelComponent.defaultProps = {
-  data: {},
+  showModal() {},
+  data: [],
 };
 
 // TODO 用接口去获取数据

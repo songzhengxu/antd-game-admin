@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Icon, Menu, Switch } from 'antd';
-
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import mockSiderMenusJson from '~/Mock/mockSiderMenus.json';
+// import mockSiderMenusJson from '~/Mock/mockSiderMenus.json';
 import config from '~/utils/config';
 import { Tool } from '~/utils/Tool';
 
@@ -39,11 +39,16 @@ class SiderMenu extends Component {
   }
 
   render() {
-    const { Views, theme } = this.props;
+    const { Views, theme, mockSiderMenusJsonMenus } = this.props;
     const { collapsed } = Views;
 
+    // 过滤需要隐藏的菜单
+    // const filterMenus = lodash.cloneDeep(mockSiderMenusJsonMenus)
+    // .filter(value => value.isHidden === false);
+    // console.log(filterMenus);
+
     // 把数组转树形菜单
-    const menuTreeDatas = Tool.arrayToTree(mockSiderMenusJson.menus, 'id', 'mpid');
+    const menuTreeDatas = Tool.arrayToTree(mockSiderMenusJsonMenus, 'id', 'mpid');
     const menuItems = [this.getMeunItems(menuTreeDatas, collapsed)];
     return (
       <div className="SilderMenu">
@@ -61,8 +66,12 @@ class SiderMenu extends Component {
 
 
 SiderMenu.propTypes = {
-  Views: React.PropTypes.object.isRequired,
-  theme: React.PropTypes.string.isRequired,
+  Views: PropTypes.object.isRequired,
+  theme: PropTypes.string.isRequired,
+  mockSiderMenusJsonMenus: PropTypes.arrayOf(PropTypes.object),
+};
+SiderMenu.defaultProps = {
+  mockSiderMenusJsonMenus: [],
 };
 
 /**
